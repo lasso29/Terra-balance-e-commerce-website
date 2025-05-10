@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Terra Balance</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-[#F5F5F5] text-gray-800">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <img src="./images/terra-balance-logo.jpeg" alt="Terra Balance Logo" class="h-10 w-10 object-contain" />
+        <h1 class="text-2xl font-bold text-green-600">Terra<span class="text-gray-800">Balance</span></h1>
+      </div>
+
+      <button id="menu-toggle" class="md:hidden text-gray-700 focus:outline-none" aria-label="Toggle menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <ul class="hidden md:flex space-x-6" id="menu">
+        <li><a href="#" class="text-gray-700 hover:text-green-600">About</a></li>
+        <li><a href="services.html" class="text-gray-700 hover:text-green-600">Services</a></li>
+        <li><a href="#" class="text-gray-700 hover:text-green-600">Shop</a></li>
+        <li><a href="#" class="text-gray-700 hover:text-green-600">Contact</a></li>
+      </ul>
+    </div>
+
+    <ul class="md:hidden hidden flex-col px-4 space-y-2 pb-4 bg-white" id="mobile-menu">
+      <li><a href="#" class="block text-gray-700 hover:text-green-600">About</a></li>
+      <li><a href="services.html" class="block text-gray-700 hover:text-green-600">Services</a></li>
+      <li><a href="#" class="block text-gray-700 hover:text-green-600">Shop</a></li>
+      <li><a href="#" class="block text-gray-700 hover:text-green-600">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Services Intro -->
+  <section class="bg-green-50 py-12 px-4 md:px-16 text-center bg-cover bg-center" style="background-image: url('./images/service-photo.jpg');">
+    <div class="bg-white bg-opacity-80 max-w-4xl mx-auto p-6 rounded">
+      <h2 class="text-3xl md:text-4xl font-bold text-green-700 mb-4">Our Services</h2>
+      <p class="text-gray-700 text-lg leading-relaxed">
+        We offer a range of comprehensive farming programs and support services designed to empower individuals and communities in the agricultural sector.
+      </p>
+    </div>
+  </section>
+
+  <!-- Product Grid Display -->
+  <section class="bg-white py-16 px-4 md:px-16">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-green-700 mb-10">Our Farming Services</h2>
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <!-- Service Cards -->
+        <div class="bg-green-50 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+          <img src="images/goat-farming.jpg" alt="Goat Farming" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-green-700 mb-2">Goat Farming</h3>
+            <p class="text-gray-700 text-sm">Training and resources for healthy goat rearing, promoting sustainable livestock practices.</p>
+          </div>
+        </div>
+
+        <div class="bg-green-50 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+          <img src="images/chicken-farming.jpg" alt="Chicken Farming" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-green-700 mb-2">Chicken Farming</h3>
+            <p class="text-gray-700 text-sm">Support for smallholders to raise poultry efficiently with proper feeding and health care.</p>
+          </div>
+        </div>
+
+        <div class="bg-green-50 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+          <img src="images/pig-farming.jpg" alt="Pig Farming" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-green-700 mb-2">Pig Farming</h3>
+            <p class="text-gray-700 text-sm">Guidance on hygiene, feeding, and breeding to improve pork quality and market access.</p>
+          </div>
+        </div>
+
+        <div class="bg-green-50 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+          <img src="images/catfish-farming.jpg" alt="Catfish Farming" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-green-700 mb-2">Catfish Farming</h3>
+            <p class="text-gray-700 text-sm">Support in aquaculture, pond management, feeding, and disease prevention.</p>
+          </div>
+        </div>
+
+        <div class="bg-green-50 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+          <img src="images/plantain-farming.jpg" alt="Plantain Farming" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-green-700 mb-2">Plantain Farming</h3>
+            <p class="text-gray-700 text-sm">Eco-friendly plantation support with propagation, fertilization, and harvesting guidance.</p>
+          </div>
+        </div>
+
+        <div class="bg-green-50 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+          <img src="images/corn-farming.jpg" alt="Corn Farming" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-green-700 mb-2">Corn Farming</h3>
+            <p class="text-gray-700 text-sm">Training in soil preparation, pest control, and irrigation for increased yield.</p>
+          </div>
+        </div>
+
+        <div class="bg-green-50 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+          <img src="images/cassava-farming.jpg" alt="Cassava Farming" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-green-700 mb-2">Cassava Farming</h3>
+            <p class="text-gray-700 text-sm">Best practices for cassava planting, stem selection, and harvesting for profitability.</p>
+          </div>
+        </div>
+
+        <div class="bg-green-50 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+          <img src="images/vegetable-farming.jpg" alt="Vegetable Farming" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-green-700 mb-2">Vegetable Farming</h3>
+            <p class="text-gray-700 text-sm">Fresh produce support with training on organic vegetable cultivation, soil nutrition, and pest control.</p>
+          </div>
+        </div>
+
+        <div class="bg-green-50 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+          <img src="images/beekeeping.jpg" alt="Beekeeping" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-green-700 mb-2">Beekeeping</h3>
+            <p class="text-gray-700 text-sm">Promoting eco-friendly beekeeping practices for honey production and crop pollination.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-[#0C1E35] text-white py-10 mt-10">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <div>
+        <h3 class="text-xl font-bold mb-3">Terra Balance</h3>
+        <p class="text-gray-300">Empowering African communities through agriculture and innovation.</p>
+      </div>
+      <div>
+        <h4 class="text-lg font-semibold mb-2">Quick Links</h4>
+        <ul class="space-y-2 text-gray-300">
+          <li><a href="#" class="hover:text-yellow-300">About</a></li>
+          <li><a href="services.html" class="hover:text-yellow-300">Services</a></li>
+          <li><a href="#" class="hover:text-yellow-300">Shop</a></li>
+          <li><a href="#" class="hover:text-yellow-300">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-lg font-semibold mb-2">Contact Us</h4>
+        <p class="text-gray-300">Email: support@terrabalance.com</p>
+        <p class="text-gray-300">Phone: +234 800 000 0000</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile menu toggle script -->
+  <script>
+    document.getElementById('menu-toggle').addEventListener('click', function () {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>
