@@ -122,3 +122,18 @@ showSlide(0); // Start on first slide
     menuToggle.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
     });
+
+    // Toggle the account menu visibility on mobile
+  const accountBtn = document.getElementById('account-btn');
+  const accountMenu = document.getElementById('account-menu');
+  
+  accountBtn.addEventListener('click', () => {
+    accountMenu.classList.toggle('hidden');
+  });
+
+  // Optional: Close the dropdown if the user clicks outside of it
+  document.addEventListener('click', (e) => {
+    if (!accountBtn.contains(e.target)) {
+      accountMenu.classList.add('hidden');
+    }
+  });

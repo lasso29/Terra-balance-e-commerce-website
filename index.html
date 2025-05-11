@@ -13,37 +13,88 @@
 
   <!-- Navbar -->
   <nav class="bg-white shadow-md sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-      <div class="flex items-center space-x-2">
-        <img src="./images/terra-balance-logo.jpeg" alt="Terra Balance Logo" class="h-10 w-10 object-contain" />
-        <h1 class="text-2xl font-bold text-green-600">Terra<span class="text-gray-800">Balance</span></h1>
-      </div>
-
-      <button id="menu-toggle" class="md:hidden text-gray-700 focus:outline-none" aria-label="Toggle menu">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
-
-      <!-- Desktop Menu -->
-      <ul class="hidden md:flex space-x-6" id="menu">
-        <li><a href="index.html" class="text-gray-700 hover:text-green-600">Home</a></li>
-        <li><a href="about.html" class="text-gray-700 hover:text-green-600">About Us</a></li>
-        <li><a href="products.html" class="text-gray-700 hover:text-green-600">Products</a></li>
-        <li><a href="contact.html" class="text-gray-700 hover:text-green-600">Contact Us</a></li>
-        <li><a href="faqs.html" class="text-gray-700 hover:text-green-600">FAQs</a></li>
-      </ul>
+  <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+    <!-- Logo + Brand Name -->
+    <div class="flex items-center space-x-2">
+      <img src="./images/terra-balance-logo.jpeg" alt="Terra Balance Logo" class="h-10 w-10 object-contain" />
+      <h1 class="text-2xl font-bold text-green-600">Terra<span class="text-gray-800">Balance</span></h1>
     </div>
 
-    <!-- Mobile Menu -->
-    <ul class="md:hidden hidden flex-col px-4 space-y-2 pb-4 bg-white" id="mobile-menu">
-      <li><a href="index.html" class="block text-gray-700 hover:text-green-600">Home</a></li>
-      <li><a href="about.html" class="block text-gray-700 hover:text-green-600">About Us</a></li>
-      <li><a href="products.html" class="block text-gray-700 hover:text-green-600">Products</a></li>
-      <li><a href="contact.html" class="block text-gray-700 hover:text-green-600">Contact Us</a></li>
-      <li><a href="faqs.html" class="block text-gray-700 hover:text-green-600">FAQs</a></li>
-    </ul>
-  </nav>
+    <!-- Search and Navigation (Desktop) -->
+    <div class="hidden md:flex items-center space-x-4 flex-1 mx-4">
+      <!-- Search Bar -->
+      <input type="text" placeholder="Search for products..." class="flex-1 px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-green-500" />
+
+      <!-- Category Selector -->
+      <select class="px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+        <option disabled selected>Categories</option>
+        <option>Goat</option>
+        <option>Rabbit</option>
+        <option>Turkey</option>
+        <option>Catfish</option>
+        <option>Pig</option>
+        <option>Snail</option>
+        <option>Chicken</option>
+        <option>Egg</option>
+        <option>Plantain</option>
+        <option>Cassava</option>
+        <option>Corn</option>
+      </select>
+
+      <!-- Help Dropdown -->
+      <div class="relative group">
+        <button class="flex items-center space-x-1 text-gray-700 hover:text-green-600">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 14h.01M16 10h.01M12 18h.01M12 6h.01M21 12c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9 9-4.03 9-9z"/>
+          </svg>
+          <span>Help</span>
+        </button>
+        <ul class="absolute hidden group-hover:block bg-white border shadow-md mt-2 w-48 rounded-md text-sm z-10">
+          <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Help Center</a></li>
+          <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Place an Order</a></li>
+          <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Payment Options</a></li>
+          <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Track an Order</a></li>
+          <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Cancel an Order</a></li>
+          <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Returns & Refunds</a></li>
+          <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Seasonal Deals</a></li>
+          <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Weekly Deals</a></li>
+          <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">New Arrivals</a></li>
+        </ul>
+      </div>
+
+<!-- Account Dropdown -->
+<div class="relative group">
+  <button class="flex items-center space-x-1 text-gray-700 hover:text-green-600" id="account-btn">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm0 2c-3.3 0-6 2.7-6 6v2h12v-2c0-3.3-2.7-6-6-6z"/>
+    </svg>
+    <span>Account</span>
+  </button>
+
+  <ul id="account-menu" class="absolute hidden bg-white border shadow-md mt-2 w-32 rounded-md text-sm z-10">
+    <!-- For Logged Out Users -->
+    <li><a href="signin.html" class="block px-4 py-2 hover:bg-gray-100">Sign In</a></li>
+    <li><a href="signup.html" class="block px-4 py-2 hover:bg-gray-100">Sign Up</a></li>
+
+    <!-- For Logged In Users (toggle visibility based on login state) -->
+    <!-- Adjust based on your authentication system -->
+    <li><a href="profile.html" class="block px-4 py-2 hover:bg-gray-100">Profile</a></li>
+    <li><a href="orders.html" class="block px-4 py-2 hover:bg-gray-100">Orders</a></li>
+    <li><a href="signout.html" class="block px-4 py-2 hover:bg-gray-100">Sign Out</a></li>
+  </ul>
+</div>
+
+   <!-- Hamburger Toggle (Mobile Only) -->
+    <button id="menu-toggle" class="md:hidden text-gray-700 focus:outline-none" aria-label="Toggle menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- You can implement mobile dropdowns here if needed -->
+</nav>
+
 
 <section class="relative w-full h-[350px] overflow-hidden"> <!-- Reduced height here -->
   <div id="carousel" class="relative h-full w-full">
