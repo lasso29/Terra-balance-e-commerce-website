@@ -114,3 +114,11 @@ showSlide(0); // Start on first slide
 
       sections.forEach(section => observer.observe(section));
     });
+
+     // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
