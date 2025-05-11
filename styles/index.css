@@ -23,4 +23,19 @@
     background-color: #fdd835;
     color: #111;
   }
+  
    */
+
+
+   /* .btn-accent {
+  background-color: var(--accent);
+  color: var(--black);
+  border: none;
+}
+.btn-accent:hover {
+  background-color: #fdd835;
+  color: #111;
+} */
+
+  body { font-family: 'Poppins', sans-serif; }
+

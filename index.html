@@ -3,16 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Terra Balance</title>
+  <title>Terra Balance - Home</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-    }
-  </style>
+  <link rel="stylesheet" href="./styles/index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-<body class="bg-[#F5F5F5] text-gray-800">
+<body class="bg-gray-50 text-gray-800">
 
   <!-- Navbar -->
   <nav class="bg-white shadow-md sticky top-0 z-50">
@@ -32,7 +29,6 @@
       <ul class="hidden md:flex space-x-6" id="menu">
         <li><a href="index.html" class="text-gray-700 hover:text-green-600">Home</a></li>
         <li><a href="about.html" class="text-gray-700 hover:text-green-600">About Us</a></li>
-        <li><a href="services.html" class="text-gray-700 hover:text-green-600">Our Services</a></li>
         <li><a href="products.html" class="text-gray-700 hover:text-green-600">Products</a></li>
         <li><a href="contact.html" class="text-gray-700 hover:text-green-600">Contact Us</a></li>
         <li><a href="faqs.html" class="text-gray-700 hover:text-green-600">FAQs</a></li>
@@ -43,39 +39,176 @@
     <ul class="md:hidden hidden flex-col px-4 space-y-2 pb-4 bg-white" id="mobile-menu">
       <li><a href="index.html" class="block text-gray-700 hover:text-green-600">Home</a></li>
       <li><a href="about.html" class="block text-gray-700 hover:text-green-600">About Us</a></li>
-      <li><a href="services.html" class="block text-gray-700 hover:text-green-600">Our Services</a></li>
       <li><a href="products.html" class="block text-gray-700 hover:text-green-600">Products</a></li>
       <li><a href="contact.html" class="block text-gray-700 hover:text-green-600">Contact Us</a></li>
       <li><a href="faqs.html" class="block text-gray-700 hover:text-green-600">FAQs</a></li>
     </ul>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="relative min-h-[70vh] md:min-h-[90vh] flex items-center justify-center text-white overflow-hidden">
-    <img src="images/photorealistic-woman-organic-sustainable-garden-harvesting-produce_23-2151462994 (1).jpg" alt="African farmer in field" class="absolute inset-0 w-full h-full object-cover object-center z-0" />
-    <div class="absolute inset-0 bg-black bg-opacity-60 z-0"></div>
-    <div class="relative z-10 text-center max-w-2xl px-4">
-      <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold mb-4">Join the Movement for Sustainable Agriculture</h2>
-      <p class="text-base sm:text-lg md:text-xl mb-6">Discover eco-friendly farming products, connect with experts, and grow together.</p>
-      <a href="#shop" class="inline-block bg-yellow-300 text-black font-semibold px-6 py-3 rounded hover:bg-yellow-400 transition">Explore Products</a>
+<section class="relative w-full h-[350px] overflow-hidden"> <!-- Reduced height here -->
+  <div id="carousel" class="relative h-full w-full">
+    <!-- Slide 1 -->
+    <div class="carousel-slide absolute inset-0 transition-opacity duration-700 opacity-100 bg-cover bg-center text-white flex flex-col justify-center items-center text-center px-4"
+      style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 128, 0, 0.6)), url('./images/grain.avif');"> <!-- Darker gradient applied here -->
+      <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 z-10 font-poppins">Grown with Care. Sold with Purpose.</h1>
+      <p class="text-lg max-w-xl mb-6 z-10 font-poppins">Support sustainable farming in Africa. Shop fresh, eco-conscious agricultural products directly from the source.</p>
+      <a href="products.html" class="bg-white text-green-700 px-6 py-3 rounded shadow hover:bg-gray-200 font-semibold z-10">
+        <i class="fas fa-store mr-2"></i>Shop Now
+      </a>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="carousel-slide absolute inset-0 transition-opacity duration-700 opacity-0 bg-cover bg-center text-white flex flex-col justify-center items-center text-center px-4"
+      style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 128, 0, 0.6)), url('./images/farmeer-on-farm.jpg');">
+      <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 z-10 font-poppins">Sustainably Grown, Naturally Yours</h1>
+      <p class="text-lg max-w-xl mb-6 z-10 font-poppins">Every purchase empowers farmers and protects the environment.</p>
+      <a href="products.html" class="bg-white text-green-700 px-6 py-3 rounded shadow hover:bg-gray-200 font-semibold z-10">
+        <i class="fas fa-store mr-2"></i>Shop Now
+      </a>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="carousel-slide absolute inset-0 transition-opacity duration-700 opacity-0 bg-cover bg-center text-white flex flex-col justify-center items-center text-center px-4"
+      style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 128, 0, 0.6)), url('./images/livestock.avif');">
+      <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 z-10 font-poppins">Feeding Africa with Heart & Soil</h1>
+      <p class="text-lg max-w-xl mb-6 z-10 font-poppins">Organic goods, livestock, and fresh produce — all in one place.</p>
+      <a href="products.html" class="bg-white text-green-700 px-6 py-3 rounded shadow hover:bg-gray-200 font-semibold z-10">
+        <i class="fas fa-store mr-2"></i>Shop Now
+      </a>
+    </div>
+  </div>
+</section>
+
+  <!-- FEATURED PRODUCTS -->
+<section class="py-16 px-4 max-w-7xl mx-auto">
+  <h2 class="text-2xl font-bold text-center mb-10 text-green-700">Featured Products</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="product-grid">
+    <!-- Products will be rendered by JS -->
+  </div>
+</section>
+
+<!-- About Us Intro -->
+  <section class="bg-green-50 py-12 px-4 md:px-16 text-center bg-cover bg-center" style="background-image: url('./images/agricultural-technology.jpg');">
+    <div class="bg-white bg-opacity-80 max-w-4xl mx-auto p-6 rounded">
+      <h2 class="text-3xl md:text-4xl font-bold text-green-700 mb-4">About Us</h2>
+      <p class="text-gray-700 text-lg leading-relaxed">
+        At Terra Balance, we are dedicated to transforming agriculture through technology and innovation. Our mission is to empower communities, promote sustainability, and create economic opportunities through sustainable farming practices.
+      </p>
     </div>
   </section>
 
-  <!-- About Section -->
+  
+
+  <!-- Mission, Vision, and Core Values -->
   <section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
-      <div>
-        <img src="images/farmeer-on-farm.jpg" alt="Farmers working" class="w-full h-auto rounded-xl shadow-lg">
-      </div>
-      <div>
-        <h3 class="text-3xl font-semibold text-green-600 mb-4">Who We Are</h3>
-        <p class="text-lg leading-relaxed text-gray-700">Terra Balance Enterprises is more than just a business; we are a social enterprise focused on transforming agriculture in Africa through sustainable practices, youth empowerment, and eco-innovation. Our journey began with a vision to empower smallholder farmers across the continent, and today, we stand at the forefront of innovation, leveraging technology to drive sustainable growth and prosperity. We equip rural farmers with the resources, training, and market access they need to succeed.</p>
-        <a href="about.html" class="mt-6 inline-block text-green-700 hover:underline font-medium">Learn more about us →</a>
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-green-600 mb-10">Our Mission & Vision</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        
+        <!-- Mission Section -->
+        <div class="bg-mission rounded-xl p-8 shadow-md hover:shadow-lg transition duration-300 slide-up" id="mission">
+          <div class="flex items-center mb-6">
+            <div class="bg-green-700 p-4 rounded-full text-white">
+              <!-- Mission Icon: Plant growing -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v6m6 0l-6-6-6 6m6 14l6-6-6 6-6-6" />
+              </svg>
+            </div>
+            <h3 class="text-2xl font-semibold text-green-700 ml-4">Mission</h3>
+          </div>
+          <p class="text-gray-700">
+            Our mission is to transform agriculture through innovative solutions, fostering sustainable growth in farming practices while empowering local communities.
+          </p>
+        </div>
+
+        <!-- Vision Section -->
+        <div class="bg-vision rounded-xl p-8 shadow-md hover:shadow-lg transition duration-300 slide-up" id="vision">
+          <div class="flex items-center mb-6">
+            <div class="bg-green-700 p-4 rounded-full text-white">
+              <!-- Vision Icon: Telescope -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 12l-7 7-7-7M12 2v14" />
+              </svg>
+            </div>
+            <h3 class="text-2xl font-semibold text-green-700 ml-4">Vision</h3>
+          </div>
+          <p class="text-gray-700">
+            We envision a world where agriculture is driven by technology, supporting rural communities and creating opportunities for growth and prosperity.
+          </p>
+        </div>
+
       </div>
     </div>
   </section>
 
- <!-- Product Grid Display -->
+  <!-- Core Values -->
+<section class="py-16 bg-green-50">
+  <div class="max-w-7xl mx-auto px-4">
+    <h2 class="text-3xl md:text-4xl font-bold text-center text-green-600 mb-10">Our Core Values</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+
+      <!-- Innovation -->
+      <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition duration-300 flex flex-col items-center text-center slide-up" id="innovation">
+        <div class="bg-green-700 p-4 rounded-full text-white mb-6">
+          <span class="text-4xl">💡</span>
+        </div>
+        <h3 class="text-2xl font-semibold text-green-700 mb-4">Innovation</h3>
+        <p class="text-gray-700">We believe in constantly pushing the boundaries of technology to bring new, sustainable farming solutions.</p>
+      </div>
+
+      <!-- Sustainability -->
+      <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition duration-300 flex flex-col items-center text-center slide-up" id="sustainability">
+        <div class="bg-green-700 p-4 rounded-full text-white mb-6">
+          <span class="text-4xl">🌱</span>
+        </div>
+        <h3 class="text-2xl font-semibold text-green-700 mb-4">Sustainability</h3>
+        <p class="text-gray-700">Our commitment to the environment drives our focus on sustainable farming practices that protect and nurture the earth.</p>
+      </div>
+
+      <!-- Empowerment -->
+      <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition duration-300 flex flex-col items-center text-center slide-up" id="empowerment">
+        <div class="bg-green-700 p-4 rounded-full text-white mb-6">
+          <span class="text-4xl">👩‍🌾</span>
+        </div>
+        <h3 class="text-2xl font-semibold text-green-700 mb-4">Empowerment</h3>
+        <p class="text-gray-700">We empower farmers and communities through training, resources, and opportunities to enhance their livelihoods.</p>
+      </div>
+
+      <!-- Integrity -->
+      <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition duration-300 flex flex-col items-center text-center slide-up" id="integrity">
+        <div class="bg-green-700 p-4 rounded-full text-white mb-6">
+          <span class="text-4xl">🛡️</span>
+        </div>
+        <h3 class="text-2xl font-semibold text-green-700 mb-4">Integrity</h3>
+        <p class="text-gray-700">We value honesty, transparency, and ethical practices in everything we do, ensuring trust and long-term relationships with our communities.</p>
+      </div>
+
+      <!-- Collaboration -->
+      <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition duration-300 flex flex-col items-center text-center slide-up" id="collaboration">
+        <div class="bg-green-700 p-4 rounded-full text-white mb-6">
+          <span class="text-4xl">🤝</span>
+        </div>
+        <h3 class="text-2xl font-semibold text-green-700 mb-4">Collaboration</h3>
+        <p class="text-gray-700">We believe in working together, combining strengths with our partners and communities to achieve common goals.</p>
+      </div>
+
+      <!-- Community -->
+      <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition duration-300 flex flex-col items-center text-center slide-up" id="community">
+        <div class="bg-green-700 p-4 rounded-full text-white mb-6">
+          <span class="text-4xl">🌍</span>
+        </div>
+        <h3 class="text-2xl font-semibold text-green-700 mb-4">community</h3>
+        <p class="text-gray-700">We are deeply committed to fostering a sense of community, working together to create a positive impact for future generations.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Our Services -->
   <section class="bg-white py-16 px-4 md:px-16">
     <div class="max-w-7xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold text-center text-green-700 mb-10">Our Farming Services</h2>
@@ -166,9 +299,39 @@
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-[#0C1E35] text-white py-10">
-  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+
+  <!-- Gallery Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-green-600 mb-10">Gallery</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Gallery Images -->
+        <div class="overflow-hidden rounded-lg shadow-lg">
+          <img src="./images/flyer-five.jpg" alt="Gallery image 1" class="gallery-image w-full h-full object-cover"/>
+        </div>
+        <div class="overflow-hidden rounded-lg shadow-lg">
+          <img src="./images/corn-farming.jpg" alt="Gallery image 2" class="gallery-image w-full h-full object-cover"/>
+        </div>
+        <div class="overflow-hidden rounded-lg shadow-lg">
+          <img src="./images/farmeer-on-farm.jpg" alt="Gallery image 3" class="gallery-image w-full h-full object-cover"/>
+        </div>
+        <div class="overflow-hidden rounded-lg shadow-lg">
+          <img src="./images/flyer-four.jpg" alt="Gallery image 4" class="gallery-image w-full h-full object-cover"/>
+        </div>
+        <div class="overflow-hidden rounded-lg shadow-lg">
+          <img src="./images/flyer-three.jpg" alt="Gallery image 5" class="gallery-image w-full h-full object-cover"/>
+        </div>
+        <div class="overflow-hidden rounded-lg shadow-lg">
+          <img src="./images/flyer-two.jpg" alt="Gallery image 6" class="gallery-image w-full h-full object-cover"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ <!-- Footer -->
+<footer class="bg-[#0C1E35] text-white py-10">
+  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 items-start">
+    
     <!-- Logo + Description -->
     <div>
       <img src="/images/terra-balance-logo.jpeg" alt="Terra Balance Logo" class="h-12 mb-4">
@@ -193,34 +356,127 @@
       <h4 class="text-lg font-semibold mb-2">Contact</h4>
       <p class="text-gray-300">Email: info@terrabalance.org</p>
       <p class="text-gray-300">Phone: +234 800 123 4567</p>
+      <p class="text-gray-300">Address: Phase 2 road, Obafemi Awolowo University Teaching Hospital, Ile-Ife, Nigeria</p>
       <div class="flex space-x-4 mt-4">
-        <a href="#" class="hover:text-yellow-300" aria-label="Facebook">
+        <!-- Facebook -->
+        <a href="https://web.facebook.com/profile.php?id=61571042126610#" class="hover:text-yellow-300" aria-label="Facebook">
           <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M22 12.073C22 5.404 17.303.5 11 .5S0 5.404 0 12.073C0 17.784 4.031 22.225 9.281 23v-7.768H6.508v-3.159h2.773V9.845c0-2.748 1.643-4.263 4.158-4.263 1.203 0 2.462.216 2.462.216v2.713h-1.387c-1.366 0-1.793.848-1.793 1.716v2.06h3.048l-.487 3.159h-2.561V23C19.969 22.225 24 17.784 24 12.073z"/></svg>
         </a>
-        <a href="#" class="hover:text-yellow-300" aria-label="Instagram">
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/terra_balance_enterprises/" class="hover:text-yellow-300" aria-label="Instagram">
           <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.34 3.608 1.316.975.976 1.253 2.243 1.315 3.609.058 1.265.07 1.645.07 4.849s-.012 3.584-.07 4.849c-.062 1.366-.34 2.633-1.316 3.608-.976.975-2.243 1.253-3.609 1.315-1.265.058-1.645.07-4.849.07s-3.584-.012-4.849-.07c-1.366-.062-2.633-.34-3.608-1.315-.976-.975-1.253-2.242-1.315-3.608C2.175 15.647 2.163 15.267 2.163 12s.012-3.584.07-4.849c.062-1.366.34-2.633 1.316-3.609.975-.975 2.242-1.253 3.608-1.315C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.012 7.052.07 5.771.129 4.535.396 3.471 1.46c-1.064 1.065-1.331 2.301-1.39 3.582C2.012 6.333 2 6.741 2 10c0 3.259.012 3.668.07 4.948.059 1.281.326 2.517 1.39 3.582 1.065 1.064 2.301 1.331 3.582 1.39 1.28.058 1.688.07 4.948.07s3.668-.012 4.948-.07c1.281-.059 2.517-.326 3.582-1.39 1.064-1.065 1.331-2.301 1.39-3.582.058-1.28.07-1.688.07-4.948s-.012-3.668-.07-4.948c-.059-1.281-.326-2.517-1.39-3.582C19.484.396 18.248.129 16.968.07 15.688.012 15.259 0 12 0z"/><path d="M12 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.999 3.999 0 1 1 0-7.998 3.999 3.999 0 0 1 0 7.998z"/><circle cx="18.406" cy="5.594" r="1.44"/></svg>
         </a>
       </div>
     </div>
   </div>
 
+  <!-- Copyright with background -->
   <div class="mt-8 bg-[#071423] py-4 text-center text-sm text-gray-400">
-  &copy; 2025 Terra Balance Enterprises. All rights reserved.
-</div>
-
+    &copy; 2025 Terra Balance Enterprises. All rights reserved.
+  </div>
 </footer>
 
 
-  <!-- Mobile Menu Toggle Script -->
-  <script>
-    const toggle = document.getElementById('menu-toggle');
-    const menu = document.getElementById('mobile-menu');
+<script>
+// Product rendering
+const featuredProducts = [
+  {
+    name: 'Organic Plantain Bunch',
+    price: 1500,
+    category: 'Produce',
+    description: 'Freshly harvested plantain, naturally ripened.',
+    image: './images/plaintain.webp'
+  },
+  {
+    name: 'Goat Milk (1L)',
+    price: 2000,
+    category: 'Dairy',
+    description: 'Creamy and nutritious milk from grass-fed goats.',
+    image: './images/goat-milk.jpg'
+  },
+  {
+    name: 'Live Chicken',
+    price: 3500,
+    category: 'Livestock',
+    description: 'Healthy local chicken raised without antibiotics.',
+    image: './images/chicken-rear.jpg'
+  },
+  {
+    name: 'Dried Snail (500g)',
+    price: 2500,
+    category: 'Protein',
+    description: 'Sun-dried, crunchy snails packed with nutrients.',
+    image: './images/dried-snail.jpg'
+  },
+  {
+    name: 'Fresh Cassava (10kg)',
+    price: 1800,
+    category: 'Roots',
+    description: 'Ready to be processed into garri, fufu, or starch.',
+    image: './images/fresh-cassava.webp'
+  },
+  {
+    name: 'Smoked Catfish',
+    price: 3000,
+    category: 'Seafood',
+    description: 'Delicious, hand-smoked catfish with rich flavor.',
+    image: './images/smoked-catfish.jpg'
+  },
+  {
+    name: 'Organic Corn (10kg)',
+    price: 1200,
+    category: 'Produce',
+    description: 'Freshly harvested organic corn with high yield potential.',
+    image: './images/organic-corn.png'
+  },
+  {
+    name: 'Pig Feed (20kg)',
+    price: 5000,
+    category: 'Livestock',
+    description: 'Nutrient-rich feed for healthy pig growth.',
+    image: './images/pig-feed.jpg'
+  }
+];
 
-    toggle.addEventListener('click', () => {
-      menu.classList.toggle('hidden');
-      menu.classList.toggle('flex');
-    });
-  </script>
+const grid = document.getElementById('product-grid');
 
+featuredProducts.forEach((product, index) => {
+  const card = document.createElement('div');
+  card.className = "bg-white rounded shadow-md overflow-hidden hover:shadow-lg transition duration-300";
+  card.innerHTML = `
+    <a href="products.html?id=${index}">
+      <img src="${product.image}" alt="${product.name}" class="w-full h-56 object-cover">
+      <div class="p-4">
+        <span class="text-xs text-white bg-green-600 px-2 py-1 rounded-full">${product.category}</span>
+        <h3 class="mt-2 text-lg font-bold">${product.name}</h3>
+        <p class="text-gray-600 text-sm mb-2">${product.description}</p>
+        <p class="text-green-700 font-semibold text-lg">₦${product.price.toLocaleString()}</p>
+        <p class="text-sm text-gray-400 mt-2">Click to view more</p>
+      </div>
+    </a>
+  `;
+  grid.appendChild(card);
+});
+
+// HERO CAROUSEL AUTO-SLIDE (Increased duration for better readability)
+const slides = document.querySelectorAll('.carousel-slide');
+let current = 0;
+
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.style.opacity = i === index ? '1' : '0';
+    slide.style.zIndex = i === index ? '1' : '0';
+  });
+  current = index;
+}
+
+function nextSlide() {
+  const next = (current + 1) % slides.length;
+  showSlide(next);
+}
+
+setInterval(nextSlide, 6000); // Slide every 6 seconds (Increased display time)
+showSlide(0); // Start on first slide
+</script>
 </body>
 </html>

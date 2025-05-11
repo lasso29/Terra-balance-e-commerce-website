@@ -1,110 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Terra Balance | Products</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Catalog - Terra Balance</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    :root {
-      --primary: #2e7d32; /* green primary color */
-    }
-    .text-primary { color: var(--primary); }
-    .bg-primary { background-color: var(--primary); }
-    .border-primary { border-color: var(--primary); }
+    body { font-family: 'Segoe UI', sans-serif; }
+    .brand-color { color: #228B22; }
+    .brand-bg { background-color: #228B22; }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
   <!-- Navbar -->
-  <header class="bg-white shadow-md sticky top-0 z-50">
+  <nav class="bg-white shadow-md sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-      <h1 class="text-xl font-bold text-primary">Terra Balance</h1>
-      <nav class="space-x-4">
-        <a href="index.html" class="hover:text-primary">Home</a>
-        <a href="about.html" class="hover:text-primary">About</a>
-        <a href="services.html" class="hover:text-primary">Services</a>
-        <a href="products.html" class="text-primary font-semibold">Products</a>
-        <a href="cart.html" class="hover:text-primary"><i class="fas fa-shopping-cart"></i></a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Product Grid -->
-  <main class="max-w-7xl mx-auto px-4 py-8">
-    <h2 class="text-3xl font-semibold mb-6 text-center text-primary">Our Farm Products</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      <!-- Product Card Template (Repeat for each product) -->
-      <!-- You can loop 70+ from a JS array later -->
-      <div class="bg-white rounded-lg shadow p-4 flex flex-col items-center">
-        <img src="/images/chicken-farming.jpg" alt="Product" class="rounded w-full h-40 object-cover mb-4">
-        <h3 class="text-lg font-semibold">Organic Tomatoes</h3>
-        <p class="text-sm text-gray-600 mt-1 mb-2">Freshly harvested organic tomatoes straight from the farm.</p>
-        <p class="text-lg font-bold text-primary">₦800</p>
-        <div class="flex items-center mt-2">
-          <button class="px-2 py-1 bg-gray-200 rounded-l quantity-decrease">-</button>
-          <input type="number" value="1" min="1" class="w-12 text-center border border-gray-300 quantity-input" />
-          <button class="px-2 py-1 bg-gray-200 rounded-r quantity-increase">+</button>
-        </div>
-        <button class="mt-4 bg-primary text-white px-4 py-2 rounded hover:opacity-90 add-to-cart">
-          <i class="fas fa-cart-plus mr-2"></i>Add to Cart
-        </button>
+      <div class="flex items-center space-x-2">
+        <img src="./images/terra-balance-logo.jpeg" alt="Terra Balance Logo" class="h-10 w-10 object-contain" />
+        <h1 class="text-2xl font-bold text-green-600">Terra<span class="text-gray-800">Balance</span></h1>
       </div>
 
-      <!-- Repeat similar blocks for more products (Chicken, Catfish, Plantain, etc.) -->
-
-    </div>
-
-    <!-- Checkout Button -->
-    <div class="text-center mt-10">
-      <button onclick="handleCheckout()" class="bg-primary text-white px-6 py-3 rounded text-lg hover:bg-green-800">
-        Proceed to Checkout
+      <button id="menu-toggle" class="md:hidden text-gray-700 focus:outline-none" aria-label="Toggle menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
       </button>
+
+      <!-- Desktop Menu -->
+      <ul class="hidden md:flex space-x-6" id="menu">
+        <li><a href="/" class="text-gray-700 hover:text-green-600">Home</a></li>
+        <li><a href="/about" class="text-gray-700 hover:text-green-600">About Us</a></li>
+        <li><a href="/products" class="text-green-700 font-bold">Products</a></li>
+        <li><a href="/account" class="text-gray-700 hover:text-green-600">Account</a></li>
+        <button onclick="toggleCart()" class="relative">
+          <i class="fas fa-shopping-cart text-green-700 text-xl"></i>
+          <span id="cart-count" class="absolute -top-2 -right-2 bg-green-700 text-white text-xs w-5 h-5 rounded-full text-center">0</span>
+        </button>
+      </ul>
     </div>
+
+    <!-- Mobile Menu -->
+    <ul class="md:hidden hidden flex-col px-4 space-y-2 pb-4 bg-white" id="mobile-menu">
+      <li><a href="/" class="block text-gray-700 hover:text-green-600">Home</a></li>
+      <li><a href="/about" class="block text-gray-700 hover:text-green-600">About Us</a></li>
+      <li><a href="/products" class="block text-gray-700 hover:text-green-600">Products</a></li>
+      <li><a href="/contact" class="block text-gray-700 hover:text-green-600">Contact Us</a></li>
+      <li><a href="/faqs" class="block text-gray-700 hover:text-green-600">FAQs</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="px-4 md:px-12 py-8">
+    <h1 class="text-3xl font-bold mb-4 brand-color">Product Catalog</h1>
+    <p class="mb-8 text-gray-600">Found <span id="product-count">0</span> items</p>
+
+    <div id="product-grid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"></div>
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-white shadow mt-12">
-    <div class="max-w-7xl mx-auto px-4 py-6 text-center text-sm text-gray-600">
-      &copy; 2025 Terra Balance Enterprises. All rights reserved.
+  <!-- Cart Sidebar -->
+  <div id="cart-sidebar" class="fixed right-0 top-0 w-80 h-full bg-white shadow-lg transform translate-x-full transition-transform duration-300 z-50 overflow-y-auto">
+    <div class="flex items-center justify-between p-4 border-b">
+      <h2 class="text-xl font-semibold">Your Cart</h2>
+      <button onclick="toggleCart()" class="text-red-500"><i class="fas fa-times"></i></button>
     </div>
-  </footer>
+    <div id="cart-items" class="p-4 space-y-4"></div>
+    <div class="p-4 border-t">
+      <p class="text-lg font-semibold">Total: ₦<span id="cart-total">0</span></p>
+      <button onclick="checkout()" class="w-full mt-4 bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800">Checkout</button>
+    </div>
+  </div>
 
-  <!-- JS -->
+  <!-- JavaScript -->
   <script>
-    document.querySelectorAll('.quantity-increase').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const input = btn.parentElement.querySelector('.quantity-input');
-        input.value = parseInt(input.value) + 1;
-      });
+    const products = [
+      { name: 'Goat Meat', weight: '500g', price: 2000, image: './images/goat-farming.jpg' },
+      { name: 'Goat Milk', weight: '1000g', price: 1500, image: './images/goat-milk.jpg' },
+      { name: 'Live Goat', weight: '15000g', price: 5000, image: './images/live-goat.jpg' },
+      { name: 'Rabbit Meat', weight: '500g', price: 1800, image: './images/rabbit-meat.jpg' },
+      { name: 'Rabbit Fur', weight: '200g', price: 3000, image: './images/rabbit-fur.jpg' },
+      { name: 'Live Rabbit', weight: '2000g', price: 2500, image: './images/live-rabbit.jpg' },
+      { name: 'Turkey Meat', weight: '1000g', price: 2200, image: './images/turkey-meat.jpg' },
+      { name: 'Turkey Eggs', weight: 'g', price: 1200, image: './images/turkey-eggs.jpg' },
+      { name: 'Live Turkey', weight: '8000g', price: 3000, image: './images/live-turkey.jpg' },
+      { name: 'Fresh Catfish', weight: '1000g', price: 2500, image: './images/fresh-catfish.jpg' },
+      { name: 'Smoked Catfish', weight: '1000g', price: 3000, image: './images/smoked-catfish.jpg' },
+      { name: 'Pork', weight: '1000g', price: 2200, image: './images/pork.jpg' },
+      { name: 'Bacon', weight: '500g', price: 2500, image: './images/bacon.jpg' },
+      { name: 'Ham', weight: '1000g', price: 3000, image: './images/ham.jpg' },
+      { name: 'Live Pig', weight: '20000g', price: 7000, image: './images/live-pig.jpg' },
+      { name: 'Dried Snail', weight: '500g', price: 2500, image: './images/dried-snail.jpg' },
+      { name: 'Live Snail', weight: '1000g', price: 1500, image: './images/live-snail.jpg' },
+      { name: 'Chicken Meat', weight: '1000g', price: 1500, image: './images/chicken-meat.jpg' },
+      { name: 'Chicken Eggs', weight: 'g', price: 800, image: './images/chicken-eggs.jpg' },
+      { name: 'Live Chicken', weight: '3000g', price: 1200, image: './images/live-chicken.jpg' },
+      { name: 'Fresh Plantain', weight: '1000g', price: 1000, image: './images/fresh-plantain.jpg' },
+      { name: 'Dried Plantain', weight: '500g', price: 1500, image: './images/dried-plantain.jpg' },
+      { name: 'Plantain Flour', weight: '1000g', price: 2000, image: './images/plantain-flour.jpg' },
+      { name: 'Fresh Cassava', weight: '5000g', price: 1200, image: './images/fresh-cassava.jpg' },
+      { name: 'Cassava Flour', weight: '1000g', price: 2000, image: './images/cassava-flour.jpg' },
+      { name: 'Garri', weight: '2000g', price: 1500, image: './images/garri.jpg' }
+    ];
+
+    // Initialize cart
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Display products
+    const productGrid = document.getElementById('product-grid');
+    const productCount = document.getElementById('product-count');
+    productCount.textContent = products.length;
+
+    products.forEach((product, index) => {
+      const productCard = document.createElement('div');
+      productCard.classList.add('border', 'rounded-lg', 'p-4', 'shadow-md', 'bg-white');
+
+      productCard.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover rounded-lg mb-4" />
+        <h2 class="font-semibold text-lg mb-2">${product.name}</h2>
+        <p class="text-gray-600 mb-2">${product.weight}</p>
+        <p class="text-green-600 font-bold mb-4">₦${product.price}</p>
+        <div class="flex items-center space-x-4">
+          <input type="number" id="quantity-${index}" value="1" min="1" class="border px-4 py-2 w-16 rounded text-center">
+          <button onclick="addToCart(${index})" class="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800">Add to Cart</button>
+        </div>
+      `;
+
+      productGrid.appendChild(productCard);
     });
 
-    document.querySelectorAll('.quantity-decrease').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const input = btn.parentElement.querySelector('.quantity-input');
-        if (parseInt(input.value) > 1) input.value = parseInt(input.value) - 1;
-      });
-    });
+    // Update cart display
+    function updateCart() {
+      const cartCount = document.getElementById('cart-count');
+      const cartItems = document.getElementById('cart-items');
+      const cartTotal = document.getElementById('cart-total');
 
-    document.querySelectorAll('.add-to-cart').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const productName = btn.parentElement.querySelector('h3').innerText;
-        const quantity = btn.parentElement.querySelector('.quantity-input').value;
-        alert(`${quantity} x ${productName} added to cart!`);
-        // You can store in localStorage or state here
-      });
-    });
+      cartCount.textContent = cart.length;
+      cartItems.innerHTML = '';
+      let total = 0;
 
-    function handleCheckout() {
-      // Simulate authentication check
-      const isAuthenticated = false; // Replace with real auth check
-      if (!isAuthenticated) {
-        window.location.href = 'signin.html';
+      cart.forEach(item => {
+        total += item.product.price * item.quantity;
+        cartItems.innerHTML += `
+          <div class="flex justify-between items-center border-b pb-4 mb-4">
+            <div>
+              <h3 class="font-semibold">${item.product.name}</h3>
+              <p class="text-gray-600">₦${item.product.price} x ${item.quantity}</p>
+            </div>
+            <button onclick="removeFromCart(${item.productIndex})" class="text-red-500"><i class="fas fa-trash"></i></button>
+          </div>
+        `;
+      });
+
+      cartTotal.textContent = total;
+    }
+
+    // Add item to cart
+    function addToCart(index) {
+      const quantity = parseInt(document.getElementById(`quantity-${index}`).value);
+      const product = products[index];
+
+      // Prevent negative or zero quantity
+      if (quantity <= 0) {
+        alert('Quantity must be greater than zero.');
+        return;
+      }
+
+      const existingItem = cart.find(item => item.productIndex === index);
+
+      if (existingItem) {
+        existingItem.quantity += quantity;
       } else {
-        window.location.href = 'checkout.html';
+        cart.push({ productIndex: index, product, quantity });
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCart();
+    }
+
+    // Remove item from cart
+    function removeFromCart(index) {
+      cart = cart.filter(item => item.productIndex !== index);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCart();
+    }
+
+    // Toggle cart sidebar
+    function toggleCart() {
+      const cartSidebar = document.getElementById('cart-sidebar');
+      if (cartSidebar.style.transform === 'translateX(0%)') {
+        cartSidebar.style.transform = 'translateX(100%)';
+      } else {
+        cartSidebar.style.transform = 'translateX(0)';
       }
     }
+
+    // Checkout
+    function checkout() {
+      if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+      }
+
+      alert('Proceeding to checkout...');
+      // You can integrate a real checkout flow here
+    }
+
+    // Initialize cart on page load
+    updateCart();
   </script>
 </body>
 </html>
