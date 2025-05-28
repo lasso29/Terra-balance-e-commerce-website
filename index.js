@@ -1,6 +1,5 @@
-// Run all code after DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
-  // ====== PRODUCT RENDERING ======
+  // ====== PRODUCT LIST ======
   const featuredProducts = [
     {
       name: 'Organic Plantain Bunch',
@@ -61,8 +60,19 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   const grid = document.getElementById('product-grid');
-  if (grid) {
-    featuredProducts.forEach((product, index) => {
+  const searchInputs = document.querySelectorAll('#search-input');
+
+  // ====== RENDER PRODUCTS ======
+  function renderProducts(products) {
+    if (!grid) return;
+
+    grid.innerHTML = '';
+    if (products.length === 0) {
+      grid.innerHTML = '<p class="text-center text-gray-500 col-span-full">No products found.</p>';
+      return;
+    }
+
+    products.forEach((product, index) => {
       const card = document.createElement('div');
       card.className = "bg-white rounded shadow-md overflow-hidden hover:shadow-lg transition duration-300";
       card.innerHTML = `
@@ -81,21 +91,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ====== HERO CAROUSEL AUTO-SLIDE ======
+  renderProducts(featuredProducts); // Initial render
+
+  // ====== SEARCH FUNCTION ======
+  searchInputs.forEach(input => {
+    input.addEventListener('input', () => {
+      const term = input.value.toLowerCase();
+      const filtered = featuredProducts.filter(product =>
+        product.name.toLowerCase().includes(term) ||
+        product.description.toLowerCase().includes(term) ||
+        product.category.toLowerCase().includes(term)
+      );
+      renderProducts(filtered);
+    });
+  });
+
+  // ====== HERO CAROUSEL ======
   const slides = document.querySelectorAll('.carousel-slide');
-  let current = 0;
+  let currentSlide = 0;
 
   function showSlide(index) {
     slides.forEach((slide, i) => {
       slide.style.opacity = i === index ? '1' : '0';
       slide.style.zIndex = i === index ? '1' : '0';
     });
-    current = index;
+    currentSlide = index;
   }
 
   function nextSlide() {
-    const next = (current + 1) % slides.length;
-    showSlide(next);
+    showSlide((currentSlide + 1) % slides.length);
   }
 
   if (slides.length) {
@@ -103,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showSlide(0);
   }
 
-  // ====== SLIDE-UP SECTIONS ON SCROLL ======
+  // ====== SCROLL IN ANIMATIONS ======
   const sections = document.querySelectorAll('.slide-up');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
