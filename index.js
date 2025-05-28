@@ -1,5 +1,5 @@
 // Run all code after DOM is fully loaded
-window.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
   // ====== PRODUCT RENDERING ======
   const featuredProducts = [
     {
@@ -99,21 +99,19 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   if (slides.length) {
-    setInterval(nextSlide, 6000); // Every 6 seconds
-    showSlide(0); // Start on first
+    setInterval(nextSlide, 6000);
+    showSlide(0);
   }
 
   // ====== SLIDE-UP SECTIONS ON SCROLL ======
   const sections = document.querySelectorAll('.slide-up');
-  const options = { threshold: 0.2 };
-
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
       }
     });
-  }, options);
+  }, { threshold: 0.2 });
 
   sections.forEach(section => observer.observe(section));
 
@@ -123,7 +121,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
   if (menuToggle && mobileMenu) {
     menuToggle.addEventListener('click', () => {
-      console.log('Menu toggle clicked');
+      const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', !isExpanded);
       mobileMenu.classList.toggle('hidden');
     });
   }
@@ -145,10 +144,3 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-
-const menuToggle = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-
-  menuToggle.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-  });
