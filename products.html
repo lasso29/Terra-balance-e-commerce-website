@@ -13,15 +13,16 @@
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
-
   <!-- Navbar -->
   <nav class="bg-white shadow-md sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <!-- Logo -->
       <div class="flex items-center space-x-2">
         <img src="./images/terra-balance-logo.jpeg" alt="Terra Balance Logo" class="h-10 w-10 object-contain" />
         <h1 class="text-2xl font-bold text-green-600">Terra<span class="text-gray-800">Balance</span></h1>
       </div>
 
+      <!-- Hamburger Toggle -->
       <button id="menu-toggle" class="md:hidden text-gray-700 focus:outline-none" aria-label="Toggle menu">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -29,25 +30,85 @@
       </button>
 
       <!-- Desktop Menu -->
-      <ul class="hidden md:flex space-x-6" id="menu">
-        <li><a href="/" class="text-gray-700 hover:text-green-600">Home</a></li>
-        <li><a href="/about" class="text-gray-700 hover:text-green-600">About Us</a></li>
-        <li><a href="/products" class="text-green-700 font-bold">Products</a></li>
-        <li><a href="/account" class="text-gray-700 hover:text-green-600">Account</a></li>
-        <button onclick="toggleCart()" class="relative">
-          <i class="fas fa-shopping-cart text-green-700 text-xl"></i>
-          <span id="cart-count" class="absolute -top-2 -right-2 bg-green-700 text-white text-xs w-5 h-5 rounded-full text-center">0</span>
+      <div class="hidden md:flex items-center space-x-6 flex-1 ml-8">
+        <input type="text" placeholder="Search for products..." class="flex-1 px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-green-500" id="search-input" />
+
+        <select class="px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+          <option disabled selected>Categories</option>
+          <option>Goat</option>
+          <option>Rabbit</option>
+          <option>Turkey</option>
+          <option>Catfish</option>
+          <option>Pig</option>
+          <option>Snail</option>
+          <option>Chicken</option>
+          <option>Egg</option>
+          <option>Plantain</option>
+          <option>Cassava</option>
+          <option>Corn</option>
+        </select>
+
+        <!-- Help -->
+        <div class="relative group">
+          <button class="flex items-center space-x-1 text-gray-700 hover:text-green-600">
+            <i class="fas fa-circle-question text-base"></i>
+            <span>Help</span>
+          </button>
+          <ul class="absolute hidden group-hover:block bg-white border shadow-md mt-2 w-48 rounded-md text-sm z-10">
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Help Center</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Place an Order</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Payment Options</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Track an Order</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Cancel an Order</a></li>
+          </ul>
+        </div>
+
+        <!-- Account -->
+        <div class="relative group">
+          <button class="flex items-center space-x-1 text-gray-700 hover:text-green-600">
+            <i class="fas fa-user text-base"></i>
+            <span>Account</span>
+          </button>
+          <ul class="absolute hidden group-hover:block bg-white border shadow-md mt-2 w-32 rounded-md text-sm z-10">
+            <li><a href="signin.html" class="block px-4 py-2 hover:bg-gray-100">Sign In</a></li>
+            <li><a href="signup.html" class="block px-4 py-2 hover:bg-gray-100">Sign Up</a></li>
+            <li><a href="profile.html" class="block px-4 py-2 hover:bg-gray-100">Profile</a></li>
+            <li><a href="orders.html" class="block px-4 py-2 hover:bg-gray-100">Orders</a></li>
+            <li><a href="signout.html" class="block px-4 py-2 hover:bg-gray-100">Sign Out</a></li>
+          </ul>
+        </div>
+
+        <!-- Cart -->
+        <button onclick="toggleCart()" class="relative text-gray-700 hover:text-green-600">
+          <i class="fas fa-shopping-cart text-xl"></i>
+          <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full text-center">0</span>
         </button>
-      </ul>
+      </div>
     </div>
 
     <!-- Mobile Menu -->
     <ul class="md:hidden hidden flex-col px-4 space-y-2 pb-4 bg-white" id="mobile-menu">
+      <input type="text" placeholder="Search for products..." class="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-green-500 mb-2" />
+      <select class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 mb-2">
+        <option disabled selected>Categories</option>
+        <option>Goat</option>
+        <option>Rabbit</option>
+        <option>Turkey</option>
+        <option>Catfish</option>
+        <option>Pig</option>
+        <option>Snail</option>
+        <option>Chicken</option>
+        <option>Egg</option>
+        <option>Plantain</option>
+        <option>Cassava</option>
+        <option>Corn</option>
+      </select>
       <li><a href="/" class="block text-gray-700 hover:text-green-600">Home</a></li>
       <li><a href="/about" class="block text-gray-700 hover:text-green-600">About Us</a></li>
-      <li><a href="/products" class="block text-gray-700 hover:text-green-600">Products</a></li>
-      <li><a href="/contact" class="block text-gray-700 hover:text-green-600">Contact Us</a></li>
+      <li><a href="/products" class="block text-green-700 font-bold">Products</a></li>
+      <li><a href="/account" class="block text-gray-700 hover:text-green-600">Account</a></li>
       <li><a href="/faqs" class="block text-gray-700 hover:text-green-600">FAQs</a></li>
+      <li><a href="cart.html" class="block text-gray-700 hover:text-green-600">Cart</a></li>
     </ul>
   </nav>
 
@@ -55,12 +116,11 @@
   <main class="px-4 md:px-12 py-8">
     <h1 class="text-3xl font-bold mb-4 brand-color">Product Catalog</h1>
     <p class="mb-8 text-gray-600">Found <span id="product-count">0</span> items</p>
-
     <div id="product-grid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"></div>
   </main>
 
   <!-- Cart Sidebar -->
-  <div id="cart-sidebar" class="fixed right-0 top-0 w-80 h-full bg-white shadow-lg transform translate-x-full transition-transform duration-300 z-50 overflow-y-auto">
+  <div id="cart-sidebar" class="fixed right-0 top-0 w-80 h-full bg-white shadow-lg translate-x-full transition-transform duration-300 z-50 overflow-y-auto">
     <div class="flex items-center justify-between p-4 border-b">
       <h2 class="text-xl font-semibold">Your Cart</h2>
       <button onclick="toggleCart()" class="text-red-500"><i class="fas fa-times"></i></button>
@@ -74,140 +134,113 @@
 
   <!-- JavaScript -->
   <script>
-    const products = [
-      { name: 'Goat Meat', weight: '500g', price: 2000, image: './images/goat-farming.jpg' },
-      { name: 'Goat Milk', weight: '1000g', price: 1500, image: './images/goat-milk.jpg' },
-      { name: 'Live Goat', weight: '15000g', price: 5000, image: './images/live-goat.jpg' },
-      { name: 'Rabbit Meat', weight: '500g', price: 1800, image: './images/rabbit-meat.jpg' },
-      { name: 'Rabbit Fur', weight: '200g', price: 3000, image: './images/rabbit-fur.jpg' },
-      { name: 'Live Rabbit', weight: '2000g', price: 2500, image: './images/live-rabbit.jpg' },
-      { name: 'Turkey Meat', weight: '1000g', price: 2200, image: './images/turkey-meat.jpg' },
-      { name: 'Turkey Eggs', weight: 'g', price: 1200, image: './images/turkey-eggs.jpg' },
-      { name: 'Live Turkey', weight: '8000g', price: 3000, image: './images/live-turkey.jpg' },
-      { name: 'Fresh Catfish', weight: '1000g', price: 2500, image: './images/fresh-catfish.jpg' },
-      { name: 'Smoked Catfish', weight: '1000g', price: 3000, image: './images/smoked-catfish.jpg' },
-      { name: 'Pork', weight: '1000g', price: 2200, image: './images/pork.jpg' },
-      { name: 'Bacon', weight: '500g', price: 2500, image: './images/bacon.jpg' },
-      { name: 'Ham', weight: '1000g', price: 3000, image: './images/ham.jpg' },
-      { name: 'Live Pig', weight: '20000g', price: 7000, image: './images/live-pig.jpg' },
-      { name: 'Dried Snail', weight: '500g', price: 2500, image: './images/dried-snail.jpg' },
-      { name: 'Live Snail', weight: '1000g', price: 1500, image: './images/live-snail.jpg' },
-      { name: 'Chicken Meat', weight: '1000g', price: 1500, image: './images/chicken-meat.jpg' },
-      { name: 'Chicken Eggs', weight: 'g', price: 800, image: './images/chicken-eggs.jpg' },
-      { name: 'Live Chicken', weight: '3000g', price: 1200, image: './images/live-chicken.jpg' },
-      { name: 'Fresh Plantain', weight: '1000g', price: 1000, image: './images/fresh-plantain.jpg' },
-      { name: 'Dried Plantain', weight: '500g', price: 1500, image: './images/dried-plantain.jpg' },
-      { name: 'Plantain Flour', weight: '1000g', price: 2000, image: './images/plantain-flour.jpg' },
-      { name: 'Fresh Cassava', weight: '5000g', price: 1200, image: './images/fresh-cassava.jpg' },
-      { name: 'Cassava Flour', weight: '1000g', price: 2000, image: './images/cassava-flour.jpg' },
-      { name: 'Garri', weight: '2000g', price: 1500, image: './images/garri.jpg' }
-    ];
+  const categories = ['Goat', 'Chicken', 'Pig', 'Catfish', 'Rabbit', 'Turkey', 'Snail', 'Corn', 'Cassava', 'Plantain'];
+  const baseImages = ['goat.jpg', 'chicken.jpg', 'pig.jpg', 'catfish.jpg', 'rabbit.jpg', 'turkey.jpg', 'snail.jpg', 'corn.jpg', 'cassava.jpg', 'plantain.jpg'];
+  const products = Array.from({ length: 72 }, (_, i) => {
+    const category = categories[i % categories.length];
+    const image = `./images/${baseImages[i % baseImages.length]}`;
+    return {
+      name: `${category} Product ${Math.floor(i / categories.length) + 1}`,
+      weight: `${500 + (i % 5) * 250}g`,
+      price: 1000 + (i * 50),
+      image
+    };
+  });
 
-    // Initialize cart
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const productGrid = document.getElementById('product-grid');
+  const productCount = document.getElementById('product-count');
+  const searchInput = document.getElementById('search-input');
 
-    // Display products
-    const productGrid = document.getElementById('product-grid');
-    const productCount = document.getElementById('product-count');
-    productCount.textContent = products.length;
-
-    products.forEach((product, index) => {
-      const productCard = document.createElement('div');
-      productCard.classList.add('border', 'rounded-lg', 'p-4', 'shadow-md', 'bg-white');
-
-      productCard.innerHTML = `
+  function renderProducts(filteredProducts = products) {
+    productGrid.innerHTML = '';
+    productCount.textContent = filteredProducts.length;
+    filteredProducts.forEach((product, index) => {
+      const card = document.createElement('div');
+      card.className = 'border rounded-lg p-4 shadow-md bg-white';
+      card.innerHTML = `
         <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover rounded-lg mb-4" />
         <h2 class="font-semibold text-lg mb-2">${product.name}</h2>
         <p class="text-gray-600 mb-2">${product.weight}</p>
         <p class="text-green-600 font-bold mb-4">₦${product.price}</p>
         <div class="flex items-center space-x-4">
-          <input type="number" id="quantity-${index}" value="1" min="1" class="border px-4 py-2 w-16 rounded text-center">
-          <button onclick="addToCart(${index})" class="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800">Add to Cart</button>
+          <input type="number" id="quantity-${products.indexOf(product)}" value="1" min="1" class="border px-4 py-2 w-16 rounded text-center">
+          <button onclick="addToCart(${products.indexOf(product)})" class="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800">Add to Cart</button>
         </div>
       `;
-
-      productGrid.appendChild(productCard);
+      productGrid.appendChild(card);
     });
+  }
 
-    // Update cart display
-    function updateCart() {
-      const cartCount = document.getElementById('cart-count');
-      const cartItems = document.getElementById('cart-items');
-      const cartTotal = document.getElementById('cart-total');
-
-      cartCount.textContent = cart.length;
-      cartItems.innerHTML = '';
-      let total = 0;
-
-      cart.forEach(item => {
-        total += item.product.price * item.quantity;
-        cartItems.innerHTML += `
-          <div class="flex justify-between items-center border-b pb-4 mb-4">
-            <div>
-              <h3 class="font-semibold">${item.product.name}</h3>
-              <p class="text-gray-600">₦${item.product.price} x ${item.quantity}</p>
-            </div>
-            <button onclick="removeFromCart(${item.productIndex})" class="text-red-500"><i class="fas fa-trash"></i></button>
+  function updateCart() {
+    const cartCount = document.getElementById('cart-count');
+    const cartItems = document.getElementById('cart-items');
+    const cartTotal = document.getElementById('cart-total');
+    cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+    cartItems.innerHTML = '';
+    let total = 0;
+    cart.forEach(item => {
+      total += item.product.price * item.quantity;
+      cartItems.innerHTML += `
+        <div class="flex justify-between items-center border-b pb-4 mb-4">
+          <div>
+            <h3 class="font-semibold">${item.product.name}</h3>
+            <p class="text-gray-600">₦${item.product.price} x ${item.quantity}</p>
           </div>
-        `;
-      });
+          <button onclick="removeFromCart(${item.productIndex})" class="text-red-500"><i class="fas fa-trash"></i></button>
+        </div>
+      `;
+    });
+    cartTotal.textContent = total;
+  }
 
-      cartTotal.textContent = total;
-    }
-
-    // Add item to cart
-    function addToCart(index) {
-      const quantity = parseInt(document.getElementById(`quantity-${index}`).value);
-      const product = products[index];
-
-      // Prevent negative or zero quantity
-      if (quantity <= 0) {
-        alert('Quantity must be greater than zero.');
-        return;
-      }
-
-      const existingItem = cart.find(item => item.productIndex === index);
-
-      if (existingItem) {
-        existingItem.quantity += quantity;
-      } else {
-        cart.push({ productIndex: index, product, quantity });
-      }
-
-      localStorage.setItem('cart', JSON.stringify(cart));
-      updateCart();
-    }
-
-    // Remove item from cart
-    function removeFromCart(index) {
-      cart = cart.filter(item => item.productIndex !== index);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      updateCart();
-    }
-
-    // Toggle cart sidebar
-    function toggleCart() {
-      const cartSidebar = document.getElementById('cart-sidebar');
-      if (cartSidebar.style.transform === 'translateX(0%)') {
-        cartSidebar.style.transform = 'translateX(100%)';
-      } else {
-        cartSidebar.style.transform = 'translateX(0)';
-      }
-    }
-
-    // Checkout
-    function checkout() {
-      if (cart.length === 0) {
-        alert('Your cart is empty!');
-        return;
-      }
-
-      alert('Proceeding to checkout...');
-      // You can integrate a real checkout flow here
-    }
-
-    // Initialize cart on page load
+  function addToCart(index) {
+    const quantity = parseInt(document.getElementById(`quantity-${index}`).value);
+    const product = products[index];
+    if (quantity <= 0) return alert('Quantity must be greater than zero.');
+    const existing = cart.find(item => item.productIndex === index);
+    if (existing) existing.quantity += quantity;
+    else cart.push({ productIndex: index, product, quantity });
+    localStorage.setItem('cart', JSON.stringify(cart));
     updateCart();
-  </script>
+  }
+
+  function removeFromCart(index) {
+    cart = cart.filter(item => item.productIndex !== index);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCart();
+  }
+
+  function toggleCart() {
+    const sidebar = document.getElementById('cart-sidebar');
+    sidebar.classList.toggle('translate-x-full');
+    sidebar.classList.toggle('translate-x-0');
+  }
+
+  function checkout() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    if (!cart.length) return alert('Your cart is empty!');
+    if (!isLoggedIn) return window.location.href = 'signin.html';
+    alert('Redirecting to payment...');
+  }
+
+  // 🔍 Search Filtering
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      const filtered = products.filter(p => p.name.toLowerCase().includes(query));
+      renderProducts(filtered);
+    });
+  }
+
+  // Initial Load
+  renderProducts();
+  updateCart();
+
+localStorage.setItem('redirectAfterLogin', 'checkout.html');
+window.location.href = 'signup.html';
+
+</script>
+
 </body>
 </html>

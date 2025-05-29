@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Checkout - Terra Balance</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; }
+    .brand-color { color: #228B22; }
+    .brand-bg { background-color: #228B22; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <img src="./images/terra-balance-logo.jpeg" alt="Terra Balance Logo" class="h-10 w-10 object-contain" />
+        <h1 class="text-2xl font-bold text-green-600">Terra<span class="text-gray-800">Balance</span></h1>
+      </div>
+      <a href="index.html" class="text-green-700 hover:underline">Home</a>
+    </div>
+  </nav>
+
+  <!-- Main Checkout Content -->
+  <main class="max-w-4xl mx-auto p-6 bg-white rounded shadow mt-8">
+    <h1 class="text-3xl font-bold mb-6 brand-color">Checkout</h1>
+
+    <div id="order-summary" class="mb-6">
+      <h2 class="text-xl font-semibold mb-4">Order Summary</h2>
+      <div id="cart-items" class="space-y-4 max-h-96 overflow-y-auto border rounded p-4 bg-gray-50"></div>
+      <p class="text-right mt-4 text-lg font-semibold">Total: ₦<span id="cart-total">0</span></p>
+    </div>
+
+    <button id="place-order-btn" class="w-full bg-green-700 text-white py-3 rounded hover:bg-green-800 text-lg font-semibold">
+      Place Order
+    </button>
+  </main>
+
+  <script>
+    // Load cart from localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    const cartItemsDiv = document.getElementById('cart-items');
+    const cartTotalSpan = document.getElementById('cart-total');
+    const placeOrderBtn = document.getElementById('place-order-btn');
+
+    function renderCart() {
+      cartItemsDiv.innerHTML = '';
+      if (cart.length === 0) {
+        cartItemsDiv.innerHTML = '<p class="text-gray-600">Your cart is empty.</p>';
+        placeOrderBtn.disabled = true;
+        placeOrderBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        return;
+      }
+      placeOrderBtn.disabled = false;
+      placeOrderBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+
+      let total = 0;
+      cart.forEach(item => {
+        const itemTotal = item.product.price * item.quantity;
+        total += itemTotal;
+
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'flex justify-between items-center border-b pb-3';
+
+        itemDiv.innerHTML = `
+          <div>
+            <p class="font-semibold">${item.product.name}</p>
+            <p class="text-gray-600">₦${item.product.price} × ${item.quantity} = ₦${itemTotal}</p>
+          </div>
+        `;
+
+        cartItemsDiv.appendChild(itemDiv);
+      });
+
+      cartTotalSpan.textContent = total;
+    }
+
+    placeOrderBtn.addEventListener('click', () => {
+      // Simulate placing order
+      alert('Thank you for your order!');
+
+      // Clear cart
+      localStorage.removeItem('cart');
+      cart = [];
+      renderCart();
+
+      // Redirect back to home or order confirmation page
+      window.location.href = 'index.html';
+    });
+
+    renderCart();
+  </script>
+</body>
+</html>
