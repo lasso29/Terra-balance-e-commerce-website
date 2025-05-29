@@ -5,11 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Product Catalog - Terra Balance</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     body { font-family: 'Segoe UI', sans-serif; }
     .brand-color { color: #228B22; }
     .brand-bg { background-color: #228B22; }
+
+    /* Responsive cart sidebar for mobile */
+    @media (max-width: 768px) {
+      #cart-sidebar {
+        width: 100vw;
+        max-width: 100%;
+        height: 100vh;
+        box-shadow: none;
+        z-index: 9999;
+      }
+    }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -134,133 +145,155 @@
 
   <!-- JavaScript -->
   <script>
-  const categories = ['Goat', 'Chicken', 'Pig', 'Catfish', 'Rabbit', 'Turkey', 'Snail', 'Corn', 'Cassava', 'Plantain'];
-  const baseImages = ['goat.jpg', 'chicken.jpg', 'pig.jpg', 'catfish.jpg', 'rabbit.jpg', 'turkey.jpg', 'snail.jpg', 'corn.jpg', 'cassava.jpg', 'plantain.jpg'];
-  const products = Array.from({ length: 72 }, (_, i) => {
-    const category = categories[i % categories.length];
-    const image = `./images/${baseImages[i % baseImages.length]}`;
-    return {
-      name: `${category} Product ${Math.floor(i / categories.length) + 1}`,
-      weight: `${500 + (i % 5) * 250}g`,
-      price: 1000 + (i * 50),
-      image
-    };
-  });
-
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  const productGrid = document.getElementById('product-grid');
-  const productCount = document.getElementById('product-count');
-  const searchInput = document.getElementById('search-input');
-
-  function renderProducts(filteredProducts = products) {
-    productGrid.innerHTML = '';
-    productCount.textContent = filteredProducts.length;
-    filteredProducts.forEach((product, index) => {
-      const card = document.createElement('div');
-      card.className = 'border rounded-lg p-4 shadow-md bg-white hover:shadow-xl transition-shadow duration-300 flex flex-col';
-      card.innerHTML = `
-        <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover rounded-lg mb-4" />
-        <h2 class="font-semibold text-lg mb-1">${product.name}</h2>
-        <p class="text-gray-600 mb-1">${product.weight}</p>
-        <p class="text-green-600 font-bold mb-4">₦${product.price}</p>
-        <div class="mt-auto flex items-center space-x-3">
-          <input type="number" id="quantity-${products.indexOf(product)}" value="1" min="1" class="border px-4 py-2 w-16 rounded text-center">
-          <button onclick="addToCart(${products.indexOf(product)})" class="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800">Add to Cart</button>
-        </div>
-      `;
-      productGrid.appendChild(card);
+    const categories = ['Goat', 'Chicken', 'Pig', 'Catfish', 'Rabbit', 'Turkey', 'Snail', 'Corn', 'Cassava', 'Plantain'];
+    const baseImages = ['goat.jpg', 'chicken.jpg', 'pig.jpg', 'catfish.jpg', 'rabbit.jpg', 'turkey.jpg', 'snail.jpg', 'corn.jpg', 'cassava.jpg', 'plantain.jpg'];
+    const products = Array.from({ length: 72 }, (_, i) => {
+      const category = categories[i % categories.length];
+      const image = `./images/${baseImages[i % baseImages.length]}`;
+      return {
+        name: `${category} Product ${Math.floor(i / categories.length) + 1}`,
+        weight: `${500 + (i % 5) * 250}g`,
+        price: 1000 + (i * 50),
+        image
+      };
     });
-  }
 
-  function updateCart() {
-    const cartCount = document.getElementById('cart-count');
-    const cartItems = document.getElementById('cart-items');
-    const cartTotal = document.getElementById('cart-total');
-    cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
-    cartItems.innerHTML = '';
-    let total = 0;
-    cart.forEach((item, idx) => {
-      total += item.product.price * item.quantity;
-      cartItems.innerHTML += `
-        <div class="flex justify-between items-center border-b pb-4 mb-4">
-          <div>
-            <h3 class="font-semibold">${item.product.name}</h3>
-            <p class="text-gray-600">₦${item.product.price} x ${item.quantity}</p>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const productGrid = document.getElementById('product-grid');
+    const productCount = document.getElementById('product-count');
+    const searchInput = document.getElementById('search-input');
+
+    function renderProducts(filteredProducts = products) {
+      productGrid.innerHTML = '';
+      productCount.textContent = filteredProducts.length;
+      filteredProducts.forEach((product, index) => {
+        const card = document.createElement('div');
+        card.className = 'border rounded-lg p-4 shadow-md bg-white hover:shadow-xl transition-shadow duration-300 flex flex-col';
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover rounded-lg mb-4" />
+          <h2 class="font-semibold text-lg mb-1">${product.name}</h2>
+          <p class="text-gray-600 mb-1">${product.weight}</p>
+          <p class="text-green-600 font-bold mb-4">₦${product.price}</p>
+          <div class="mt-auto flex items-center space-x-3">
+            <input type="number" id="quantity-${products.indexOf(product)}" value="1" min="1" class="border px-4 py-2 w-16 rounded" />
+            <button onclick="addToCart(${products.indexOf(product)})" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">Add to Cart</button>
           </div>
-          <div class="flex items-center space-x-2">
-            <button onclick="changeQuantity(${idx}, -1)" class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">-</button>
-            <span>${item.quantity}</span>
-            <button onclick="changeQuantity(${idx}, 1)" class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">+</button>
-            <button onclick="removeFromCart(${item.productIndex})" class="text-red-500 ml-2"><i class="fas fa-trash"></i></button>
+        `;
+        productGrid.appendChild(card);
+      });
+    }
+
+    function addToCart(index) {
+      const quantityInput = document.getElementById(`quantity-${index}`);
+      const quantity = parseInt(quantityInput.value);
+      if (quantity < 1) {
+        alert('Please select a quantity of 1 or more.');
+        return;
+      }
+      const product = products[index];
+      const existingItemIndex = cart.findIndex(item => item.name === product.name);
+      if (existingItemIndex !== -1) {
+        cart[existingItemIndex].quantity += quantity;
+      } else {
+        cart.push({ ...product, quantity });
+      }
+      saveCart();
+      renderCartItems();
+      updateCartCount();
+      alert(`${product.name} added to cart.`);
+    }
+
+    function renderCartItems() {
+      const cartItemsContainer = document.getElementById('cart-items');
+      cartItemsContainer.innerHTML = '';
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<p class="text-gray-600">Your cart is empty.</p>';
+        document.getElementById('cart-total').textContent = '0';
+        return;
+      }
+      let total = 0;
+      cart.forEach((item, index) => {
+        total += item.price * item.quantity;
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'flex items-center space-x-4 border-b pb-3';
+        itemDiv.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded" />
+          <div class="flex-1">
+            <h3 class="font-semibold">${item.name}</h3>
+            <p class="text-gray-600">₦${item.price} x ${item.quantity} = ₦${item.price * item.quantity}</p>
+            <div class="flex items-center space-x-2 mt-1">
+              <button onclick="changeQuantity(${index}, -1)" class="bg-gray-300 px-2 rounded hover:bg-gray-400">-</button>
+              <span>${item.quantity}</span>
+              <button onclick="changeQuantity(${index}, 1)" class="bg-gray-300 px-2 rounded hover:bg-gray-400">+</button>
+              <button onclick="removeItem(${index})" class="ml-4 text-red-600 hover:text-red-800"><i class="fas fa-trash"></i></button>
+            </div>
           </div>
-        </div>
-      `;
+        `;
+        cartItemsContainer.appendChild(itemDiv);
+      });
+      document.getElementById('cart-total').textContent = total;
+    }
+
+    function changeQuantity(index, delta) {
+      cart[index].quantity += delta;
+      if (cart[index].quantity < 1) cart[index].quantity = 1;
+      saveCart();
+      renderCartItems();
+      updateCartCount();
+    }
+
+    function removeItem(index) {
+      if (confirm('Remove this item from your cart?')) {
+        cart.splice(index, 1);
+        saveCart();
+        renderCartItems();
+        updateCartCount();
+      }
+    }
+
+    function saveCart() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function updateCartCount() {
+      document.getElementById('cart-count').textContent = cart.reduce((acc, item) => acc + item.quantity, 0);
+    }
+
+    function toggleCart() {
+      const sidebar = document.getElementById('cart-sidebar');
+      sidebar.classList.toggle('translate-x-full');
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert('Your cart is empty.');
+        return;
+      }
+      // Save cart to localStorage and redirect to checkout page
+      saveCart();
+      window.location.href = 'checkout.html';
+    }
+
+    // Search functionality
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        const query = searchInput.value.toLowerCase();
+        const filtered = products.filter(p => p.name.toLowerCase().includes(query));
+        renderProducts(filtered);
+      });
+    }
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
     });
-    cartTotal.textContent = total;
-    localStorage.setItem('cart', JSON.stringify(cart)); // Keep localStorage updated
-  }
 
-  function addToCart(productIndex) {
-    const quantityInput = document.getElementById(`quantity-${productIndex}`);
-    let quantity = parseInt(quantityInput.value);
-    if (quantity <= 0 || isNaN(quantity)) {
-      alert('Please enter a valid quantity');
-      return;
-    }
-    const product = products[productIndex];
-    const cartItemIndex = cart.findIndex(item => item.product.name === product.name);
-    if (cartItemIndex > -1) {
-      cart[cartItemIndex].quantity += quantity;
-    } else {
-      cart.push({ product, quantity, productIndex });
-    }
-    updateCart();
-  }
-
-  function changeQuantity(cartIdx, delta) {
-    if (!cart[cartIdx]) return;
-    cart[cartIdx].quantity += delta;
-    if (cart[cartIdx].quantity <= 0) {
-      cart.splice(cartIdx, 1);
-    }
-    updateCart();
-  }
-
-  function removeFromCart(productIndex) {
-    cart = cart.filter(item => item.productIndex !== productIndex);
-    updateCart();
-  }
-
-  function toggleCart() {
-    const sidebar = document.getElementById('cart-sidebar');
-    sidebar.classList.toggle('translate-x-full');
-  }
-
-  function checkout() {
-    if (cart.length === 0) {
-      alert('Your cart is empty!');
-      return;
-    }
-    // Cart already saved in localStorage, just redirect
-    window.location.href = 'checkout.html';
-  }
-
-  searchInput.addEventListener('input', () => {
-    const query = searchInput.value.toLowerCase();
-    const filtered = products.filter(p => p.name.toLowerCase().includes(query));
-    renderProducts(filtered);
-  });
-
-  // Initial render
-  renderProducts();
-  updateCart();
-
-  // Mobile menu toggle
-  const menuToggle = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  menuToggle.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-  });
+    // Initial render
+    renderProducts();
+    renderCartItems();
+    updateCartCount();
   </script>
 </body>
 </html>
