@@ -10,6 +10,10 @@
     body { font-family: 'Segoe UI', sans-serif; }
     .brand-color { color: #228B22; }
     .brand-bg { background-color: #228B22; }
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -20,79 +24,122 @@
         <img src="./images/terra-balance-logo.jpeg" alt="Terra Balance Logo" class="h-10 w-10 object-contain" />
         <h1 class="text-2xl font-bold text-green-600">Terra<span class="text-gray-800">Balance</span></h1>
       </div>
-      <a href="index.html" class="text-green-700 hover:underline">Home</a>
+      <div>
+        <a href="product.html" class="text-green-700 hover:underline"><i class="fas fa-arrow-left mr-1"></i> Back to Products</a>
+      </div>
     </div>
   </nav>
 
-  <!-- Main Checkout Content -->
-  <main class="max-w-4xl mx-auto p-6 bg-white rounded shadow mt-8">
+  <!-- Main Content -->
+  <main class="max-w-4xl mx-auto px-6 py-10">
     <h1 class="text-3xl font-bold mb-6 brand-color">Checkout</h1>
 
-    <div id="order-summary" class="mb-6">
-      <h2 class="text-xl font-semibold mb-4">Order Summary</h2>
-      <div id="cart-items" class="space-y-4 max-h-96 overflow-y-auto border rounded p-4 bg-gray-50"></div>
-      <p class="text-right mt-4 text-lg font-semibold">Total: ₦<span id="cart-total">0</span></p>
-    </div>
+    <div id="checkout-container" class="bg-white rounded-lg shadow-md p-6">
+      <p id="empty-msg" class="text-center text-gray-500 text-lg">Your cart is empty.</p>
 
-    <button id="place-order-btn" class="w-full bg-green-700 text-white py-3 rounded hover:bg-green-800 text-lg font-semibold">
-      Place Order
-    </button>
+      <div id="checkout-items" class="space-y-6"></div>
+
+      <div id="checkout-summary" class="mt-8 border-t pt-4 text-right hidden">
+        <p class="text-xl font-semibold">Total: ₦<span id="checkout-total">0</span></p>
+        <button id="place-order-btn" class="mt-4 bg-green-700 text-white px-6 py-3 rounded hover:bg-green-800">Place Order</button>
+      </div>
+    </div>
   </main>
 
   <script>
-    // Load cart from localStorage
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-    const cartItemsDiv = document.getElementById('cart-items');
-    const cartTotalSpan = document.getElementById('cart-total');
+    const checkoutItemsDiv = document.getElementById('checkout-items');
+    const emptyMsg = document.getElementById('empty-msg');
+    const checkoutSummary = document.getElementById('checkout-summary');
+    const checkoutTotalSpan = document.getElementById('checkout-total');
     const placeOrderBtn = document.getElementById('place-order-btn');
 
+    // Load cart from localStorage or empty array
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function saveCart() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
     function renderCart() {
-      cartItemsDiv.innerHTML = '';
+      checkoutItemsDiv.innerHTML = '';
       if (cart.length === 0) {
-        cartItemsDiv.innerHTML = '<p class="text-gray-600">Your cart is empty.</p>';
-        placeOrderBtn.disabled = true;
-        placeOrderBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        emptyMsg.style.display = 'block';
+        checkoutSummary.classList.add('hidden');
         return;
       }
-      placeOrderBtn.disabled = false;
-      placeOrderBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+      emptyMsg.style.display = 'none';
+      checkoutSummary.classList.remove('hidden');
 
       let total = 0;
-      cart.forEach(item => {
-        const itemTotal = item.product.price * item.quantity;
+
+      cart.forEach(({ product, quantity }, index) => {
+        const itemTotal = product.price * quantity;
         total += itemTotal;
 
         const itemDiv = document.createElement('div');
-        itemDiv.className = 'flex justify-between items-center border-b pb-3';
+        itemDiv.className = 'flex items-center space-x-4 border-b pb-4';
 
         itemDiv.innerHTML = `
-          <div>
-            <p class="font-semibold">${item.product.name}</p>
-            <p class="text-gray-600">₦${item.product.price} × ${item.quantity} = ₦${itemTotal}</p>
+          <img src="${product.image}" alt="${product.name}" class="w-24 h-24 object-cover rounded" />
+          <div class="flex-1">
+            <h2 class="font-semibold text-lg">${product.name}</h2>
+            <p class="text-gray-600">Weight: ${product.weight}</p>
+            <p class="text-green-600 font-bold">₦${product.price.toLocaleString()} each</p>
+            <div class="mt-2 flex items-center space-x-2">
+              <button class="qty-btn bg-gray-200 hover:bg-gray-300 rounded px-2 py-1 text-lg" data-action="decrease" data-index="${index}">-</button>
+              <span class="font-semibold px-3 py-1 border rounded">${quantity}</span>
+              <button class="qty-btn bg-gray-200 hover:bg-gray-300 rounded px-2 py-1 text-lg" data-action="increase" data-index="${index}">+</button>
+              <button class="delete-btn ml-4 text-red-600 hover:text-red-800" data-index="${index}" title="Remove item">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+            <p class="mt-2 text-green-700 font-semibold">Subtotal: ₦${itemTotal.toLocaleString()}</p>
           </div>
         `;
 
-        cartItemsDiv.appendChild(itemDiv);
+        checkoutItemsDiv.appendChild(itemDiv);
       });
 
-      cartTotalSpan.textContent = total;
+      checkoutTotalSpan.textContent = total.toLocaleString();
+
+      // Attach event listeners to buttons
+      document.querySelectorAll('.qty-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const action = btn.getAttribute('data-action');
+          const idx = Number(btn.getAttribute('data-index'));
+          if (action === 'increase') {
+            cart[idx].quantity++;
+          } else if (action === 'decrease') {
+            if (cart[idx].quantity > 1) {
+              cart[idx].quantity--;
+            }
+          }
+          saveCart();
+          renderCart();
+        });
+      });
+
+      document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const idx = Number(btn.getAttribute('data-index'));
+          cart.splice(idx, 1);
+          saveCart();
+          renderCart();
+        });
+      });
     }
 
-    placeOrderBtn.addEventListener('click', () => {
-      // Simulate placing order
-      alert('Thank you for your order!');
-
-      // Clear cart
-      localStorage.removeItem('cart');
-      cart = [];
-      renderCart();
-
-      // Redirect back to home or order confirmation page
-      window.location.href = 'index.html';
-    });
-
     renderCart();
+
+    placeOrderBtn.addEventListener('click', () => {
+      if (cart.length === 0) {
+        alert('Your cart is empty.');
+        return;
+      }
+      alert('Thank you for your order! Your order has been placed successfully.');
+      localStorage.removeItem('cart'); // clear cart after order
+      window.location.href = 'product.html'; // redirect to product page after order
+    });
   </script>
 </body>
 </html>

@@ -157,13 +157,13 @@
     productCount.textContent = filteredProducts.length;
     filteredProducts.forEach((product, index) => {
       const card = document.createElement('div');
-      card.className = 'border rounded-lg p-4 shadow-md bg-white';
+      card.className = 'border rounded-lg p-4 shadow-md bg-white hover:shadow-xl transition-shadow duration-300 flex flex-col';
       card.innerHTML = `
         <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover rounded-lg mb-4" />
-        <h2 class="font-semibold text-lg mb-2">${product.name}</h2>
-        <p class="text-gray-600 mb-2">${product.weight}</p>
+        <h2 class="font-semibold text-lg mb-1">${product.name}</h2>
+        <p class="text-gray-600 mb-1">${product.weight}</p>
         <p class="text-green-600 font-bold mb-4">₦${product.price}</p>
-        <div class="flex items-center space-x-4">
+        <div class="mt-auto flex items-center space-x-3">
           <input type="number" id="quantity-${products.indexOf(product)}" value="1" min="1" class="border px-4 py-2 w-16 rounded text-center">
           <button onclick="addToCart(${products.indexOf(product)})" class="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800">Add to Cart</button>
         </div>
@@ -179,7 +179,7 @@
     cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
     cartItems.innerHTML = '';
     let total = 0;
-    cart.forEach(item => {
+    cart.forEach((item, idx) => {
       total += item.product.price * item.quantity;
       cartItems.innerHTML += `
         <div class="flex justify-between items-center border-b pb-4 mb-4">
@@ -187,60 +187,80 @@
             <h3 class="font-semibold">${item.product.name}</h3>
             <p class="text-gray-600">₦${item.product.price} x ${item.quantity}</p>
           </div>
-          <button onclick="removeFromCart(${item.productIndex})" class="text-red-500"><i class="fas fa-trash"></i></button>
+          <div class="flex items-center space-x-2">
+            <button onclick="changeQuantity(${idx}, -1)" class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">-</button>
+            <span>${item.quantity}</span>
+            <button onclick="changeQuantity(${idx}, 1)" class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">+</button>
+            <button onclick="removeFromCart(${item.productIndex})" class="text-red-500 ml-2"><i class="fas fa-trash"></i></button>
+          </div>
         </div>
       `;
     });
     cartTotal.textContent = total;
+    localStorage.setItem('cart', JSON.stringify(cart)); // Keep localStorage updated
   }
 
-  function addToCart(index) {
-    const quantity = parseInt(document.getElementById(`quantity-${index}`).value);
-    const product = products[index];
-    if (quantity <= 0) return alert('Quantity must be greater than zero.');
-    const existing = cart.find(item => item.productIndex === index);
-    if (existing) existing.quantity += quantity;
-    else cart.push({ productIndex: index, product, quantity });
-    localStorage.setItem('cart', JSON.stringify(cart));
+  function addToCart(productIndex) {
+    const quantityInput = document.getElementById(`quantity-${productIndex}`);
+    let quantity = parseInt(quantityInput.value);
+    if (quantity <= 0 || isNaN(quantity)) {
+      alert('Please enter a valid quantity');
+      return;
+    }
+    const product = products[productIndex];
+    const cartItemIndex = cart.findIndex(item => item.product.name === product.name);
+    if (cartItemIndex > -1) {
+      cart[cartItemIndex].quantity += quantity;
+    } else {
+      cart.push({ product, quantity, productIndex });
+    }
     updateCart();
   }
 
-  function removeFromCart(index) {
-    cart = cart.filter(item => item.productIndex !== index);
-    localStorage.setItem('cart', JSON.stringify(cart));
+  function changeQuantity(cartIdx, delta) {
+    if (!cart[cartIdx]) return;
+    cart[cartIdx].quantity += delta;
+    if (cart[cartIdx].quantity <= 0) {
+      cart.splice(cartIdx, 1);
+    }
+    updateCart();
+  }
+
+  function removeFromCart(productIndex) {
+    cart = cart.filter(item => item.productIndex !== productIndex);
     updateCart();
   }
 
   function toggleCart() {
     const sidebar = document.getElementById('cart-sidebar');
     sidebar.classList.toggle('translate-x-full');
-    sidebar.classList.toggle('translate-x-0');
   }
 
   function checkout() {
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    if (!cart.length) return alert('Your cart is empty!');
-    if (!isLoggedIn) return window.location.href = 'signin.html';
-    alert('Redirecting to payment...');
+    if (cart.length === 0) {
+      alert('Your cart is empty!');
+      return;
+    }
+    // Cart already saved in localStorage, just redirect
+    window.location.href = 'checkout.html';
   }
 
-  // 🔍 Search Filtering
-  if (searchInput) {
-    searchInput.addEventListener('input', (e) => {
-      const query = e.target.value.toLowerCase();
-      const filtered = products.filter(p => p.name.toLowerCase().includes(query));
-      renderProducts(filtered);
-    });
-  }
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase();
+    const filtered = products.filter(p => p.name.toLowerCase().includes(query));
+    renderProducts(filtered);
+  });
 
-  // Initial Load
+  // Initial render
   renderProducts();
   updateCart();
 
-localStorage.setItem('redirectAfterLogin', 'checkout.html');
-window.location.href = 'signup.html';
-
-</script>
-
+  // Mobile menu toggle
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+  </script>
 </body>
 </html>
