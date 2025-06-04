@@ -1,3 +1,4 @@
+<!-- START OF checkout.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,7 +54,6 @@
     const checkoutTotalSpan = document.getElementById('checkout-total');
     const placeOrderBtn = document.getElementById('place-order-btn');
 
-    // Load cart from localStorage or empty array
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     function saveCart() {
@@ -67,27 +67,28 @@
         checkoutSummary.classList.add('hidden');
         return;
       }
+
       emptyMsg.style.display = 'none';
       checkoutSummary.classList.remove('hidden');
 
       let total = 0;
 
-      cart.forEach(({ product, quantity }, index) => {
-        const itemTotal = product.price * quantity;
+      cart.forEach((item, index) => {
+        const itemTotal = item.price * item.quantity;
         total += itemTotal;
 
         const itemDiv = document.createElement('div');
         itemDiv.className = 'flex items-center space-x-4 border-b pb-4';
 
         itemDiv.innerHTML = `
-          <img src="${product.image}" alt="${product.name}" class="w-24 h-24 object-cover rounded" />
+          <img src="${item.image}" alt="${item.name}" class="w-24 h-24 object-cover rounded" />
           <div class="flex-1">
-            <h2 class="font-semibold text-lg">${product.name}</h2>
-            <p class="text-gray-600">Weight: ${product.weight}</p>
-            <p class="text-green-600 font-bold">₦${product.price.toLocaleString()} each</p>
+            <h2 class="font-semibold text-lg">${item.name}</h2>
+            <p class="text-gray-600">Weight: ${item.weight}</p>
+            <p class="text-green-600 font-bold">₦${item.price.toLocaleString()} each</p>
             <div class="mt-2 flex items-center space-x-2">
               <button class="qty-btn bg-gray-200 hover:bg-gray-300 rounded px-2 py-1 text-lg" data-action="decrease" data-index="${index}">-</button>
-              <span class="font-semibold px-3 py-1 border rounded">${quantity}</span>
+              <span class="font-semibold px-3 py-1 border rounded">${item.quantity}</span>
               <button class="qty-btn bg-gray-200 hover:bg-gray-300 rounded px-2 py-1 text-lg" data-action="increase" data-index="${index}">+</button>
               <button class="delete-btn ml-4 text-red-600 hover:text-red-800" data-index="${index}" title="Remove item">
                 <i class="fas fa-trash"></i>
@@ -102,17 +103,15 @@
 
       checkoutTotalSpan.textContent = total.toLocaleString();
 
-      // Attach event listeners to buttons
+      // Bind all quantity + delete events
       document.querySelectorAll('.qty-btn').forEach(btn => {
-        btn.addEventListener('click', e => {
-          const action = btn.getAttribute('data-action');
-          const idx = Number(btn.getAttribute('data-index'));
+        btn.addEventListener('click', () => {
+          const action = btn.dataset.action;
+          const index = parseInt(btn.dataset.index);
           if (action === 'increase') {
-            cart[idx].quantity++;
+            cart[index].quantity++;
           } else if (action === 'decrease') {
-            if (cart[idx].quantity > 1) {
-              cart[idx].quantity--;
-            }
+            if (cart[index].quantity > 1) cart[index].quantity--;
           }
           saveCart();
           renderCart();
@@ -120,26 +119,29 @@
       });
 
       document.querySelectorAll('.delete-btn').forEach(btn => {
-        btn.addEventListener('click', e => {
-          const idx = Number(btn.getAttribute('data-index'));
-          cart.splice(idx, 1);
+        btn.addEventListener('click', () => {
+          const index = parseInt(btn.dataset.index);
+          cart.splice(index, 1);
           saveCart();
           renderCart();
         });
       });
     }
 
-    renderCart();
-
+    // Place order
     placeOrderBtn.addEventListener('click', () => {
       if (cart.length === 0) {
         alert('Your cart is empty.');
         return;
       }
-      alert('Thank you for your order! Your order has been placed successfully.');
-      localStorage.removeItem('cart'); // clear cart after order
-      window.location.href = 'product.html'; // redirect to product page after order
+      alert('Thank you for your order! You will be redirected to sign in.');
+      localStorage.removeItem('cart');
+      window.location.href = 'signin.html';
     });
+
+    // Initial render
+    renderCart();
   </script>
 </body>
 </html>
+<!-- END OF checkout.html -->

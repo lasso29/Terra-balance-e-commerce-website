@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // ====== PRODUCT LIST ======
+  // ✅ Clear cart on homepage
+  localStorage.removeItem('cart');
+
+  // ====== FEATURED PRODUCTS (12 items) ======
   const featuredProducts = [
     {
       name: 'Organic Plantain Bunch',
@@ -56,6 +59,34 @@ document.addEventListener('DOMContentLoaded', () => {
       category: 'Livestock',
       description: 'Nutrient-rich feed for healthy pig growth.',
       image: './images/pig-feed.jpg'
+    },
+    {
+      name: 'Fresh Eggs (12 pack)',
+      price: 800,
+      category: 'Poultry',
+      description: 'Farm fresh eggs delivered from healthy layers.',
+      image: './images/eggs.jpg'
+    },
+    {
+      name: 'Cassava Flour (2kg)',
+      price: 1700,
+      category: 'Flour',
+      description: 'Smooth and fine cassava flour for local meals.',
+      image: './images/cassava-flour.jpg'
+    },
+    {
+      name: 'Chicken Meat (1kg)',
+      price: 2200,
+      category: 'Meat',
+      description: 'Well-cut fresh chicken meat ready to cook.',
+      image: './images/chicken-meat.jpg'
+    },
+    {
+      name: 'Plantain Chips (500g)',
+      price: 1000,
+      category: 'Snacks',
+      description: 'Crispy plantain chips with a touch of salt.',
+      image: './images/plantain-chips.jpg'
     }
   ];
 
@@ -91,7 +122,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  renderProducts(featuredProducts); // Initial render
+  // Initial render (show only 12)
+  renderProducts(featuredProducts.slice(0, 12));
 
   // ====== SEARCH FUNCTION ======
   searchInputs.forEach(input => {
@@ -102,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
         product.description.toLowerCase().includes(term) ||
         product.category.toLowerCase().includes(term)
       );
-      renderProducts(filtered);
+      renderProducts(filtered.slice(0, 12)); // Still limit to 12
     });
   });
 
@@ -127,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showSlide(0);
   }
 
-  // ====== SCROLL IN ANIMATIONS ======
+  // ====== SCROLL-IN ANIMATION ======
   const sections = document.querySelectorAll('.slide-up');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {

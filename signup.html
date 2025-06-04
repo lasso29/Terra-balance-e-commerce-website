@@ -65,10 +65,13 @@
         return;
       }
 
-      // Simulate saving user data (in real app, send to backend)
+      // Simulate account creation
       alert('Account created successfully!');
+      
+      // Set login flag
+      localStorage.setItem('userLoggedIn', 'true');
 
-      // Redirect to intended page or signin by default
+      // Redirect after login (to checkout.html or other saved page)
       const redirectTo = localStorage.getItem('redirectAfterLogin') || 'signin.html';
       localStorage.removeItem('redirectAfterLogin');
       window.location.href = redirectTo;

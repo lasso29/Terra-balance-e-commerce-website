@@ -21,18 +21,6 @@
         z-index: 9999;
       }
     }
-
-    /* Overlay for mobile cart */
-    #cart-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.4);
-      z-index: 40;
-    }
-    #cart-sidebar.open + #cart-overlay {
-      display: block;
-    }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -151,21 +139,150 @@
     <div id="cart-items" class="p-4 space-y-4"></div>
     <div class="p-4 border-t">
       <p class="text-lg font-semibold">Total: ₦<span id="cart-total">0</span></p>
-      <button onclick="goToCheckout()" class="w-full mt-4 bg-green-600 hover:bg-green-700 text-white py-2 rounded">Checkout</button>
+      <button onclick="checkout()" class="w-full mt-4 bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800">Checkout</button>
     </div>
   </div>
 
-  <!-- Overlay for mobile -->
-  <div id="cart-overlay" onclick="toggleCart()"></div>
-
-  <!-- Mobile Cart Button -->
-  <button onclick="toggleCart()" 
-          class="fixed bottom-5 right-5 md:hidden bg-green-600 text-white p-4 rounded-full shadow-lg z-50 hover:bg-green-700" aria-label="Open Cart">
-    <i class="fas fa-shopping-cart text-xl"></i>
-    <span id="cart-count-mobile" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full text-center">0</span>
-  </button>
-
+  <!-- JavaScript -->
   <script>
+    const categories = ['Goat', 'Chicken', 'Pig', 'Catfish', 'Rabbit', 'Turkey', 'Snail', 'Corn', 'Cassava', 'Plantain'];
+    const baseImages = ['goat.jpg', 'chicken.jpg', 'pig.jpg', 'catfish.jpg', 'rabbit.jpg', 'turkey.jpg', 'snail.jpg', 'corn.jpg', 'cassava.jpg', 'plantain.jpg'];
+    const products = Array.from({ length: 72 }, (_, i) => {
+      const category = categories[i % categories.length];
+      const image = `./images/${baseImages[i % baseImages.length]}`;
+      return {
+        name: `${category} Product ${Math.floor(i / categories.length) + 1}`,
+        weight: `${500 + (i % 5) * 250}g`,
+        price: 1000 + (i * 50),
+        image
+      };
+    });
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const productGrid = document.getElementById('product-grid');
+    const productCount = document.getElementById('product-count');
+    const searchInput = document.getElementById('search-input');
+
+    function renderProducts(filteredProducts = products) {
+      productGrid.innerHTML = '';
+      productCount.textContent = filteredProducts.length;
+      filteredProducts.forEach((product, index) => {
+        const card = document.createElement('div');
+        card.className = 'border rounded-lg p-4 shadow-md bg-white hover:shadow-xl transition-shadow duration-300 flex flex-col';
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover rounded-lg mb-4" />
+          <h2 class="font-semibold text-lg mb-1">${product.name}</h2>
+          <p class="text-gray-600 mb-1">${product.weight}</p>
+          <p class="text-green-600 font-bold mb-4">₦${product.price}</p>
+          <div class="mt-auto flex items-center space-x-3">
+            <input type="number" id="quantity-${products.indexOf(product)}" value="1" min="1" class="border px-4 py-2 w-16 rounded" />
+            <button onclick="addToCart(${products.indexOf(product)})" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">Add to Cart</button>
+          </div>
+        `;
+        productGrid.appendChild(card);
+      });
+    }
+
+    function addToCart(index) {
+      const quantityInput = document.getElementById(`quantity-${index}`);
+      const quantity = parseInt(quantityInput.value);
+      if (quantity < 1) {
+        alert('Please select a quantity of 1 or more.');
+        return;
+      }
+      const product = products[index];
+      const existingItemIndex = cart.findIndex(item => item.name === product.name);
+      if (existingItemIndex !== -1) {
+        cart[existingItemIndex].quantity += quantity;
+      } else {
+        cart.push({ ...product, quantity });
+      }
+      saveCart();
+      renderCartItems();
+      updateCartCount();
+      alert(`${product.name} added to cart.`);
+    }
+
+    function renderCartItems() {
+      const cartItemsContainer = document.getElementById('cart-items');
+      cartItemsContainer.innerHTML = '';
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<p class="text-gray-600">Your cart is empty.</p>';
+        document.getElementById('cart-total').textContent = '0';
+        return;
+      }
+      let total = 0;
+      cart.forEach((item, index) => {
+        total += item.price * item.quantity;
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'flex items-center space-x-4 border-b pb-3';
+        itemDiv.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded" />
+          <div class="flex-1">
+            <h3 class="font-semibold">${item.name}</h3>
+            <p class="text-gray-600">₦${item.price} x ${item.quantity} = ₦${item.price * item.quantity}</p>
+            <div class="flex items-center space-x-2 mt-1">
+              <button onclick="changeQuantity(${index}, -1)" class="bg-gray-300 px-2 rounded hover:bg-gray-400">-</button>
+              <span>${item.quantity}</span>
+              <button onclick="changeQuantity(${index}, 1)" class="bg-gray-300 px-2 rounded hover:bg-gray-400">+</button>
+              <button onclick="removeItem(${index})" class="ml-4 text-red-600 hover:text-red-800"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>
+        `;
+        cartItemsContainer.appendChild(itemDiv);
+      });
+      document.getElementById('cart-total').textContent = total;
+    }
+
+    function changeQuantity(index, delta) {
+      cart[index].quantity += delta;
+      if (cart[index].quantity < 1) cart[index].quantity = 1;
+      saveCart();
+      renderCartItems();
+      updateCartCount();
+    }
+
+    function removeItem(index) {
+      if (confirm('Remove this item from your cart?')) {
+        cart.splice(index, 1);
+        saveCart();
+        renderCartItems();
+        updateCartCount();
+      }
+    }
+
+    function saveCart() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function updateCartCount() {
+      document.getElementById('cart-count').textContent = cart.reduce((acc, item) => acc + item.quantity, 0);
+    }
+
+    function toggleCart() {
+      const sidebar = document.getElementById('cart-sidebar');
+      sidebar.classList.toggle('translate-x-full');
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert('Your cart is empty.');
+        return;
+      }
+      // Save cart to localStorage and redirect to checkout page
+      saveCart();
+      window.location.href = 'checkout.html';
+    }
+
+    // Search functionality
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        const query = searchInput.value.toLowerCase();
+        const filtered = products.filter(p => p.name.toLowerCase().includes(query));
+        renderProducts(filtered);
+      });
+    }
+
     // Mobile menu toggle
     const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -173,165 +290,10 @@
       mobileMenu.classList.toggle('hidden');
     });
 
-    // Products sample data
-    const products = [
-      {
-        id: 1,
-        name: "Goat - Premium",
-        price: 25000,
-        image: "./images/goat.jpeg"
-      },
-      {
-        id: 2,
-        name: "Rabbit - Fresh",
-        price: 8000,
-        image: "./images/rabbit.jpeg"
-      },
-      {
-        id: 3,
-        name: "Turkey - Free Range",
-        price: 15000,
-        image: "./images/turkey.jpeg"
-      },
-      {
-        id: 4,
-        name: "Catfish - Fresh",
-        price: 1200,
-        image: "./images/catfish.jpeg"
-      },
-      {
-        id: 5,
-        name: "Pig - Organic",
-        price: 35000,
-        image: "./images/pig.jpeg"
-      },
-      {
-        id: 6,
-        name: "Snail - Farm Fresh",
-        price: 5000,
-        image: "./images/snail.jpeg"
-      }
-    ];
-
-    const productGrid = document.getElementById('product-grid');
-    const productCount = document.getElementById('product-count');
-
-    // Render products
-    function renderProducts() {
-      productGrid.innerHTML = '';
-      products.forEach(product => {
-        productGrid.innerHTML += `
-          <div class="bg-white rounded-lg shadow p-4 flex flex-col">
-            <img src="${product.image}" alt="${product.name}" class="w-full h-40 object-cover rounded-md mb-3" />
-            <h3 class="text-lg font-semibold mb-2">${product.name}</h3>
-            <p class="text-green-700 font-bold mb-4">₦${product.price.toLocaleString()}</p>
-            <button onclick="addToCart(${product.id})" class="mt-auto bg-green-600 hover:bg-green-700 text-white py-2 rounded">Add to Cart</button>
-          </div>
-        `;
-      });
-      productCount.textContent = products.length;
-    }
-
+    // Initial render
     renderProducts();
-
-    // Cart functionality
-    let cart = [];
-
-    function addToCart(id) {
-      const product = products.find(p => p.id === id);
-      if (!product) return;
-      const existing = cart.find(item => item.id === id);
-      if (existing) {
-        existing.quantity++;
-      } else {
-        cart.push({ ...product, quantity: 1 });
-      }
-      updateCartCount();
-      renderCart();
-      alert(`${product.name} added to cart!`);
-    }
-
-    function updateCartCount() {
-      const count = cart.reduce((acc, item) => acc + item.quantity, 0);
-      document.getElementById('cart-count').textContent = count;
-      const mobileCount = document.getElementById('cart-count-mobile');
-      if (mobileCount) mobileCount.textContent = count;
-    }
-
-    function renderCart() {
-      const cartItems = document.getElementById('cart-items');
-      cartItems.innerHTML = '';
-      if (cart.length === 0) {
-        cartItems.innerHTML = '<p class="text-center text-gray-500">Your cart is empty.</p>';
-        document.getElementById('cart-total').textContent = '0';
-        return;
-      }
-
-      let total = 0;
-      cart.forEach(item => {
-        total += item.price * item.quantity;
-        cartItems.innerHTML += `
-          <div class="flex items-center space-x-4">
-            <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded" />
-            <div class="flex-1">
-              <h4 class="font-semibold">${item.name}</h4>
-              <p>₦${item.price.toLocaleString()} x ${item.quantity} = ₦${(item.price * item.quantity).toLocaleString()}</p>
-              <div class="mt-1 flex items-center space-x-2">
-                <button onclick="decreaseQuantity(${item.id})" class="bg-gray-300 px-2 rounded">-</button>
-                <span>${item.quantity}</span>
-                <button onclick="increaseQuantity(${item.id})" class="bg-gray-300 px-2 rounded">+</button>
-                <button onclick="removeFromCart(${item.id})" class="ml-4 text-red-500 hover:text-red-700"><i class="fas fa-trash"></i></button>
-              </div>
-            </div>
-          </div>
-        `;
-      });
-      document.getElementById('cart-total').textContent = total.toLocaleString();
-    }
-
-    function increaseQuantity(id) {
-      const item = cart.find(i => i.id === id);
-      if (item) {
-        item.quantity++;
-        updateCartCount();
-        renderCart();
-      }
-    }
-
-    function decreaseQuantity(id) {
-      const item = cart.find(i => i.id === id);
-      if (item) {
-        if (item.quantity > 1) {
-          item.quantity--;
-        } else {
-          cart = cart.filter(i => i.id !== id);
-        }
-        updateCartCount();
-        renderCart();
-      }
-    }
-
-    function removeFromCart(id) {
-      cart = cart.filter(i => i.id !== id);
-      updateCartCount();
-      renderCart();
-    }
-
-    function toggleCart() {
-      const sidebar = document.getElementById('cart-sidebar');
-      const overlay = document.getElementById('cart-overlay');
-      sidebar.classList.toggle('translate-x-full');
-      sidebar.classList.toggle('open');
-      if (overlay) overlay.style.display = sidebar.classList.contains('open') ? 'block' : 'none';
-    }
-
-    function goToCheckout() {
-      window.location.href = 'checkout.html';
-    }
-
-    // Initialize
+    renderCartItems();
     updateCartCount();
-    renderCart();
   </script>
 </body>
 </html>
