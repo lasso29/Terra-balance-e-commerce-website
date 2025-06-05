@@ -143,157 +143,215 @@
     </div>
   </div>
 
+
+  <!-- Footer -->
+<footer class="bg-[#0C1E35] text-white py-10">
+  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 items-start">
+    
+    <!-- Logo + Description -->
+    <div>
+      <img src="/images/terra-balance-logo.jpeg" alt="Terra Balance Logo" class="h-12 mb-4">
+      <p class="text-gray-300">Empowering African communities through agriculture and innovation.</p>
+    </div>
+
+    <!-- Quick Links -->
+    <div>
+      <h4 class="text-lg font-semibold mb-2">Quick Links</h4>
+      <ul class="space-y-2 text-gray-300">
+        <li><a href="#" class="hover:text-yellow-300">Home</a></li>
+        <li><a href="#" class="hover:text-yellow-300">About Us</a></li>
+        <li><a href="#" class="hover:text-yellow-300">Our Services</a></li>
+        <li><a href="#" class="hover:text-yellow-300">Shop</a></li>
+        <li><a href="#" class="hover:text-yellow-300">Contact Us</a></li>
+        <li><a href="#" class="hover:text-yellow-300">FAQs</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact + Social -->
+    <div>
+      <h4 class="text-lg font-semibold mb-2">Contact</h4>
+      <p class="text-gray-300">Email: info@terrabalance.org</p>
+      <p class="text-gray-300">Phone: +234 800 123 4567</p>
+      <p class="text-gray-300">Address: Phase 2 road, Obafemi Awolowo University Teaching Hospital, Ile-Ife, Nigeria</p>
+      <div class="flex space-x-4 mt-4">
+        <!-- Facebook -->
+        <a href="https://web.facebook.com/profile.php?id=61571042126610#" class="hover:text-yellow-300" aria-label="Facebook">
+          <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M22 12.073C22 5.404 17.303.5 11 .5S0 5.404 0 12.073C0 17.784 4.031 22.225 9.281 23v-7.768H6.508v-3.159h2.773V9.845c0-2.748 1.643-4.263 4.158-4.263 1.203 0 2.462.216 2.462.216v2.713h-1.387c-1.366 0-1.793.848-1.793 1.716v2.06h3.048l-.487 3.159h-2.561V23C19.969 22.225 24 17.784 24 12.073z"/></svg>
+        </a>
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/terra_balance_enterprises/" class="hover:text-yellow-300" aria-label="Instagram">
+          <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.34 3.608 1.316.975.976 1.253 2.243 1.315 3.609.058 1.265.07 1.645.07 4.849s-.012 3.584-.07 4.849c-.062 1.366-.34 2.633-1.316 3.608-.976.975-2.243 1.253-3.609 1.315-1.265.058-1.645.07-4.849.07s-3.584-.012-4.849-.07c-1.366-.062-2.633-.34-3.608-1.315-.976-.975-1.253-2.242-1.315-3.608C2.175 15.647 2.163 15.267 2.163 12s.012-3.584.07-4.849c.062-1.366.34-2.633 1.316-3.609.975-.975 2.242-1.253 3.608-1.315C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.012 7.052.07 5.771.129 4.535.396 3.471 1.46c-1.064 1.065-1.331 2.301-1.39 3.582C2.012 6.333 2 6.741 2 10c0 3.259.012 3.668.07 4.948.059 1.281.326 2.517 1.39 3.582 1.065 1.064 2.301 1.331 3.582 1.39 1.28.058 1.688.07 4.948.07s3.668-.012 4.948-.07c1.281-.059 2.517-.326 3.582-1.39 1.064-1.065 1.331-2.301 1.39-3.582.058-1.28.07-1.688.07-4.948s-.012-3.668-.07-4.948c-.059-1.281-.326-2.517-1.39-3.582C19.484.396 18.248.129 16.968.07 15.688.012 15.259 0 12 0z"/><path d="M12 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.999 3.999 0 1 1 0-7.998 3.999 3.999 0 0 1 0 7.998z"/><circle cx="18.406" cy="5.594" r="1.44"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Copyright with background -->
+  <div class="mt-8 bg-[#071423] py-4 text-center text-sm text-gray-400">
+    &copy; 2025 Terra Balance Enterprises. All rights reserved.
+  </div>
+</footer>
+
   <!-- JavaScript -->
   <script>
-    const categories = ['Goat', 'Chicken', 'Pig', 'Catfish', 'Rabbit', 'Turkey', 'Snail', 'Corn', 'Cassava', 'Plantain'];
-    const baseImages = ['goat.jpg', 'chicken.jpg', 'pig.jpg', 'catfish.jpg', 'rabbit.jpg', 'turkey.jpg', 'snail.jpg', 'corn.jpg', 'cassava.jpg', 'plantain.jpg'];
-    const products = Array.from({ length: 72 }, (_, i) => {
-      const category = categories[i % categories.length];
-      const image = `./images/${baseImages[i % baseImages.length]}`;
-      return {
-        name: `${category} Product ${Math.floor(i / categories.length) + 1}`,
-        weight: `${500 + (i % 5) * 250}g`,
-        price: 1000 + (i * 50),
-        image
-      };
+  const categories = ['Goat', 'Chicken', 'Pig', 'Catfish', 'Rabbit', 'Turkey', 'Snail', 'Corn', 'Cassava', 'Plantain'];
+  const baseImages = [
+    'goat-farming.jpg',
+    'chicken-farming.jpg',
+    'pig-farming.jpg',
+    'catfish-farming.jpg',
+    'rabbit.jpg',
+    'turkey.jpg',
+    'snail.jpg',
+    'corn.jpg',
+    'cassava.jpg',
+    'plantain-farming.jpg'
+  ];
+
+  const products = Array.from({ length: 72 }, (_, i) => {
+    const category = categories[i % categories.length];
+    const image = `./images/${baseImages[i % baseImages.length]}`;
+    return {
+      name: `${category} Product ${Math.floor(i / categories.length) + 1}`,
+      weight: `${500 + (i % 5) * 250}g`,
+      price: 1000 + (i * 50),
+      image
+    };
+  });
+
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  const productGrid = document.getElementById('product-grid');
+  const productCount = document.getElementById('product-count');
+  const searchInput = document.getElementById('search-input');
+
+  function renderProducts(filteredProducts = products) {
+    productGrid.innerHTML = '';
+    productCount.textContent = filteredProducts.length;
+
+    filteredProducts.forEach((product, index) => {
+      const card = document.createElement('div');
+      card.className = 'border rounded-lg p-4 shadow-md bg-white hover:shadow-xl transition-shadow duration-300 flex flex-col';
+      card.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover rounded-lg mb-4" />
+        <h2 class="font-semibold text-lg mb-1">${product.name}</h2>
+        <p class="text-gray-600 mb-1">${product.weight}</p>
+        <p class="text-green-600 font-bold mb-4">₦${product.price.toLocaleString()}</p>
+        <div class="mt-auto flex items-center space-x-3">
+          <input type="number" id="quantity-${index}" value="1" min="1" class="border px-4 py-2 w-16 rounded" />
+          <button onclick="addToCart(${index})" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">Add to Cart</button>
+        </div>
+      `;
+      productGrid.appendChild(card);
     });
+  }
 
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const productGrid = document.getElementById('product-grid');
-    const productCount = document.getElementById('product-count');
-    const searchInput = document.getElementById('search-input');
+  function addToCart(index) {
+    const quantityInput = document.getElementById(`quantity-${index}`);
+    const quantity = parseInt(quantityInput.value);
+    if (quantity < 1) return alert('Select at least 1 quantity.');
 
-    function renderProducts(filteredProducts = products) {
-      productGrid.innerHTML = '';
-      productCount.textContent = filteredProducts.length;
-      filteredProducts.forEach((product, index) => {
-        const card = document.createElement('div');
-        card.className = 'border rounded-lg p-4 shadow-md bg-white hover:shadow-xl transition-shadow duration-300 flex flex-col';
-        card.innerHTML = `
-          <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover rounded-lg mb-4" />
-          <h2 class="font-semibold text-lg mb-1">${product.name}</h2>
-          <p class="text-gray-600 mb-1">${product.weight}</p>
-          <p class="text-green-600 font-bold mb-4">₦${product.price}</p>
-          <div class="mt-auto flex items-center space-x-3">
-            <input type="number" id="quantity-${products.indexOf(product)}" value="1" min="1" class="border px-4 py-2 w-16 rounded" />
-            <button onclick="addToCart(${products.indexOf(product)})" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">Add to Cart</button>
-          </div>
-        `;
-        productGrid.appendChild(card);
-      });
+    const product = products[index];
+    const existingIndex = cart.findIndex(item => item.name === product.name);
+    if (existingIndex !== -1) {
+      cart[existingIndex].quantity += quantity;
+    } else {
+      cart.push({ ...product, quantity });
     }
-
-    function addToCart(index) {
-      const quantityInput = document.getElementById(`quantity-${index}`);
-      const quantity = parseInt(quantityInput.value);
-      if (quantity < 1) {
-        alert('Please select a quantity of 1 or more.');
-        return;
-      }
-      const product = products[index];
-      const existingItemIndex = cart.findIndex(item => item.name === product.name);
-      if (existingItemIndex !== -1) {
-        cart[existingItemIndex].quantity += quantity;
-      } else {
-        cart.push({ ...product, quantity });
-      }
-      saveCart();
-      renderCartItems();
-      updateCartCount();
-      alert(`${product.name} added to cart.`);
-    }
-
-    function renderCartItems() {
-      const cartItemsContainer = document.getElementById('cart-items');
-      cartItemsContainer.innerHTML = '';
-      if (cart.length === 0) {
-        cartItemsContainer.innerHTML = '<p class="text-gray-600">Your cart is empty.</p>';
-        document.getElementById('cart-total').textContent = '0';
-        return;
-      }
-      let total = 0;
-      cart.forEach((item, index) => {
-        total += item.price * item.quantity;
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'flex items-center space-x-4 border-b pb-3';
-        itemDiv.innerHTML = `
-          <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded" />
-          <div class="flex-1">
-            <h3 class="font-semibold">${item.name}</h3>
-            <p class="text-gray-600">₦${item.price} x ${item.quantity} = ₦${item.price * item.quantity}</p>
-            <div class="flex items-center space-x-2 mt-1">
-              <button onclick="changeQuantity(${index}, -1)" class="bg-gray-300 px-2 rounded hover:bg-gray-400">-</button>
-              <span>${item.quantity}</span>
-              <button onclick="changeQuantity(${index}, 1)" class="bg-gray-300 px-2 rounded hover:bg-gray-400">+</button>
-              <button onclick="removeItem(${index})" class="ml-4 text-red-600 hover:text-red-800"><i class="fas fa-trash"></i></button>
-            </div>
-          </div>
-        `;
-        cartItemsContainer.appendChild(itemDiv);
-      });
-      document.getElementById('cart-total').textContent = total;
-    }
-
-    function changeQuantity(index, delta) {
-      cart[index].quantity += delta;
-      if (cart[index].quantity < 1) cart[index].quantity = 1;
-      saveCart();
-      renderCartItems();
-      updateCartCount();
-    }
-
-    function removeItem(index) {
-      if (confirm('Remove this item from your cart?')) {
-        cart.splice(index, 1);
-        saveCart();
-        renderCartItems();
-        updateCartCount();
-      }
-    }
-
-    function saveCart() {
-      localStorage.setItem('cart', JSON.stringify(cart));
-    }
-
-    function updateCartCount() {
-      document.getElementById('cart-count').textContent = cart.reduce((acc, item) => acc + item.quantity, 0);
-    }
-
-    function toggleCart() {
-      const sidebar = document.getElementById('cart-sidebar');
-      sidebar.classList.toggle('translate-x-full');
-    }
-
-    function checkout() {
-      if (cart.length === 0) {
-        alert('Your cart is empty.');
-        return;
-      }
-      // Save cart to localStorage and redirect to checkout page
-      saveCart();
-      window.location.href = 'checkout.html';
-    }
-
-    // Search functionality
-    if (searchInput) {
-      searchInput.addEventListener('input', () => {
-        const query = searchInput.value.toLowerCase();
-        const filtered = products.filter(p => p.name.toLowerCase().includes(query));
-        renderProducts(filtered);
-      });
-    }
-
-    // Mobile menu toggle
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    menuToggle.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-
-    // Initial render
-    renderProducts();
+    saveCart();
     renderCartItems();
     updateCartCount();
-  </script>
+    alert(`${product.name} added to cart.`);
+  }
+
+  function renderCartItems() {
+    const container = document.getElementById('cart-items');
+    container.innerHTML = '';
+    if (cart.length === 0) {
+      container.innerHTML = '<p class="text-gray-600">Your cart is empty.</p>';
+      document.getElementById('cart-total').textContent = '0';
+      return;
+    }
+    let total = 0;
+    cart.forEach((item, index) => {
+      total += item.price * item.quantity;
+      const div = document.createElement('div');
+      div.className = 'flex items-center space-x-4 border-b pb-3';
+      div.innerHTML = `
+        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded" />
+        <div class="flex-1">
+          <h3 class="font-semibold">${item.name}</h3>
+          <p class="text-gray-600">₦${item.price} x ${item.quantity} = ₦${item.price * item.quantity}</p>
+          <div class="flex items-center space-x-2 mt-1">
+            <button onclick="changeQuantity(${index}, -1)" class="bg-gray-300 px-2 rounded hover:bg-gray-400">-</button>
+            <span>${item.quantity}</span>
+            <button onclick="changeQuantity(${index}, 1)" class="bg-gray-300 px-2 rounded hover:bg-gray-400">+</button>
+            <button onclick="removeItem(${index})" class="ml-4 text-red-600 hover:text-red-800"><i class="fas fa-trash"></i></button>
+          </div>
+        </div>
+      `;
+      container.appendChild(div);
+    });
+    document.getElementById('cart-total').textContent = total.toLocaleString();
+  }
+
+  function changeQuantity(index, delta) {
+    cart[index].quantity += delta;
+    if (cart[index].quantity < 1) cart[index].quantity = 1;
+    saveCart();
+    renderCartItems();
+    updateCartCount();
+  }
+
+  function removeItem(index) {
+    if (confirm('Remove this item from your cart?')) {
+      cart.splice(index, 1);
+      saveCart();
+      renderCartItems();
+      updateCartCount();
+    }
+  }
+
+  function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
+  function updateCartCount() {
+    const count = cart.reduce((acc, item) => acc + item.quantity, 0);
+    document.getElementById('cart-count').textContent = count;
+  }
+
+  function toggleCart() {
+    const sidebar = document.getElementById('cart-sidebar');
+    sidebar.classList.toggle('translate-x-full');
+  }
+
+  function checkout() {
+    if (cart.length === 0) {
+      alert('Your cart is empty.');
+      return;
+    }
+    saveCart();
+    window.location.href = 'checkout.html';
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+      const filtered = products.filter(p => p.name.toLowerCase().includes(query));
+      renderProducts(filtered);
+    });
+  }
+
+  document.getElementById('menu-toggle').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+  });
+
+  // Initial load
+  renderProducts();
+  renderCartItems();
+  updateCartCount();
+</script>
+
 </body>
 </html>

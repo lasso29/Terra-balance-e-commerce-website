@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Payment - Terra Balance</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; }
+    .brand-color { color: #228B22; }
+    .brand-bg { background-color: #228B22; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <img src="./images/terra-balance-logo.jpeg" alt="Terra Balance Logo" class="h-10 w-10 object-contain" />
+        <h1 class="text-2xl font-bold text-green-600">Terra<span class="text-gray-800">Balance</span></h1>
+      </div>
+      <div>
+        <a href="dashboard.html" class="text-green-700 hover:underline"><i class="fas fa-arrow-left mr-1"></i> Back to Dashboard</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="max-w-4xl mx-auto px-6 py-10">
+    <h1 class="text-3xl font-bold mb-6 brand-color">Payment</h1>
+
+    <div id="payment-container" class="bg-white p-6 rounded-lg shadow-md">
+      <div id="cart-items" class="space-y-6"></div>
+
+      <div class="mt-8 text-right">
+        <p class="text-xl font-semibold mb-4">Total: ₦<span id="total-price">0</span></p>
+        <button id="pay-btn" class="bg-green-700 text-white px-6 py-3 rounded hover:bg-green-800">
+          Make Payment
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // ✅ Login check: redirect if not logged in
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    if (!isLoggedIn) {
+      localStorage.setItem('redirectAfterLogin', 'payment.html');
+      window.location.href = 'signin.html';
+    }
+
+    const cartItemsDiv = document.getElementById('cart-items');
+    const totalPriceSpan = document.getElementById('total-price');
+    const payBtn = document.getElementById('pay-btn');
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function renderPaymentItems() {
+      if (cart.length === 0) {
+        cartItemsDiv.innerHTML = '<p class="text-center text-gray-500">Your cart is empty.</p>';
+        payBtn.disabled = true;
+        return;
+      }
+
+      let total = 0;
+      cartItemsDiv.innerHTML = '';
+
+      cart.forEach(item => {
+        const subtotal = item.price * item.quantity;
+        total += subtotal;
+
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'flex items-center space-x-4 border-b pb-4';
+
+        itemDiv.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded" />
+          <div class="flex-1">
+            <h2 class="font-semibold text-lg">${item.name}</h2>
+            <p class="text-gray-600">₦${item.price} × ${item.quantity} = ₦${subtotal.toLocaleString()}</p>
+          </div>
+        `;
+
+        cartItemsDiv.appendChild(itemDiv);
+      });
+
+      totalPriceSpan.textContent = total.toLocaleString();
+    }
+
+    payBtn.addEventListener('click', () => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Payment Successful',
+        text: 'Thank you! Your payment has been received.',
+        confirmButtonText: 'OK'
+      }).then(() => {
+        localStorage.removeItem('cart');
+        window.location.href = 'success.html';
+      });
+    });
+
+    renderPaymentItems();
+  </script>
+</body>
+</html>

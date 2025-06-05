@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sign In - Terra Balance</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <style>
     body { font-family: 'Segoe UI', sans-serif; }
@@ -57,22 +58,24 @@
   <script>
     function handleSignIn(event) {
       event.preventDefault();
+
       // Simulate login success
       localStorage.setItem('isLoggedIn', 'true');
-      alert('Sign in successful!');
-      
-      // Redirect to checkout if came from cart, else homepage
-      const redirectTo = localStorage.getItem('redirectAfterLogin') || 'index.html';
-      localStorage.removeItem('redirectAfterLogin');
-      window.location.href = redirectTo;
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Sign in successful!',
+        showConfirmButton: false,
+        timer: 1500
+      }).then(() => {
+        const redirectTo = localStorage.getItem('redirectAfterLogin') || 'index.html';
+        localStorage.removeItem('redirectAfterLogin');
+        window.location.href = redirectTo;
+      });
     }
 
-    localStorage.setItem('redirectAfterLogin', 'checkout.html');
-    window.location.href = 'signin.html';
-
-
-    // If user comes to signin page from checkout, save redirect info
-    // This can be set from your "Checkout" button code:
+    // Optional: Only set redirectAfterLogin from external pages before redirecting here
+    // Example usage from checkout page:
     // localStorage.setItem('redirectAfterLogin', 'checkout.html');
   </script>
 </body>

@@ -1,4 +1,3 @@
-<!-- START OF checkout.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Checkout - Terra Balance</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     body { font-family: 'Segoe UI', sans-serif; }
@@ -14,6 +14,30 @@
     button:disabled {
       opacity: 0.5;
       cursor: not-allowed;
+    }
+    /* SweetAlert2 custom styles for brand color */
+    .swal2-popup {
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .swal2-confirm {
+      background-color: #228B22 !important;
+      color: white !important;
+      border: none !important;
+      box-shadow: none !important;
+      font-weight: 600;
+    }
+    .swal2-confirm:hover {
+      background-color: #196619 !important; /* Darker green on hover */
+    }
+    .swal2-cancel {
+      color: #228B22 !important;
+      border: 1px solid #228B22 !important;
+      background: transparent !important;
+      font-weight: 600;
+    }
+    .swal2-cancel:hover {
+      background-color: #228B22 !important;
+      color: white !important;
     }
   </style>
 </head>
@@ -26,7 +50,7 @@
         <h1 class="text-2xl font-bold text-green-600">Terra<span class="text-gray-800">Balance</span></h1>
       </div>
       <div>
-        <a href="product.html" class="text-green-700 hover:underline"><i class="fas fa-arrow-left mr-1"></i> Back to Products</a>
+        <a href="products.html" class="text-green-700 hover:underline"><i class="fas fa-arrow-left mr-1"></i> Back to Products</a>
       </div>
     </div>
   </nav>
@@ -37,9 +61,7 @@
 
     <div id="checkout-container" class="bg-white rounded-lg shadow-md p-6">
       <p id="empty-msg" class="text-center text-gray-500 text-lg">Your cart is empty.</p>
-
       <div id="checkout-items" class="space-y-6"></div>
-
       <div id="checkout-summary" class="mt-8 border-t pt-4 text-right hidden">
         <p class="text-xl font-semibold">Total: ₦<span id="checkout-total">0</span></p>
         <button id="place-order-btn" class="mt-4 bg-green-700 text-white px-6 py-3 rounded hover:bg-green-800">Place Order</button>
@@ -97,21 +119,19 @@
             <p class="mt-2 text-green-700 font-semibold">Subtotal: ₦${itemTotal.toLocaleString()}</p>
           </div>
         `;
-
         checkoutItemsDiv.appendChild(itemDiv);
       });
 
       checkoutTotalSpan.textContent = total.toLocaleString();
 
-      // Bind all quantity + delete events
       document.querySelectorAll('.qty-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           const action = btn.dataset.action;
           const index = parseInt(btn.dataset.index);
           if (action === 'increase') {
             cart[index].quantity++;
-          } else if (action === 'decrease') {
-            if (cart[index].quantity > 1) cart[index].quantity--;
+          } else if (action === 'decrease' && cart[index].quantity > 1) {
+            cart[index].quantity--;
           }
           saveCart();
           renderCart();
@@ -128,20 +148,50 @@
       });
     }
 
-    // Place order
+    // Place Order Button - Check if logged in, else redirect to sign in/up
     placeOrderBtn.addEventListener('click', () => {
       if (cart.length === 0) {
-        alert('Your cart is empty.');
+        Swal.fire({
+          icon: 'info',
+          title: 'Cart is empty',
+          text: 'Please add items to your cart before placing an order.',
+          customClass: {
+            confirmButton: 'swal2-confirm',
+            cancelButton: 'swal2-cancel'
+          }
+        });
         return;
       }
-      alert('Thank you for your order! You will be redirected to sign in.');
-      localStorage.removeItem('cart');
-      window.location.href = 'signin.html';
+
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+      if (!isLoggedIn) {
+        // Save redirect so after signin user can come here
+        localStorage.setItem('redirectAfterLogin', 'checkout.html');
+        Swal.fire({
+          icon: 'warning',
+          title: 'Sign in required',
+          text: 'Please sign in or sign up to continue with your order.',
+          confirmButtonText: 'Go to Sign In',
+          showCancelButton: true,
+          cancelButtonText: 'Cancel',
+          customClass: {
+            confirmButton: 'swal2-confirm',
+            cancelButton: 'swal2-cancel'
+          }
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = 'signin.html';
+          }
+        });
+        return;
+      }
+
+      // If logged in, go to payment page
+      window.location.href = 'payment.html';
     });
 
-    // Initial render
     renderCart();
   </script>
 </body>
 </html>
-<!-- END OF checkout.html -->

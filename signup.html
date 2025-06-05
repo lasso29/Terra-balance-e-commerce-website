@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sign Up - Terra Balance</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <style>
     body { font-family: 'Segoe UI', sans-serif; }
@@ -61,20 +62,29 @@
       const confirm = document.getElementById('confirm').value;
 
       if (password !== confirm) {
-        alert('Passwords do not match!');
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Passwords do not match!',
+        });
         return;
       }
 
-      // Simulate account creation
-      alert('Account created successfully!');
-      
-      // Set login flag
-      localStorage.setItem('userLoggedIn', 'true');
+      // Simulate account creation success
+      Swal.fire({
+        icon: 'success',
+        title: 'Account created successfully!',
+        showConfirmButton: false,
+        timer: 1500
+      }).then(() => {
+        // Set login flag (consistent with checkout page)
+        localStorage.setItem('isLoggedIn', 'true');
 
-      // Redirect after login (to checkout.html or other saved page)
-      const redirectTo = localStorage.getItem('redirectAfterLogin') || 'signin.html';
-      localStorage.removeItem('redirectAfterLogin');
-      window.location.href = redirectTo;
+        // Redirect after login (default to payment.html)
+        const redirectTo = localStorage.getItem('redirectAfterLogin') || 'payment.html';
+        localStorage.removeItem('redirectAfterLogin');
+        window.location.href = redirectTo;
+      });
     }
   </script>
 </body>
