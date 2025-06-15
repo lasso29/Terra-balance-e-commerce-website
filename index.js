@@ -65,21 +65,21 @@ document.addEventListener('DOMContentLoaded', () => {
       price: 800,
       category: 'Poultry',
       description: 'Farm fresh eggs delivered from healthy layers.',
-      image: './images/eggs.jpg'
+      image: './images/eggs.webp'
     },
     {
       name: 'Cassava Flour (2kg)',
       price: 1700,
       category: 'Flour',
       description: 'Smooth and fine cassava flour for local meals.',
-      image: './images/cassava-flour.jpg'
+      image: './images/cassava-flour.webp'
     },
     {
       name: 'Chicken Meat (1kg)',
       price: 2200,
       category: 'Meat',
       description: 'Well-cut fresh chicken meat ready to cook.',
-      image: './images/chicken-meat.jpg'
+      image: './images/chicken-meat.png'
     },
     {
       name: 'Plantain Chips (500g)',

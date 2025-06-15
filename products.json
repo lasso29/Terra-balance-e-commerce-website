@@ -1,0 +1,650 @@
+[
+  {
+    "id": 0,
+    "name": "Goat Product 1",
+    "category": "Goat",
+    "weight": "500g",
+    "price": 1000,
+    "image": "./images/goat-farming.jpg",
+    "description": "Premium quality goat product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 1,
+    "name": "Chicken Product 1",
+    "category": "Chicken",
+    "weight": "750g",
+    "price": 1050,
+    "image": "./images/chicken-farming.jpg",
+    "description": "Premium quality chicken product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 2,
+    "name": "Pig Product 1",
+    "category": "Pig",
+    "weight": "1000g",
+    "price": 1100,
+    "image": "./images/pig-farming.jpg",
+    "description": "Premium quality pig product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 3,
+    "name": "Catfish Product 1",
+    "category": "Catfish",
+    "weight": "1250g",
+    "price": 1150,
+    "image": "./images/catfish-farming.jpg",
+    "description": "Premium quality catfish product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 4,
+    "name": "Rabbit Product 1",
+    "category": "Rabbit",
+    "weight": "1500g",
+    "price": 1200,
+    "image": "./images/rabbit.jpg",
+    "description": "Premium quality rabbit product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 5,
+    "name": "Turkey Product 1",
+    "category": "Turkey",
+    "weight": "500g",
+    "price": 1250,
+    "image": "./images/turkey.jpg",
+    "description": "Premium quality turkey product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 6,
+    "name": "Snail Product 1",
+    "category": "Snail",
+    "weight": "750g",
+    "price": 1300,
+    "image": "./images/snail.jpg",
+    "description": "Premium quality snail product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 7,
+    "name": "Corn Product 1",
+    "category": "Corn",
+    "weight": "1000g",
+    "price": 1350,
+    "image": "./images/corn.jpg",
+    "description": "Premium quality corn product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 8,
+    "name": "Cassava Product 1",
+    "category": "Cassava",
+    "weight": "1250g",
+    "price": 1400,
+    "image": "./images/cassava.jpg",
+    "description": "Premium quality cassava product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 9,
+    "name": "Plantain Product 1",
+    "category": "Plantain",
+    "weight": "1500g",
+    "price": 1450,
+    "image": "./images/plantain-farming.jpg",
+    "description": "Premium quality plantain product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 10,
+    "name": "Goat Product 2",
+    "category": "Goat",
+    "weight": "500g",
+    "price": 1500,
+    "image": "./images/goat-farming.jpg",
+    "description": "Premium quality goat product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 11,
+    "name": "Chicken Product 2",
+    "category": "Chicken",
+    "weight": "750g",
+    "price": 1550,
+    "image": "./images/chicken-farming.jpg",
+    "description": "Premium quality chicken product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 12,
+    "name": "Pig Product 2",
+    "category": "Pig",
+    "weight": "1000g",
+    "price": 1600,
+    "image": "./images/pig-farming.jpg",
+    "description": "Premium quality pig product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 13,
+    "name": "Catfish Product 2",
+    "category": "Catfish",
+    "weight": "1250g",
+    "price": 1650,
+    "image": "./images/catfish-farming.jpg",
+    "description": "Premium quality catfish product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 14,
+    "name": "Rabbit Product 2",
+    "category": "Rabbit",
+    "weight": "1500g",
+    "price": 1700,
+    "image": "./images/rabbit.jpg",
+    "description": "Premium quality rabbit product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 15,
+    "name": "Turkey Product 2",
+    "category": "Turkey",
+    "weight": "500g",
+    "price": 1750,
+    "image": "./images/turkey.jpg",
+    "description": "Premium quality turkey product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 16,
+    "name": "Snail Product 2",
+    "category": "Snail",
+    "weight": "750g",
+    "price": 1800,
+    "image": "./images/snail.jpg",
+    "description": "Premium quality snail product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 17,
+    "name": "Corn Product 2",
+    "category": "Corn",
+    "weight": "1000g",
+    "price": 1850,
+    "image": "./images/corn.jpg",
+    "description": "Premium quality corn product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 18,
+    "name": "Cassava Product 2",
+    "category": "Cassava",
+    "weight": "1250g",
+    "price": 1900,
+    "image": "./images/cassava.jpg",
+    "description": "Premium quality cassava product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 19,
+    "name": "Plantain Product 2",
+    "category": "Plantain",
+    "weight": "1500g",
+    "price": 1950,
+    "image": "./images/plantain-farming.jpg",
+    "description": "Premium quality plantain product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 20,
+    "name": "Goat Product 3",
+    "category": "Goat",
+    "weight": "500g",
+    "price": 2000,
+    "image": "./images/goat-farming.jpg",
+    "description": "Premium quality goat product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 21,
+    "name": "Chicken Product 3",
+    "category": "Chicken",
+    "weight": "750g",
+    "price": 2050,
+    "image": "./images/chicken-farming.jpg",
+    "description": "Premium quality chicken product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 22,
+    "name": "Pig Product 3",
+    "category": "Pig",
+    "weight": "1000g",
+    "price": 2100,
+    "image": "./images/pig-farming.jpg",
+    "description": "Premium quality pig product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 23,
+    "name": "Catfish Product 3",
+    "category": "Catfish",
+    "weight": "1250g",
+    "price": 2150,
+    "image": "./images/catfish-farming.jpg",
+    "description": "Premium quality catfish product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 24,
+    "name": "Rabbit Product 3",
+    "category": "Rabbit",
+    "weight": "1500g",
+    "price": 2200,
+    "image": "./images/rabbit.jpg",
+    "description": "Premium quality rabbit product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 25,
+    "name": "Turkey Product 3",
+    "category": "Turkey",
+    "weight": "500g",
+    "price": 2250,
+    "image": "./images/turkey.jpg",
+    "description": "Premium quality turkey product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 26,
+    "name": "Snail Product 3",
+    "category": "Snail",
+    "weight": "750g",
+    "price": 2300,
+    "image": "./images/snail.jpg",
+    "description": "Premium quality snail product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 27,
+    "name": "Corn Product 3",
+    "category": "Corn",
+    "weight": "1000g",
+    "price": 2350,
+    "image": "./images/corn.jpg",
+    "description": "Premium quality corn product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 28,
+    "name": "Cassava Product 3",
+    "category": "Cassava",
+    "weight": "1250g",
+    "price": 2400,
+    "image": "./images/cassava.jpg",
+    "description": "Premium quality cassava product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 29,
+    "name": "Plantain Product 3",
+    "category": "Plantain",
+    "weight": "1500g",
+    "price": 2450,
+    "image": "./images/plantain-farming.jpg",
+    "description": "Premium quality plantain product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 30,
+    "name": "Goat Product 4",
+    "category": "Goat",
+    "weight": "500g",
+    "price": 2500,
+    "image": "./images/goat-farming.jpg",
+    "description": "Premium quality goat product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 31,
+    "name": "Chicken Product 4",
+    "category": "Chicken",
+    "weight": "750g",
+    "price": 2550,
+    "image": "./images/chicken-farming.jpg",
+    "description": "Premium quality chicken product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 32,
+    "name": "Pig Product 4",
+    "category": "Pig",
+    "weight": "1000g",
+    "price": 2600,
+    "image": "./images/pig-farming.jpg",
+    "description": "Premium quality pig product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 33,
+    "name": "Catfish Product 4",
+    "category": "Catfish",
+    "weight": "1250g",
+    "price": 2650,
+    "image": "./images/catfish-farming.jpg",
+    "description": "Premium quality catfish product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 34,
+    "name": "Rabbit Product 4",
+    "category": "Rabbit",
+    "weight": "1500g",
+    "price": 2700,
+    "image": "./images/rabbit.jpg",
+    "description": "Premium quality rabbit product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 35,
+    "name": "Turkey Product 4",
+    "category": "Turkey",
+    "weight": "500g",
+    "price": 2750,
+    "image": "./images/turkey.jpg",
+    "description": "Premium quality turkey product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 36,
+    "name": "Snail Product 4",
+    "category": "Snail",
+    "weight": "750g",
+    "price": 2800,
+    "image": "./images/snail.jpg",
+    "description": "Premium quality snail product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 37,
+    "name": "Corn Product 4",
+    "category": "Corn",
+    "weight": "1000g",
+    "price": 2850,
+    "image": "./images/corn.jpg",
+    "description": "Premium quality corn product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 38,
+    "name": "Cassava Product 4",
+    "category": "Cassava",
+    "weight": "1250g",
+    "price": 2900,
+    "image": "./images/cassava.jpg",
+    "description": "Premium quality cassava product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 39,
+    "name": "Plantain Product 4",
+    "category": "Plantain",
+    "weight": "1500g",
+    "price": 2950,
+    "image": "./images/plantain-farming.jpg",
+    "description": "Premium quality plantain product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 40,
+    "name": "Goat Product 5",
+    "category": "Goat",
+    "weight": "500g",
+    "price": 3000,
+    "image": "./images/goat-farming.jpg",
+    "description": "Premium quality goat product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 41,
+    "name": "Chicken Product 5",
+    "category": "Chicken",
+    "weight": "750g",
+    "price": 3050,
+    "image": "./images/chicken-farming.jpg",
+    "description": "Premium quality chicken product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 42,
+    "name": "Pig Product 5",
+    "category": "Pig",
+    "weight": "1000g",
+    "price": 3100,
+    "image": "./images/pig-farming.jpg",
+    "description": "Premium quality pig product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 43,
+    "name": "Catfish Product 5",
+    "category": "Catfish",
+    "weight": "1250g",
+    "price": 3150,
+    "image": "./images/catfish-farming.jpg",
+    "description": "Premium quality catfish product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 44,
+    "name": "Rabbit Product 5",
+    "category": "Rabbit",
+    "weight": "1500g",
+    "price": 3200,
+    "image": "./images/rabbit.jpg",
+    "description": "Premium quality rabbit product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 45,
+    "name": "Turkey Product 5",
+    "category": "Turkey",
+    "weight": "500g",
+    "price": 3250,
+    "image": "./images/turkey.jpg",
+    "description": "Premium quality turkey product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 46,
+    "name": "Snail Product 5",
+    "category": "Snail",
+    "weight": "750g",
+    "price": 3300,
+    "image": "./images/snail.jpg",
+    "description": "Premium quality snail product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 47,
+    "name": "Corn Product 5",
+    "category": "Corn",
+    "weight": "1000g",
+    "price": 3350,
+    "image": "./images/corn.jpg",
+    "description": "Premium quality corn product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 48,
+    "name": "Cassava Product 5",
+    "category": "Cassava",
+    "weight": "1250g",
+    "price": 3400,
+    "image": "./images/cassava.jpg",
+    "description": "Premium quality cassava product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 49,
+    "name": "Plantain Product 5",
+    "category": "Plantain",
+    "weight": "1500g",
+    "price": 3450,
+    "image": "./images/plantain-farming.jpg",
+    "description": "Premium quality plantain product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 50,
+    "name": "Goat Product 6",
+    "category": "Goat",
+    "weight": "500g",
+    "price": 3500,
+    "image": "./images/goat-farming.jpg",
+    "description": "Premium quality goat product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 51,
+    "name": "Chicken Product 6",
+    "category": "Chicken",
+    "weight": "750g",
+    "price": 3550,
+    "image": "./images/chicken-farming.jpg",
+    "description": "Premium quality chicken product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 52,
+    "name": "Pig Product 6",
+    "category": "Pig",
+    "weight": "1000g",
+    "price": 3600,
+    "image": "./images/pig-farming.jpg",
+    "description": "Premium quality pig product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 53,
+    "name": "Catfish Product 6",
+    "category": "Catfish",
+    "weight": "1250g",
+    "price": 3650,
+    "image": "./images/catfish-farming.jpg",
+    "description": "Premium quality catfish product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 54,
+    "name": "Rabbit Product 6",
+    "category": "Rabbit",
+    "weight": "1500g",
+    "price": 3700,
+    "image": "./images/rabbit.jpg",
+    "description": "Premium quality rabbit product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 55,
+    "name": "Turkey Product 6",
+    "category": "Turkey",
+    "weight": "500g",
+    "price": 3750,
+    "image": "./images/turkey.jpg",
+    "description": "Premium quality turkey product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 56,
+    "name": "Snail Product 6",
+    "category": "Snail",
+    "weight": "750g",
+    "price": 3800,
+    "image": "./images/snail.jpg",
+    "description": "Premium quality snail product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 57,
+    "name": "Corn Product 6",
+    "category": "Corn",
+    "weight": "1000g",
+    "price": 3850,
+    "image": "./images/corn.jpg",
+    "description": "Premium quality corn product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 58,
+    "name": "Cassava Product 6",
+    "category": "Cassava",
+    "weight": "1250g",
+    "price": 3900,
+    "image": "./images/cassava.jpg",
+    "description": "Premium quality cassava product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 59,
+    "name": "Plantain Product 6",
+    "category": "Plantain",
+    "weight": "1500g",
+    "price": 3950,
+    "image": "./images/plantain-farming.jpg",
+    "description": "Premium quality plantain product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 60,
+    "name": "Goat Product 7",
+    "category": "Goat",
+    "weight": "500g",
+    "price": 4000,
+    "image": "./images/goat-farming.jpg",
+    "description": "Premium quality goat product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 61,
+    "name": "Chicken Product 7",
+    "category": "Chicken",
+    "weight": "750g",
+    "price": 4050,
+    "image": "./images/chicken-farming.jpg",
+    "description": "Premium quality chicken product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 62,
+    "name": "Pig Product 7",
+    "category": "Pig",
+    "weight": "1000g",
+    "price": 4100,
+    "image": "./images/pig-farming.jpg",
+    "description": "Premium quality pig product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 63,
+    "name": "Catfish Product 7",
+    "category": "Catfish",
+    "weight": "1250g",
+    "price": 4150,
+    "image": "./images/catfish-farming.jpg",
+    "description": "Premium quality catfish product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 64,
+    "name": "Rabbit Product 7",
+    "category": "Rabbit",
+    "weight": "1500g",
+    "price": 4200,
+    "image": "./images/rabbit.jpg",
+    "description": "Premium quality rabbit product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 65,
+    "name": "Turkey Product 7",
+    "category": "Turkey",
+    "weight": "500g",
+    "price": 4250,
+    "image": "./images/turkey.jpg",
+    "description": "Premium quality turkey product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 66,
+    "name": "Snail Product 7",
+    "category": "Snail",
+    "weight": "750g",
+    "price": 4300,
+    "image": "./images/snail.jpg",
+    "description": "Premium quality snail product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 67,
+    "name": "Corn Product 7",
+    "category": "Corn",
+    "weight": "1000g",
+    "price": 4350,
+    "image": "./images/corn.jpg",
+    "description": "Premium quality corn product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 68,
+    "name": "Cassava Product 7",
+    "category": "Cassava",
+    "weight": "1250g",
+    "price": 4400,
+    "image": "./images/cassava.jpg",
+    "description": "Premium quality cassava product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 69,
+    "name": "Plantain Product 7",
+    "category": "Plantain",
+    "weight": "1500g",
+    "price": 4450,
+    "image": "./images/plantain-farming.jpg",
+    "description": "Premium quality plantain product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 70,
+    "name": "Goat Product 8",
+    "category": "Goat",
+    "weight": "500g",
+    "price": 4500,
+    "image": "./images/goat-farming.jpg",
+    "description": "Premium quality goat product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  },
+  {
+    "id": 71,
+    "name": "Chicken Product 8",
+    "category": "Chicken",
+    "weight": "750g",
+    "price": 4550,
+    "image": "./images/chicken-farming.jpg",
+    "description": "Premium quality chicken product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+  }
+]
