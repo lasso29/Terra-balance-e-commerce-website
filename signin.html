@@ -59,24 +59,25 @@
     function handleSignIn(event) {
       event.preventDefault();
 
-      // Simulate login success
+      const email = document.getElementById('email').value;
+      const defaultName = email.split('@')[0].replace(/\W/g, ' '); // Use email prefix as name
+      const storedName = localStorage.getItem('userName') || defaultName;
+
       localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('userName', storedName);
 
       Swal.fire({
         icon: 'success',
-        title: 'Sign in successful!',
+        title: `Welcome back, ${storedName.split(' ')[0]}!`,
+        text: 'Glad to have you again on Terra Balance.',
         showConfirmButton: false,
-        timer: 1500
+        timer: 1800
       }).then(() => {
-        const redirectTo = localStorage.getItem('redirectAfterLogin') || 'index.html';
+        const redirectTo = localStorage.getItem('redirectAfterLogin') || 'dashboard.html';
         localStorage.removeItem('redirectAfterLogin');
         window.location.href = redirectTo;
       });
     }
-
-    // Optional: Only set redirectAfterLogin from external pages before redirecting here
-    // Example usage from checkout page:
-    // localStorage.setItem('redirectAfterLogin', 'checkout.html');
   </script>
 </body>
 </html>

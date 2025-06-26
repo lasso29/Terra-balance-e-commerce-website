@@ -1,650 +1,506 @@
 [
   {
-    "id": 0,
-    "name": "Goat Product 1",
-    "category": "Goat",
-    "weight": "500g",
-    "price": 1000,
-    "image": "./images/goat-farming.jpg",
-    "description": "Premium quality goat product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 1,
-    "name": "Chicken Product 1",
-    "category": "Chicken",
-    "weight": "750g",
-    "price": 1050,
-    "image": "./images/chicken-farming.jpg",
-    "description": "Premium quality chicken product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 2,
-    "name": "Pig Product 1",
-    "category": "Pig",
+    "name": "Goat",
     "weight": "1000g",
-    "price": 1100,
-    "image": "./images/pig-farming.jpg",
-    "description": "Premium quality pig product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 3,
-    "name": "Catfish Product 1",
-    "category": "Catfish",
-    "weight": "1250g",
-    "price": 1150,
-    "image": "./images/catfish-farming.jpg",
-    "description": "Premium quality catfish product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 4,
-    "name": "Rabbit Product 1",
-    "category": "Rabbit",
-    "weight": "1500g",
-    "price": 1200,
-    "image": "./images/rabbit.jpg",
-    "description": "Premium quality rabbit product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 5,
-    "name": "Turkey Product 1",
-    "category": "Turkey",
-    "weight": "500g",
-    "price": 1250,
-    "image": "./images/turkey.jpg",
-    "description": "Premium quality turkey product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 6,
-    "name": "Snail Product 1",
-    "category": "Snail",
-    "weight": "750g",
-    "price": 1300,
-    "image": "./images/snail.jpg",
-    "description": "Premium quality snail product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 7,
-    "name": "Corn Product 1",
-    "category": "Corn",
-    "weight": "1000g",
-    "price": 1350,
-    "image": "./images/corn.jpg",
-    "description": "Premium quality corn product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 8,
-    "name": "Cassava Product 1",
-    "category": "Cassava",
-    "weight": "1250g",
-    "price": 1400,
-    "image": "./images/cassava.jpg",
-    "description": "Premium quality cassava product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 9,
-    "name": "Plantain Product 1",
-    "category": "Plantain",
-    "weight": "1500g",
-    "price": 1450,
-    "image": "./images/plantain-farming.jpg",
-    "description": "Premium quality plantain product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 10,
-    "name": "Goat Product 2",
-    "category": "Goat",
-    "weight": "500g",
-    "price": 1500,
-    "image": "./images/goat-farming.jpg",
-    "description": "Premium quality goat product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 11,
-    "name": "Chicken Product 2",
-    "category": "Chicken",
-    "weight": "750g",
-    "price": 1550,
-    "image": "./images/chicken-farming.jpg",
-    "description": "Premium quality chicken product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 12,
-    "name": "Pig Product 2",
-    "category": "Pig",
-    "weight": "1000g",
-    "price": 1600,
-    "image": "./images/pig-farming.jpg",
-    "description": "Premium quality pig product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 13,
-    "name": "Catfish Product 2",
-    "category": "Catfish",
-    "weight": "1250g",
-    "price": 1650,
-    "image": "./images/catfish-farming.jpg",
-    "description": "Premium quality catfish product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 14,
-    "name": "Rabbit Product 2",
-    "category": "Rabbit",
-    "weight": "1500g",
-    "price": 1700,
-    "image": "./images/rabbit.jpg",
-    "description": "Premium quality rabbit product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 15,
-    "name": "Turkey Product 2",
-    "category": "Turkey",
-    "weight": "500g",
-    "price": 1750,
-    "image": "./images/turkey.jpg",
-    "description": "Premium quality turkey product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 16,
-    "name": "Snail Product 2",
-    "category": "Snail",
-    "weight": "750g",
-    "price": 1800,
-    "image": "./images/snail.jpg",
-    "description": "Premium quality snail product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 17,
-    "name": "Corn Product 2",
-    "category": "Corn",
-    "weight": "1000g",
-    "price": 1850,
-    "image": "./images/corn.jpg",
-    "description": "Premium quality corn product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 18,
-    "name": "Cassava Product 2",
-    "category": "Cassava",
-    "weight": "1250g",
-    "price": 1900,
-    "image": "./images/cassava.jpg",
-    "description": "Premium quality cassava product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 19,
-    "name": "Plantain Product 2",
-    "category": "Plantain",
-    "weight": "1500g",
-    "price": 1950,
-    "image": "./images/plantain-farming.jpg",
-    "description": "Premium quality plantain product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 20,
-    "name": "Goat Product 3",
-    "category": "Goat",
-    "weight": "500g",
-    "price": 2000,
-    "image": "./images/goat-farming.jpg",
-    "description": "Premium quality goat product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 21,
-    "name": "Chicken Product 3",
-    "category": "Chicken",
-    "weight": "750g",
-    "price": 2050,
-    "image": "./images/chicken-farming.jpg",
-    "description": "Premium quality chicken product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 22,
-    "name": "Pig Product 3",
-    "category": "Pig",
-    "weight": "1000g",
-    "price": 2100,
-    "image": "./images/pig-farming.jpg",
-    "description": "Premium quality pig product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 23,
-    "name": "Catfish Product 3",
-    "category": "Catfish",
-    "weight": "1250g",
-    "price": 2150,
-    "image": "./images/catfish-farming.jpg",
-    "description": "Premium quality catfish product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 24,
-    "name": "Rabbit Product 3",
-    "category": "Rabbit",
-    "weight": "1500g",
-    "price": 2200,
-    "image": "./images/rabbit.jpg",
-    "description": "Premium quality rabbit product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 25,
-    "name": "Turkey Product 3",
-    "category": "Turkey",
-    "weight": "500g",
-    "price": 2250,
-    "image": "./images/turkey.jpg",
-    "description": "Premium quality turkey product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 26,
-    "name": "Snail Product 3",
-    "category": "Snail",
-    "weight": "750g",
-    "price": 2300,
-    "image": "./images/snail.jpg",
-    "description": "Premium quality snail product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 27,
-    "name": "Corn Product 3",
-    "category": "Corn",
-    "weight": "1000g",
-    "price": 2350,
-    "image": "./images/corn.jpg",
-    "description": "Premium quality corn product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 28,
-    "name": "Cassava Product 3",
-    "category": "Cassava",
-    "weight": "1250g",
-    "price": 2400,
-    "image": "./images/cassava.jpg",
-    "description": "Premium quality cassava product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 29,
-    "name": "Plantain Product 3",
-    "category": "Plantain",
-    "weight": "1500g",
-    "price": 2450,
-    "image": "./images/plantain-farming.jpg",
-    "description": "Premium quality plantain product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 30,
-    "name": "Goat Product 4",
-    "category": "Goat",
-    "weight": "500g",
-    "price": 2500,
-    "image": "./images/goat-farming.jpg",
-    "description": "Premium quality goat product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 31,
-    "name": "Chicken Product 4",
-    "category": "Chicken",
-    "weight": "750g",
-    "price": 2550,
-    "image": "./images/chicken-farming.jpg",
-    "description": "Premium quality chicken product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 32,
-    "name": "Pig Product 4",
-    "category": "Pig",
-    "weight": "1000g",
-    "price": 2600,
-    "image": "./images/pig-farming.jpg",
-    "description": "Premium quality pig product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 33,
-    "name": "Catfish Product 4",
-    "category": "Catfish",
-    "weight": "1250g",
-    "price": 2650,
-    "image": "./images/catfish-farming.jpg",
-    "description": "Premium quality catfish product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 34,
-    "name": "Rabbit Product 4",
-    "category": "Rabbit",
-    "weight": "1500g",
-    "price": 2700,
-    "image": "./images/rabbit.jpg",
-    "description": "Premium quality rabbit product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 35,
-    "name": "Turkey Product 4",
-    "category": "Turkey",
-    "weight": "500g",
-    "price": 2750,
-    "image": "./images/turkey.jpg",
-    "description": "Premium quality turkey product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 36,
-    "name": "Snail Product 4",
-    "category": "Snail",
-    "weight": "750g",
-    "price": 2800,
-    "image": "./images/snail.jpg",
-    "description": "Premium quality snail product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 37,
-    "name": "Corn Product 4",
-    "category": "Corn",
-    "weight": "1000g",
-    "price": 2850,
-    "image": "./images/corn.jpg",
-    "description": "Premium quality corn product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 38,
-    "name": "Cassava Product 4",
-    "category": "Cassava",
-    "weight": "1250g",
-    "price": 2900,
-    "image": "./images/cassava.jpg",
-    "description": "Premium quality cassava product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 39,
-    "name": "Plantain Product 4",
-    "category": "Plantain",
-    "weight": "1500g",
-    "price": 2950,
-    "image": "./images/plantain-farming.jpg",
-    "description": "Premium quality plantain product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 40,
-    "name": "Goat Product 5",
-    "category": "Goat",
-    "weight": "500g",
     "price": 3000,
-    "image": "./images/goat-farming.jpg",
-    "description": "Premium quality goat product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "image": "./images/goat.jpg",
+    "description": "High-quality goat product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 41,
-    "name": "Chicken Product 5",
-    "category": "Chicken",
-    "weight": "750g",
-    "price": 3050,
+    "name": "Chicken",
+    "weight": "1050g",
+    "price": 3123,
     "image": "./images/chicken-farming.jpg",
-    "description": "Premium quality chicken product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "description": "High-quality chicken product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 42,
-    "name": "Pig Product 5",
-    "category": "Pig",
-    "weight": "1000g",
-    "price": 3100,
+    "name": "Pig",
+    "weight": "1100g",
+    "price": 3246,
     "image": "./images/pig-farming.jpg",
-    "description": "Premium quality pig product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "description": "High-quality pig product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 43,
-    "name": "Catfish Product 5",
-    "category": "Catfish",
-    "weight": "1250g",
-    "price": 3150,
+    "name": "Catfish",
+    "weight": "1150g",
+    "price": 3369,
     "image": "./images/catfish-farming.jpg",
-    "description": "Premium quality catfish product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "description": "High-quality catfish product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 44,
-    "name": "Rabbit Product 5",
-    "category": "Rabbit",
-    "weight": "1500g",
-    "price": 3200,
+    "name": "Rabbit",
+    "weight": "1200g",
+    "price": 3492,
     "image": "./images/rabbit.jpg",
-    "description": "Premium quality rabbit product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "description": "High-quality rabbit product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 45,
-    "name": "Turkey Product 5",
-    "category": "Turkey",
-    "weight": "500g",
-    "price": 3250,
-    "image": "./images/turkey.jpg",
-    "description": "Premium quality turkey product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 46,
-    "name": "Snail Product 5",
-    "category": "Snail",
-    "weight": "750g",
-    "price": 3300,
-    "image": "./images/snail.jpg",
-    "description": "Premium quality snail product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 47,
-    "name": "Corn Product 5",
-    "category": "Corn",
-    "weight": "1000g",
-    "price": 3350,
-    "image": "./images/corn.jpg",
-    "description": "Premium quality corn product grown and harvested with care. Ideal for consumption, sale, or reproduction."
-  },
-  {
-    "id": 48,
-    "name": "Cassava Product 5",
-    "category": "Cassava",
+    "name": "Turkey",
     "weight": "1250g",
-    "price": 3400,
+    "price": 3615,
+    "image": "./images/turkey.jpg",
+    "description": "High-quality turkey product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Snail",
+    "weight": "1300g",
+    "price": 3738,
+    "image": "./images/snail.jpg",
+    "description": "High-quality snail product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Corn",
+    "weight": "1350g",
+    "price": 3861,
+    "image": "./images/corn.jpg",
+    "description": "High-quality corn product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Cassava",
+    "weight": "1400g",
+    "price": 3984,
     "image": "./images/cassava.jpg",
-    "description": "Premium quality cassava product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "description": "High-quality cassava product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 49,
-    "name": "Plantain Product 5",
-    "category": "Plantain",
+    "name": "Plantain",
+    "weight": "1450g",
+    "price": 4107,
+    "image": "./images/plantain.jpg",
+    "description": "High-quality plantain product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Yam",
     "weight": "1500g",
-    "price": 3450,
-    "image": "./images/plantain-farming.jpg",
-    "description": "Premium quality plantain product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "price": 4230,
+    "image": "./images/yam.jpg",
+    "description": "High-quality yam product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 50,
-    "name": "Goat Product 6",
-    "category": "Goat",
-    "weight": "500g",
-    "price": 3500,
-    "image": "./images/goat-farming.jpg",
-    "description": "Premium quality goat product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "name": "Tomato",
+    "weight": "1550g",
+    "price": 4353,
+    "image": "./images/tomato.jpg",
+    "description": "High-quality tomato product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 51,
-    "name": "Chicken Product 6",
-    "category": "Chicken",
-    "weight": "750g",
-    "price": 3550,
+    "name": "Onion",
+    "weight": "1600g",
+    "price": 4476,
+    "image": "./images/onion.jpg",
+    "description": "High-quality onion product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Cucumber",
+    "weight": "1650g",
+    "price": 4599,
+    "image": "./images/cucumber.jpg",
+    "description": "High-quality cucumber product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Pepper",
+    "weight": "1700g",
+    "price": 4722,
+    "image": "./images/pepper.jpg",
+    "description": "High-quality pepper product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Okra",
+    "weight": "1750g",
+    "price": 4845,
+    "image": "./images/okra.jpg",
+    "description": "High-quality okra product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Melon",
+    "weight": "1800g",
+    "price": 4968,
+    "image": "./images/melon.jpg",
+    "description": "High-quality melon product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Beans",
+    "weight": "1850g",
+    "price": 5091,
+    "image": "./images/beans.jpg",
+    "description": "High-quality beans product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Rice",
+    "weight": "1900g",
+    "price": 5214,
+    "image": "./images/rice.jpg",
+    "description": "High-quality rice product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Wheat",
+    "weight": "1950g",
+    "price": 5337,
+    "image": "./images/wheat.jpg",
+    "description": "High-quality wheat product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Sorghum",
+    "weight": "2000g",
+    "price": 5460,
+    "image": "./images/sorghum.jpg",
+    "description": "High-quality sorghum product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Millet",
+    "weight": "2050g",
+    "price": 5583,
+    "image": "./images/millet.jpg",
+    "description": "High-quality millet product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Goat",
+    "weight": "2100g",
+    "price": 5706,
+    "image": "./images/goat.jpg",
+    "description": "High-quality goat product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Chicken",
+    "weight": "2150g",
+    "price": 5829,
     "image": "./images/chicken-farming.jpg",
-    "description": "Premium quality chicken product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "description": "High-quality chicken product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 52,
-    "name": "Pig Product 6",
-    "category": "Pig",
-    "weight": "1000g",
-    "price": 3600,
+    "name": "Pig",
+    "weight": "2200g",
+    "price": 5952,
     "image": "./images/pig-farming.jpg",
-    "description": "Premium quality pig product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "description": "High-quality pig product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 53,
-    "name": "Catfish Product 6",
-    "category": "Catfish",
-    "weight": "1250g",
-    "price": 3650,
+    "name": "Catfish",
+    "weight": "2250g",
+    "price": 6075,
     "image": "./images/catfish-farming.jpg",
-    "description": "Premium quality catfish product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "description": "High-quality catfish product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 54,
-    "name": "Rabbit Product 6",
-    "category": "Rabbit",
-    "weight": "1500g",
-    "price": 3700,
+    "name": "Rabbit",
+    "weight": "2300g",
+    "price": 6198,
     "image": "./images/rabbit.jpg",
-    "description": "Premium quality rabbit product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "description": "High-quality rabbit product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 55,
-    "name": "Turkey Product 6",
-    "category": "Turkey",
-    "weight": "500g",
-    "price": 3750,
+    "name": "Turkey",
+    "weight": "2350g",
+    "price": 6321,
     "image": "./images/turkey.jpg",
-    "description": "Premium quality turkey product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "description": "High-quality turkey product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 56,
-    "name": "Snail Product 6",
-    "category": "Snail",
-    "weight": "750g",
-    "price": 3800,
+    "name": "Snail",
+    "weight": "2400g",
+    "price": 6444,
     "image": "./images/snail.jpg",
-    "description": "Premium quality snail product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "description": "High-quality snail product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 57,
-    "name": "Corn Product 6",
-    "category": "Corn",
-    "weight": "1000g",
-    "price": 3850,
+    "name": "Corn",
+    "weight": "2450g",
+    "price": 6567,
     "image": "./images/corn.jpg",
-    "description": "Premium quality corn product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "description": "High-quality corn product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 58,
-    "name": "Cassava Product 6",
-    "category": "Cassava",
-    "weight": "1250g",
-    "price": 3900,
+    "name": "Cassava",
+    "weight": "2500g",
+    "price": 6690,
     "image": "./images/cassava.jpg",
-    "description": "Premium quality cassava product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "description": "High-quality cassava product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 59,
-    "name": "Plantain Product 6",
-    "category": "Plantain",
-    "weight": "1500g",
-    "price": 3950,
-    "image": "./images/plantain-farming.jpg",
-    "description": "Premium quality plantain product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "name": "Plantain",
+    "weight": "2550g",
+    "price": 6813,
+    "image": "./images/plantain.jpg",
+    "description": "High-quality plantain product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 60,
-    "name": "Goat Product 7",
-    "category": "Goat",
-    "weight": "500g",
-    "price": 4000,
-    "image": "./images/goat-farming.jpg",
-    "description": "Premium quality goat product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "name": "Yam",
+    "weight": "2600g",
+    "price": 6936,
+    "image": "./images/yam.jpg",
+    "description": "High-quality yam product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 61,
-    "name": "Chicken Product 7",
-    "category": "Chicken",
-    "weight": "750g",
-    "price": 4050,
+    "name": "Tomato",
+    "weight": "2650g",
+    "price": 7059,
+    "image": "./images/tomato.jpg",
+    "description": "High-quality tomato product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Onion",
+    "weight": "2700g",
+    "price": 7182,
+    "image": "./images/onion.jpg",
+    "description": "High-quality onion product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Cucumber",
+    "weight": "2750g",
+    "price": 7305,
+    "image": "./images/cucumber.jpg",
+    "description": "High-quality cucumber product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Pepper",
+    "weight": "2800g",
+    "price": 7428,
+    "image": "./images/pepper.jpg",
+    "description": "High-quality pepper product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Okra",
+    "weight": "2850g",
+    "price": 7551,
+    "image": "./images/okra.jpg",
+    "description": "High-quality okra product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Melon",
+    "weight": "2900g",
+    "price": 7674,
+    "image": "./images/melon.jpg",
+    "description": "High-quality melon product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Beans",
+    "weight": "2950g",
+    "price": 7797,
+    "image": "./images/beans.jpg",
+    "description": "High-quality beans product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Rice",
+    "weight": "3000g",
+    "price": 7920,
+    "image": "./images/rice.jpg",
+    "description": "High-quality rice product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Wheat",
+    "weight": "3050g",
+    "price": 8043,
+    "image": "./images/wheat.jpg",
+    "description": "High-quality wheat product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Sorghum",
+    "weight": "3100g",
+    "price": 8166,
+    "image": "./images/sorghum.jpg",
+    "description": "High-quality sorghum product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Millet",
+    "weight": "3150g",
+    "price": 8289,
+    "image": "./images/millet.jpg",
+    "description": "High-quality millet product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Goat",
+    "weight": "3200g",
+    "price": 8412,
+    "image": "./images/goat.jpg",
+    "description": "High-quality goat product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Chicken",
+    "weight": "3250g",
+    "price": 8535,
     "image": "./images/chicken-farming.jpg",
-    "description": "Premium quality chicken product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "description": "High-quality chicken product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 62,
-    "name": "Pig Product 7",
-    "category": "Pig",
-    "weight": "1000g",
-    "price": 4100,
+    "name": "Pig",
+    "weight": "3300g",
+    "price": 8658,
     "image": "./images/pig-farming.jpg",
-    "description": "Premium quality pig product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "description": "High-quality pig product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 63,
-    "name": "Catfish Product 7",
-    "category": "Catfish",
-    "weight": "1250g",
-    "price": 4150,
+    "name": "Catfish",
+    "weight": "3350g",
+    "price": 8781,
     "image": "./images/catfish-farming.jpg",
-    "description": "Premium quality catfish product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "description": "High-quality catfish product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 64,
-    "name": "Rabbit Product 7",
-    "category": "Rabbit",
-    "weight": "1500g",
-    "price": 4200,
+    "name": "Rabbit",
+    "weight": "3400g",
+    "price": 8904,
     "image": "./images/rabbit.jpg",
-    "description": "Premium quality rabbit product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "description": "High-quality rabbit product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 65,
-    "name": "Turkey Product 7",
-    "category": "Turkey",
-    "weight": "500g",
-    "price": 4250,
+    "name": "Turkey",
+    "weight": "3450g",
+    "price": 9027,
     "image": "./images/turkey.jpg",
-    "description": "Premium quality turkey product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "description": "High-quality turkey product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 66,
-    "name": "Snail Product 7",
-    "category": "Snail",
-    "weight": "750g",
-    "price": 4300,
+    "name": "Snail",
+    "weight": "3500g",
+    "price": 9150,
     "image": "./images/snail.jpg",
-    "description": "Premium quality snail product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "description": "High-quality snail product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 67,
-    "name": "Corn Product 7",
-    "category": "Corn",
-    "weight": "1000g",
-    "price": 4350,
+    "name": "Corn",
+    "weight": "3550g",
+    "price": 9273,
     "image": "./images/corn.jpg",
-    "description": "Premium quality corn product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "description": "High-quality corn product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 68,
-    "name": "Cassava Product 7",
-    "category": "Cassava",
-    "weight": "1250g",
-    "price": 4400,
+    "name": "Cassava",
+    "weight": "3600g",
+    "price": 9396,
     "image": "./images/cassava.jpg",
-    "description": "Premium quality cassava product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "description": "High-quality cassava product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 69,
-    "name": "Plantain Product 7",
-    "category": "Plantain",
-    "weight": "1500g",
-    "price": 4450,
-    "image": "./images/plantain-farming.jpg",
-    "description": "Premium quality plantain product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "name": "Plantain",
+    "weight": "3650g",
+    "price": 9519,
+    "image": "./images/plantain.jpg",
+    "description": "High-quality plantain product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 70,
-    "name": "Goat Product 8",
-    "category": "Goat",
-    "weight": "500g",
-    "price": 4500,
-    "image": "./images/goat-farming.jpg",
-    "description": "Premium quality goat product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "name": "Yam",
+    "weight": "3700g",
+    "price": 9642,
+    "image": "./images/yam.jpg",
+    "description": "High-quality yam product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   },
   {
-    "id": 71,
-    "name": "Chicken Product 8",
-    "category": "Chicken",
-    "weight": "750g",
-    "price": 4550,
+    "name": "Tomato",
+    "weight": "3750g",
+    "price": 9765,
+    "image": "./images/tomato.jpg",
+    "description": "High-quality tomato product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Onion",
+    "weight": "3800g",
+    "price": 9888,
+    "image": "./images/onion.jpg",
+    "description": "High-quality onion product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Cucumber",
+    "weight": "3850g",
+    "price": 10011,
+    "image": "./images/cucumber.jpg",
+    "description": "High-quality cucumber product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Pepper",
+    "weight": "3900g",
+    "price": 10134,
+    "image": "./images/pepper.jpg",
+    "description": "High-quality pepper product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Okra",
+    "weight": "3950g",
+    "price": 10257,
+    "image": "./images/okra.jpg",
+    "description": "High-quality okra product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Melon",
+    "weight": "4000g",
+    "price": 10380,
+    "image": "./images/melon.jpg",
+    "description": "High-quality melon product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Beans",
+    "weight": "4050g",
+    "price": 10503,
+    "image": "./images/beans.jpg",
+    "description": "High-quality beans product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Rice",
+    "weight": "4100g",
+    "price": 10626,
+    "image": "./images/rice.jpg",
+    "description": "High-quality rice product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Wheat",
+    "weight": "4150g",
+    "price": 10749,
+    "image": "./images/wheat.jpg",
+    "description": "High-quality wheat product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Sorghum",
+    "weight": "4200g",
+    "price": 10872,
+    "image": "./images/sorghum.jpg",
+    "description": "High-quality sorghum product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Millet",
+    "weight": "4250g",
+    "price": 10995,
+    "image": "./images/millet.jpg",
+    "description": "High-quality millet product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Goat",
+    "weight": "4300g",
+    "price": 11118,
+    "image": "./images/goat.jpg",
+    "description": "High-quality goat product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Chicken",
+    "weight": "4350g",
+    "price": 11241,
     "image": "./images/chicken-farming.jpg",
-    "description": "Premium quality chicken product grown and harvested with care. Ideal for consumption, sale, or reproduction."
+    "description": "High-quality chicken product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Pig",
+    "weight": "4400g",
+    "price": 11364,
+    "image": "./images/pig-farming.jpg",
+    "description": "High-quality pig product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Catfish",
+    "weight": "4450g",
+    "price": 11487,
+    "image": "./images/catfish-farming.jpg",
+    "description": "High-quality catfish product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Rabbit",
+    "weight": "4500g",
+    "price": 11610,
+    "image": "./images/rabbit.jpg",
+    "description": "High-quality rabbit product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
+  },
+  {
+    "name": "Turkey",
+    "weight": "4550g",
+    "price": 11733,
+    "image": "./images/turkey.jpg",
+    "description": "High-quality turkey product, freshly harvested and processed for optimal nutrition and taste. Ideal for various local dishes and rich in essential nutrients."
   }
 ]

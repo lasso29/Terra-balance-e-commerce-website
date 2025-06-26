@@ -6,16 +6,18 @@
   <title>Payment - Terra Balance</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     body { font-family: 'Segoe UI', sans-serif; }
     .brand-color { color: #228B22; }
-    .brand-bg { background-color: #228B22; }
+    .btn-primary { background-color: #228B22; }
+    .btn-primary:hover { background-color: #1e7a1e; }
+    #countdown { font-weight: bold; color: #228B22; }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
-
-  <!-- Navbar -->
   <nav class="bg-white shadow-md sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
       <div class="flex items-center space-x-2">
@@ -28,35 +30,29 @@
     </div>
   </nav>
 
-  <!-- Main Content -->
   <main class="max-w-4xl mx-auto px-6 py-10">
     <h1 class="text-3xl font-bold mb-6 brand-color">Payment</h1>
-
     <div id="payment-container" class="bg-white p-6 rounded-lg shadow-md">
       <div id="cart-items" class="space-y-6"></div>
-
       <div class="mt-8 text-right">
         <p class="text-xl font-semibold mb-4">Total: ₦<span id="total-price">0</span></p>
-        <button id="pay-btn" class="bg-green-700 text-white px-6 py-3 rounded hover:bg-green-800">
-          Make Payment
-        </button>
+        <button id="pay-btn" class="btn-primary text-white px-6 py-3 rounded">Make Payment</button>
       </div>
     </div>
   </main>
 
   <script>
-    // ✅ Login check: redirect if not logged in
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     if (!isLoggedIn) {
       localStorage.setItem('redirectAfterLogin', 'payment.html');
       window.location.href = 'signin.html';
     }
 
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const userEmail = localStorage.getItem('userEmail') || 'Unknown';
     const cartItemsDiv = document.getElementById('cart-items');
     const totalPriceSpan = document.getElementById('total-price');
     const payBtn = document.getElementById('pay-btn');
-
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     function renderPaymentItems() {
       if (cart.length === 0) {
@@ -67,37 +63,152 @@
 
       let total = 0;
       cartItemsDiv.innerHTML = '';
-
       cart.forEach(item => {
         const subtotal = item.price * item.quantity;
         total += subtotal;
-
         const itemDiv = document.createElement('div');
         itemDiv.className = 'flex items-center space-x-4 border-b pb-4';
-
         itemDiv.innerHTML = `
           <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded" />
           <div class="flex-1">
             <h2 class="font-semibold text-lg">${item.name}</h2>
-            <p class="text-gray-600">₦${item.price} × ${item.quantity} = ₦${subtotal.toLocaleString()}</p>
+            <p class="text-gray-600">₦${item.price} × ${item.quantity} = ₦${(item.price * item.quantity).toLocaleString()}</p>
           </div>
         `;
-
         cartItemsDiv.appendChild(itemDiv);
       });
-
       totalPriceSpan.textContent = total.toLocaleString();
+    }
+
+    function startCountdown(duration, onComplete) {
+      let timer = duration, minutes, seconds;
+      const interval = setInterval(() => {
+        minutes = Math.floor(timer / 60);
+        seconds = timer % 60;
+        document.getElementById('countdown').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        if (--timer < 0) {
+          clearInterval(interval);
+          onComplete();
+        }
+      }, 1000);
+    }
+
+    function showReceiptAndCountdown() {
+      Swal.fire({
+        title: 'Upload Payment Receipt',
+        html: `
+          <p class="text-left mb-2 text-sm">Bank: <strong>Zenith Bank</strong><br>
+          Account Name: <strong>Terra Balance Enterprises</strong><br>
+          Account Number: <strong>1234567890</strong><br>
+          <span class="text-red-600 text-xs italic">(Other payment methods are under integration)</span></p>
+          <input type="file" id="receipt-upload" class="swal2-input">
+          <p class="text-sm text-gray-600 mt-2">After uploading, you will be redirected shortly...</p>
+          <div class="text-lg font-bold mt-2">⏱️ <span id="countdown">0:45</span></div>
+        `,
+        confirmButtonText: 'Submit Receipt',
+        confirmButtonColor: '#228B22',
+        preConfirm: () => {
+          const fileInput = Swal.getPopup().querySelector('#receipt-upload');
+          if (!fileInput.files.length) {
+            Swal.showValidationMessage('Please upload a receipt.');
+            return false;
+          }
+        },
+        allowOutsideClick: false
+      }).then(() => {
+        Swal.fire({
+          title: 'Processing Payment...',
+          html: '<p>Please wait while we confirm your payment.</p><div class="text-lg font-bold mt-2">⏱️ <span id="countdown">0:45</span></div>',
+          allowOutsideClick: false,
+          didOpen: () => {
+            Swal.showLoading();
+            startCountdown(45, () => {
+              Swal.close();
+              showSuccessMessage();
+            });
+          }
+        });
+      });
+    }
+
+    async function showSuccessMessage() {
+      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      const today = new Date().toLocaleString();
+      const orderId = 'TB' + Math.floor(Math.random() * 1000000);
+      const receiptHTML = cart.map(item => `
+        <tr>
+          <td class="border px-4 py-2">${item.name}</td>
+          <td class="border px-4 py-2">${item.quantity}</td>
+          <td class="border px-4 py-2">₦${item.price.toLocaleString()}</td>
+        </tr>
+      `).join('');
+
+      const existingOrders = JSON.parse(localStorage.getItem('orders')) || [];
+      existingOrders.push({
+        date: new Date(),
+        trackingID: orderId,
+        userEmail,
+        items: cart
+      });
+      localStorage.setItem('orders', JSON.stringify(existingOrders));
+
+      const content = document.createElement('div');
+      content.innerHTML = `
+        <div id="receipt" class="bg-white p-6 rounded shadow text-sm max-w-xl mx-auto">
+          <div class="flex items-center space-x-3 mb-4">
+            <img src="./images/terra-balance-logo.jpeg" alt="Logo" class="h-12 w-12 object-contain" />
+            <div>
+              <h2 class="text-xl font-bold brand-color">Terra Balance Enterprises</h2>
+              <p class="text-gray-600 text-xs">info@terrabalance.org | +234 800 123 4567</p>
+            </div>
+          </div>
+          <h3 class="text-md font-semibold mb-2">Order Receipt</h3>
+          <p class="text-xs text-gray-500 mb-1">Order ID: <strong>${orderId}</strong></p>
+          <p class="text-xs text-gray-500 mb-1">Email: ${userEmail}</p>
+          <p class="text-xs text-gray-500 mb-1">Date: ${today}</p>
+          <table class="w-full border text-xs mb-2">
+            <thead><tr class="bg-green-100">
+              <th class="border px-2 py-1">Product</th>
+              <th class="border px-2 py-1">Qty</th>
+              <th class="border px-2 py-1">Price</th>
+            </tr></thead>
+            <tbody>${receiptHTML}</tbody>
+          </table>
+          <p class="text-right font-bold text-sm">Total: ₦${total.toLocaleString()}</p>
+        </div>
+      `;
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Payment Successful 🎉',
+        html: content.innerHTML + '<br><p class="mt-2">Your order has been confirmed and added to your dashboard.</p><br><button id="download-receipt" class="mt-2 bg-green-700 text-white px-4 py-2 rounded">Download Receipt</button>',
+        didRender: () => {
+          document.getElementById('download-receipt').addEventListener('click', () => {
+            html2canvas(document.getElementById('receipt')).then(canvas => {
+              const imgData = canvas.toDataURL('image/png');
+              const { jsPDF } = window.jspdf;
+              const pdf = new jsPDF();
+              pdf.addImage(imgData, 'PNG', 10, 10, 190, 0);
+              pdf.save('TerraBalance_Receipt.pdf');
+            });
+          });
+        },
+        confirmButtonText: 'Done',
+        confirmButtonColor: '#228B22'
+      }).then(() => {
+        localStorage.removeItem('cart');
+        window.location.href = 'dashboard.html';
+      });
     }
 
     payBtn.addEventListener('click', () => {
       Swal.fire({
-        icon: 'success',
-        title: 'Payment Successful',
-        text: 'Thank you! Your payment has been received.',
-        confirmButtonText: 'OK'
-      }).then(() => {
-        localStorage.removeItem('cart');
-        window.location.href = 'success.html';
+        title: 'Choose Payment Method',
+        html: `
+          <button class="btn-primary text-white px-4 py-2 rounded m-2 opacity-50 cursor-not-allowed" disabled>Pay with Card (Coming Soon)</button>
+          <button onclick="showReceiptAndCountdown()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded m-2">Pay with Bank Transfer</button>
+        `,
+        showConfirmButton: false
       });
     });
 

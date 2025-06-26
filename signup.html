@@ -58,6 +58,9 @@
   <script>
     function handleSignUp(event) {
       event.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value;
       const confirm = document.getElementById('confirm').value;
 
@@ -70,18 +73,17 @@
         return;
       }
 
-      // Simulate account creation success
       Swal.fire({
         icon: 'success',
-        title: 'Account created successfully!',
+        title: `Welcome, ${name.split(' ')[0]}!`,
+        text: 'Your account has been created successfully.',
         showConfirmButton: false,
         timer: 1500
       }).then(() => {
-        // Set login flag (consistent with checkout page)
         localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userName', name);
 
-        // Redirect after login (default to payment.html)
-        const redirectTo = localStorage.getItem('redirectAfterLogin') || 'payment.html';
+        const redirectTo = localStorage.getItem('redirectAfterLogin') || 'dashboard.html';
         localStorage.removeItem('redirectAfterLogin');
         window.location.href = redirectTo;
       });
