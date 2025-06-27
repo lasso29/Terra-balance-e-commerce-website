@@ -29,41 +29,39 @@
         <img src="./images/terra-balance-logo.jpeg" alt="Terra Balance Logo" class="h-10 w-10 object-contain" />
         <h1 class="text-2xl font-bold text-green-600">Terra<span class="text-gray-800">Balance</span></h1>
       </div>
+
+      <!-- Desktop View -->
       <div class="hidden md:flex items-center space-x-4">
-        <input id="search-input" type="text" placeholder="Search products." class="px-4 py-2 border rounded-full w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
-        <div class="relative group">
-          <button class="text-gray-700 hover:text-green-600">
-            <i class="fas fa-user text-xl"></i>
-          </button>
-          <ul class="absolute hidden group-hover:block right-0 mt-2 bg-white border shadow-md rounded-md w-32 text-sm z-10">
-            <li><a href="signup.html" class="block px-4 py-2 hover:bg-gray-100">Sign Up</a></li>
-            <li><a href="signin.html" class="block px-4 py-2 hover:bg-gray-100">Sign In</a></li>
-          </ul>
-        </div>
+        <input id="search-input-desktop" type="text" placeholder="Search products." class="px-4 py-2 border rounded-full w-96 max-w-md focus:outline-none focus:ring-2 focus:ring-green-500">
+        <button onclick="window.location.href='signin.html'" class="text-gray-700 hover:text-green-600">
+          <i class="fas fa-user text-xl"></i>
+        </button>
         <button onclick="toggleCart()" class="relative text-gray-700 hover:text-green-600">
           <i class="fas fa-shopping-cart text-xl"></i>
           <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full text-center">0</span>
         </button>
       </div>
-      <button id="mobile-menu-btn" class="md:hidden text-2xl text-gray-600 focus:outline-none" onclick="toggleMobileMenu()">
-        <i class="fas fa-bars"></i>
-      </button>
-    </div>
-    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4">
-      <input id="mobile-search" type="text" placeholder="Search products." class="w-full mb-2 px-4 py-2 border rounded focus:outline-none">
-      <div class="flex justify-between items-center">
-        <div>
-          <a href="signup.html" class="text-green-700">Sign Up</a>
-          <a href="signin.html" class="ml-4 text-green-700">Sign In</a>
-        </div>
-        <button onclick="toggleCart()" class="text-green-700 relative">
-          <i class="fas fa-shopping-cart"></i>
-          <span id="cart-count-mobile" class="absolute -top-2 -right-3 bg-red-500 text-white text-xs w-5 h-5 rounded-full text-center">0</span>
+
+      <!-- Mobile Icons -->
+      <div class="flex items-center space-x-4 md:hidden">
+        <button onclick="document.getElementById('search-mobile').classList.toggle('hidden')" class="text-gray-700 hover:text-green-600">
+          <i class="fas fa-search text-xl"></i>
+        </button>
+        <button onclick="window.location.href='signin.html'" class="text-gray-700 hover:text-green-600">
+          <i class="fas fa-user text-xl"></i>
+        </button>
+        <button onclick="toggleCart()" class="relative text-gray-700 hover:text-green-600">
+          <i class="fas fa-shopping-cart text-xl"></i>
+          <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full text-center">0</span>
         </button>
       </div>
     </div>
-  </nav>
 
+    <!-- Search input for mobile view -->
+    <div id="search-mobile" class="px-4 pb-4 md:hidden hidden">
+      <input id="search-input" type="text" placeholder="Search products." class="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-green-500">
+    </div>
+  </nav>
 
   <!-- Product Catalog -->
   <main class="px-4 md:px-12 py-8">
@@ -82,22 +80,6 @@
     <div class="p-4 border-t">
       <p class="text-lg font-semibold">Total: ₦<span id="cart-total">0</span></p>
       <button onclick="checkout()" class="w-full mt-4 bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800">Checkout</button>
-    </div>
-  </div>
-
-  <!-- Product Modal -->
-  <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-    <div class="bg-white rounded-lg shadow-lg w-11/12 max-w-2xl p-6 relative">
-      <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-600 hover:text-red-600 text-xl">&times;</button>
-      <img id="modal-image" class="w-full h-64 object-cover rounded mb-4" />
-      <h2 id="modal-name" class="text-2xl font-bold mb-2"></h2>
-      <p id="modal-weight" class="text-sm text-gray-600 mb-1"></p>
-      <p id="modal-price" class="text-green-600 font-semibold mb-2"></p>
-      <p id="modal-description" class="text-gray-700 mb-4"></p>
-      <div class="flex items-center space-x-2">
-        <input type="number" id="modal-qty" value="1" min="1" class="border px-2 py-1 w-16 rounded" />
-        <button onclick="addToCartFromModal()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add to Cart</button>
-      </div>
     </div>
   </div>
 
@@ -130,13 +112,15 @@
     </div>
   </footer>
 
-
+  <!-- JavaScript -->
   <script>
-    document.getElementById('search-input').addEventListener('input', e => filterProducts());
-    document.getElementById('mobile-search').addEventListener('input', e => filterProducts());
+    document.getElementById('search-input').addEventListener('input', filterProducts);
+    document.getElementById('search-input-desktop').addEventListener('input', filterProducts);
 
     function filterProducts() {
-      const search = document.getElementById('search-input').value.toLowerCase() || document.getElementById('mobile-search').value.toLowerCase();
+      const mobileSearch = document.getElementById('search-input')?.value.toLowerCase() || '';
+      const desktopSearch = document.getElementById('search-input-desktop')?.value.toLowerCase() || '';
+      const search = mobileSearch || desktopSearch;
       const cards = document.querySelectorAll('#product-grid > div');
       cards.forEach(card => {
         const title = card.querySelector('h2').textContent.toLowerCase();
@@ -180,40 +164,6 @@
       });
     }
 
-    function showProductDetail(product, index) {
-      selectedProductIndex = index;
-      document.getElementById('modal-image').src = product.image;
-      document.getElementById('modal-name').textContent = product.name;
-      document.getElementById('modal-weight').textContent = `Weight: ${product.weight}`;
-      document.getElementById('modal-price').textContent = `₦${product.price.toLocaleString()}`;
-      document.getElementById('modal-description').textContent = product.description;
-      document.getElementById('modal-qty').value = 1;
-      document.getElementById('product-modal').classList.remove('hidden');
-    }
-
-    function closeModal() {
-      document.getElementById('product-modal').classList.add('hidden');
-    }
-
-    function addToCart(index) {
-      const qty = parseInt(document.getElementById(`qty-${index}`).value);
-      if (qty < 1) return alert('Quantity must be at least 1.');
-      const product = products[index];
-      const found = cart.find(item => item.name === product.name);
-      if (found) found.quantity += qty;
-      else cart.push({ ...product, quantity: qty });
-      saveCart();
-      renderCartItems();
-      updateCartCount();
-    }
-
-    function addToCartFromModal() {
-      const qty = parseInt(document.getElementById('modal-qty').value);
-      if (qty < 1 || selectedProductIndex === null) return alert('Invalid quantity or product.');
-      addToCart(selectedProductIndex);
-      closeModal();
-    }
-
     function renderCartItems() {
       const container = document.getElementById('cart-items');
       container.innerHTML = '';
@@ -245,6 +195,18 @@
       document.getElementById('cart-total').textContent = total.toLocaleString();
     }
 
+    function addToCart(index) {
+      const qty = parseInt(document.getElementById(`qty-${index}`).value);
+      if (qty < 1) return alert('Quantity must be at least 1.');
+      const product = products[index];
+      const found = cart.find(item => item.name === product.name);
+      if (found) found.quantity += qty;
+      else cart.push({ ...product, quantity: qty });
+      saveCart();
+      renderCartItems();
+      updateCartCount();
+    }
+
     function updateQuantity(index, delta) {
       cart[index].quantity += delta;
       if (cart[index].quantity < 1) cart[index].quantity = 1;
@@ -266,7 +228,7 @@
 
     function updateCartCount() {
       const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-      document.getElementById('cart-count').textContent = count;
+      document.querySelectorAll('#cart-count').forEach(el => el.textContent = count);
     }
 
     function toggleCart() {
@@ -285,32 +247,10 @@
       }
     }
 
-    document.getElementById('search-input').addEventListener('input', filterProducts);
-    document.getElementById('mobile-search').addEventListener('input', filterProducts);
-
-    function filterProducts() {
-      const desktopInput = document.getElementById('search-input').value.toLowerCase();
-      const mobileInput = document.getElementById('mobile-search').value.toLowerCase();
-      const search = desktopInput || mobileInput;
-      const cards = document.querySelectorAll('#product-grid > div');
-      cards.forEach(card => {
-        const title = card.querySelector('h2').textContent.toLowerCase();
-        card.style.display = title.includes(search) ? '' : 'none';
-      });
-    }
-
-    function toggleMobileMenu() {
-      document.getElementById('mobile-menu').classList.toggle('hidden');
+    function showProductDetail(product, index) {
+      selectedProductIndex = index;
+      // Add modal display logic if needed
     }
   </script>
 </body>
 </html>
-
-
-  
-  
-
-    
-
-  
-  
