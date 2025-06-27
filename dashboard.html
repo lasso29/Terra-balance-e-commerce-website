@@ -54,22 +54,20 @@
         <button id="place-order-btn" class="mt-4 bg-green-700 text-white px-6 py-3 rounded hover:bg-green-800">Place Order</button>
       </div>
     </div>
+
+    <h2 class="text-2xl font-semibold text-green-700 mt-10 mb-4">Your Orders</h2>
+    <table class="w-full text-sm border-collapse">
+      <thead class="bg-green-100 text-left">
+        <tr>
+          <th class="border px-4 py-2">Product</th>
+          <th class="border px-4 py-2">Qty</th>
+          <th class="border px-4 py-2">Price</th>
+          <th class="border px-4 py-2">Subtotal</th>
+        </tr>
+      </thead>
+      <tbody id="order-history-body"></tbody>
+    </table>
   </main>
-
-
-  <h2 class="text-2xl font-semibold text-green-700 mb-4">Your Orders</h2>
-<table class="w-full text-sm border-collapse">
-  <thead class="bg-green-100 text-left">
-    <tr>
-      <th class="border px-4 py-2">Product</th>
-      <th class="border px-4 py-2">Qty</th>
-      <th class="border px-4 py-2">Price</th>
-      <th class="border px-4 py-2">Subtotal</th>
-    </tr>
-  </thead>
-  <tbody id="order-history-body"></tbody>
-</table>
-
 
   <script>
     const checkoutItemsDiv = document.getElementById('checkout-items');
@@ -81,7 +79,6 @@
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const userName = localStorage.getItem('userName') || 'Customer';
 
-    // Show welcome message
     document.getElementById('welcome-banner').innerHTML = `
       <div class="bg-green-100 border-l-4 border-green-600 p-4 rounded shadow">
         <h2 class="text-xl font-semibold text-green-800">Welcome, <span class="capitalize">${userName}</span> 👋</h2>
@@ -189,28 +186,28 @@
       window.location.href = 'payment.html';
     });
 
-    renderCart();
-
     function renderOrderHistory() {
-  const orders = JSON.parse(localStorage.getItem('orders')) || [];
-  const tableBody = document.getElementById('order-history-body');
-  tableBody.innerHTML = '';
+      const orders = JSON.parse(localStorage.getItem('orders')) || [];
+      const tableBody = document.getElementById('order-history-body');
+      tableBody.innerHTML = '';
 
-  orders.forEach(item => {
-    const row = document.createElement('tr');
-    const subtotal = item.quantity * item.price;
-    row.innerHTML = `
-      <td class="border px-4 py-2">${item.name}</td>
-      <td class="border px-4 py-2">${item.quantity}</td>
-      <td class="border px-4 py-2">₦${item.price.toLocaleString()}</td>
-      <td class="border px-4 py-2 font-semibold">₦${subtotal.toLocaleString()}</td>
-    `;
-    tableBody.appendChild(row);
-  });
-}
+      orders.forEach(order => {
+        order.items.forEach(item => {
+          const subtotal = item.quantity * item.price;
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td class="border px-4 py-2">${item.name}</td>
+            <td class="border px-4 py-2">${item.quantity}</td>
+            <td class="border px-4 py-2">₦${item.price.toLocaleString()}</td>
+            <td class="border px-4 py-2 font-semibold">₦${subtotal.toLocaleString()}</td>
+          `;
+          tableBody.appendChild(row);
+        });
+      });
+    }
 
-renderOrderHistory();
-
+    renderCart();
+    renderOrderHistory();
   </script>
 </body>
 </html>
