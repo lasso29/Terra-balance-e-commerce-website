@@ -103,176 +103,179 @@
   </div>
 
   <script>
-    const searchMobile = document.getElementById('search-input');
-    const searchDesktop = document.getElementById('search-input-desktop');
-    let products = [];
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let selectedProductIndex = null;
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInputs = document.querySelectorAll('#search-input, #search-input-desktop');
+      let products = [];
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      let selectedProductIndex = null;
 
-    fetch('products.json')
-      .then(res => res.json())
-      .then(data => {
-        products = data;
-        renderProducts();
+      fetch('products.json')
+        .then(res => res.json())
+        .then(data => {
+          products = data;
+          renderProducts();
+          renderCartItems();
+          updateCartCount();
+        });
+
+      function renderProducts(filtered = products) {
+        const grid = document.getElementById('product-grid');
+        const count = document.getElementById('product-count');
+        grid.innerHTML = '';
+        count.textContent = filtered.length;
+
+        filtered.forEach((product, i) => {
+          const card = document.createElement('div');
+          card.className = 'border rounded-lg p-4 shadow-md bg-white hover:shadow-xl cursor-pointer';
+          card.innerHTML = `
+            <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover rounded mb-2" />
+            <h2 class="font-bold text-lg">${product.name}</h2>
+            <p class="text-sm text-gray-600">${product.weight}</p>
+            <p class="text-green-700 font-bold mb-2">₦${product.price.toLocaleString()}</p>
+            <div class="flex items-center space-x-2">
+              <input type="number" id="qty-${i}" value="1" min="1" class="border px-2 py-1 w-16 rounded" onclick="event.stopPropagation();" />
+              <button onclick="event.stopPropagation(); addToCart(${i})" class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">Add to Cart</button>
+            </div>
+          `;
+          card.addEventListener('click', () => showProductDetail(product, i));
+          grid.appendChild(card);
+        });
+      }
+
+      function filterProducts() {
+        const query = Array.from(searchInputs).map(i => i.value).join('').toLowerCase();
+        const filtered = products.filter(product => product.name.toLowerCase().includes(query));
+        renderProducts(filtered);
+      }
+
+      searchInputs.forEach(input => {
+        input.addEventListener('input', filterProducts);
+      });
+
+      window.checkout = function () {
+        if (!cart.length) return alert('Cart is empty.');
+        const isAuth = localStorage.getItem('userLoggedIn');
+        if (!isAuth) {
+          // Hide cart, show modal
+          document.getElementById('cart-sidebar')?.classList.add('translate-x-full');
+          document.getElementById('signin-modal')?.classList.remove('hidden');
+        } else {
+          saveCart();
+          window.location.href = 'checkout.html';
+        }
+      };
+
+      window.redirectToSignIn = function () {
+        window.location.href = 'signin.html';
+      }
+
+      window.closeSignInModal = function () {
+        document.getElementById('signin-modal')?.classList.add('hidden');
+      }
+
+      window.clearCart = function () {
+        cart = [];
+        saveCart();
         renderCartItems();
         updateCartCount();
-      });
-
-    function renderProducts(filtered = products) {
-      const grid = document.getElementById('product-grid');
-      const count = document.getElementById('product-count');
-      grid.innerHTML = '';
-      count.textContent = filtered.length;
-
-      filtered.forEach((product, i) => {
-        const card = document.createElement('div');
-        card.className = 'border rounded-lg p-4 shadow-md bg-white hover:shadow-xl cursor-pointer';
-        card.innerHTML = `
-          <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover rounded mb-2" />
-          <h2 class="font-bold text-lg">${product.name}</h2>
-          <p class="text-sm text-gray-600">${product.weight}</p>
-          <p class="text-green-700 font-bold mb-2">₦${product.price.toLocaleString()}</p>
-          <div class="flex items-center space-x-2">
-            <input type="number" id="qty-${i}" value="1" min="1" class="border px-2 py-1 w-16 rounded" onclick="event.stopPropagation();" />
-            <button onclick="event.stopPropagation(); addToCart(${i})" class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">Add to Cart</button>
-          </div>
-        `;
-        card.addEventListener('click', () => showProductDetail(product, i));
-        grid.appendChild(card);
-      });
-    }
-
-    function filterProducts() {
-      const query = (searchMobile?.value || searchDesktop?.value || '').toLowerCase();
-      const filtered = products.filter(product => product.name.toLowerCase().includes(query));
-      renderProducts(filtered);
-    }
-
-    searchMobile?.addEventListener('input', filterProducts);
-    searchDesktop?.addEventListener('input', filterProducts);
-
-    function showProductDetail(product, index) {
-      selectedProductIndex = index;
-      document.getElementById('modal-image').src = product.image;
-      document.getElementById('modal-name').textContent = product.name;
-      document.getElementById('modal-weight').textContent = `Weight: ${product.weight}`;
-      document.getElementById('modal-price').textContent = `₦${product.price.toLocaleString()}`;
-      document.getElementById('modal-description').textContent = product.description || 'No description available.';
-      document.getElementById('modal-qty').value = 1;
-      document.getElementById('product-modal').classList.remove('hidden');
-    }
-
-    function closeModal() {
-      document.getElementById('product-modal').classList.add('hidden');
-    }
-
-    function addToCart(index) {
-      const qty = parseInt(document.getElementById(`qty-${index}`).value);
-      if (qty < 1) return;
-      const product = products[index];
-      const found = cart.find(item => item.name === product.name);
-      if (found) found.quantity += qty;
-      else cart.push({ ...product, quantity: qty });
-      saveCart();
-      renderCartItems();
-      updateCartCount();
-    }
-
-    function addToCartFromModal() {
-      const qty = parseInt(document.getElementById('modal-qty').value);
-      if (qty > 0 && selectedProductIndex !== null) {
-        addToCart(selectedProductIndex);
-        closeModal();
-      }
-    }
-
-    function renderCartItems() {
-      const container = document.getElementById('cart-items');
-      container.innerHTML = '';
-      let total = 0;
-      if (cart.length === 0) {
-        container.innerHTML = '<p class="text-gray-600">Cart is empty.</p>';
-        document.getElementById('cart-total').textContent = '0';
-        return;
+        closeSignInModal();
       }
 
-      cart.forEach((item, i) => {
-        total += item.price * item.quantity;
-        const div = document.createElement('div');
-        div.className = 'flex items-center space-x-4 border-b pb-3';
-        div.innerHTML = `
-          <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded" />
-          <div class="flex-1">
-            <h3 class="font-semibold">${item.name}</h3>
-            <p class="text-gray-600">₦${item.price} x ${item.quantity} = ₦${item.price * item.quantity}</p>
-            <div class="flex items-center space-x-2 mt-1">
-              <button onclick="updateQuantity(${i}, -1)" class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">-</button>
-              <span>${item.quantity}</span>
-              <button onclick="updateQuantity(${i}, 1)" class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">+</button>
-              <button onclick="removeItem(${i})" class="text-red-600 hover:text-red-800 text-sm ml-4"><i class="fas fa-trash"></i></button>
+      function saveCart() {
+        localStorage.setItem('cart', JSON.stringify(cart));
+      }
+
+      function renderCartItems() {
+        const container = document.getElementById('cart-items');
+        container.innerHTML = '';
+        let total = 0;
+        if (cart.length === 0) {
+          container.innerHTML = '<p class="text-gray-600">Cart is empty.</p>';
+          document.getElementById('cart-total').textContent = '0';
+          return;
+        }
+
+        cart.forEach((item, i) => {
+          total += item.price * item.quantity;
+          const div = document.createElement('div');
+          div.className = 'flex items-center space-x-4 border-b pb-3';
+          div.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded" />
+            <div class="flex-1">
+              <h3 class="font-semibold">${item.name}</h3>
+              <p class="text-gray-600">₦${item.price} x ${item.quantity} = ₦${item.price * item.quantity}</p>
+              <div class="flex items-center space-x-2 mt-1">
+                <button onclick="updateQuantity(${i}, -1)" class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">-</button>
+                <span>${item.quantity}</span>
+                <button onclick="updateQuantity(${i}, 1)" class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">+</button>
+                <button onclick="removeItem(${i})" class="text-red-600 hover:text-red-800 text-sm ml-4"><i class="fas fa-trash"></i></button>
+              </div>
             </div>
-          </div>
-        `;
-        container.appendChild(div);
-      });
-      document.getElementById('cart-total').textContent = total.toLocaleString();
-    }
-
-    function updateQuantity(index, delta) {
-      cart[index].quantity += delta;
-      if (cart[index].quantity < 1) cart[index].quantity = 1;
-      saveCart();
-      renderCartItems();
-      updateCartCount();
-    }
-
-    function removeItem(index) {
-      cart.splice(index, 1);
-      saveCart();
-      renderCartItems();
-      updateCartCount();
-    }
-
-    function toggleCart() {
-      document.getElementById('cart-sidebar').classList.toggle('translate-x-full');
-    }
-
-    function updateCartCount() {
-      const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-      document.querySelectorAll('#cart-count').forEach(el => el.textContent = count);
-    }
-
-    function saveCart() {
-      localStorage.setItem('cart', JSON.stringify(cart));
-    }
-
-    function checkout() {
-      if (!cart.length) return alert('Cart is empty.');
-      const isAuth = localStorage.getItem('userLoggedIn');
-      if (!isAuth) {
-        document.getElementById('signin-modal').classList.remove('hidden');
-      } else {
-        saveCart();
-        window.location.href = 'checkout.html';
+          `;
+          container.appendChild(div);
+        });
+        document.getElementById('cart-total').textContent = total.toLocaleString();
       }
-    }
 
-    function redirectToSignIn() {
-      window.location.href = 'signin.html';
-    }
+      window.updateQuantity = function(index, delta) {
+        cart[index].quantity += delta;
+        if (cart[index].quantity < 1) cart[index].quantity = 1;
+        saveCart();
+        renderCartItems();
+        updateCartCount();
+      }
 
-    function closeSignInModal() {
-      document.getElementById('signin-modal').classList.add('hidden');
-    }
+      window.removeItem = function(index) {
+        cart.splice(index, 1);
+        saveCart();
+        renderCartItems();
+        updateCartCount();
+      }
 
-    function clearCart() {
-      cart = [];
-      saveCart();
-      renderCartItems();
-      updateCartCount();
-      closeSignInModal();
-      document.getElementById('cart-sidebar').classList.add('translate-x-full');
-    }
+      window.updateCartCount = function () {
+        const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+        document.querySelectorAll('#cart-count').forEach(el => el.textContent = count);
+      }
+
+      window.toggleCart = function () {
+        document.getElementById('cart-sidebar')?.classList.toggle('translate-x-full');
+      }
+
+      function showProductDetail(product, index) {
+        selectedProductIndex = index;
+        document.getElementById('modal-image').src = product.image;
+        document.getElementById('modal-name').textContent = product.name;
+        document.getElementById('modal-weight').textContent = `Weight: ${product.weight}`;
+        document.getElementById('modal-price').textContent = `₦${product.price.toLocaleString()}`;
+        document.getElementById('modal-description').textContent = product.description || 'No description available.';
+        document.getElementById('modal-qty').value = 1;
+        document.getElementById('product-modal').classList.remove('hidden');
+      }
+
+      window.closeModal = function () {
+        document.getElementById('product-modal')?.classList.add('hidden');
+      }
+
+      window.addToCart = function(index) {
+        const qty = parseInt(document.getElementById(`qty-${index}`).value);
+        if (qty < 1) return;
+        const product = products[index];
+        const found = cart.find(item => item.name === product.name);
+        if (found) found.quantity += qty;
+        else cart.push({ ...product, quantity: qty });
+        saveCart();
+        renderCartItems();
+        updateCartCount();
+      }
+
+      window.addToCartFromModal = function () {
+        const qty = parseInt(document.getElementById('modal-qty').value);
+        if (qty > 0 && selectedProductIndex !== null) {
+          addToCart(selectedProductIndex);
+          closeModal();
+        }
+      }
+    });
   </script>
 
 </body>
