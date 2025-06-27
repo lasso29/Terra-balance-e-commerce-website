@@ -22,6 +22,7 @@
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
+
   <!-- Navbar -->
   <nav class="bg-white shadow-md sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
@@ -70,6 +71,22 @@
     <div id="product-grid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"></div>
   </main>
 
+  <!-- Product Modal -->
+  <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+    <div class="bg-white rounded-lg shadow-lg w-11/12 max-w-2xl p-6 relative">
+      <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-600 hover:text-red-600 text-xl">&times;</button>
+      <img id="modal-image" class="w-full h-64 object-cover rounded mb-4" />
+      <h2 id="modal-name" class="text-2xl font-bold mb-2"></h2>
+      <p id="modal-weight" class="text-sm text-gray-600 mb-1"></p>
+      <p id="modal-price" class="text-green-600 font-semibold mb-2"></p>
+      <p id="modal-description" class="text-gray-700 mb-4"></p>
+      <div class="flex items-center space-x-2">
+        <input type="number" id="modal-qty" value="1" min="1" class="border px-2 py-1 w-16 rounded" />
+        <button onclick="addToCartFromModal()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Cart Sidebar -->
   <div id="cart-sidebar" class="fixed right-0 top-0 w-80 h-full bg-white shadow-lg translate-x-full transition-transform duration-300 z-50 overflow-y-auto">
     <div class="flex items-center justify-between p-4 border-b">
@@ -83,55 +100,14 @@
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer class="bg-[#0C1E35] text-white py-10">
-    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 items-start">
-      <div>
-        <img src="/images/terra-balance-logo.jpeg" alt="Terra Balance Logo" class="h-12 mb-4">
-        <p class="text-gray-300">Empowering African communities through agriculture and innovation.</p>
-      </div>
-      <div>
-        <h4 class="text-lg font-semibold mb-2">Quick Links</h4>
-        <ul class="space-y-2 text-gray-300">
-          <li><a href="#" class="hover:text-yellow-300">Home</a></li>
-          <li><a href="#" class="hover:text-yellow-300">About Us</a></li>
-          <li><a href="#" class="hover:text-yellow-300">Shop</a></li>
-          <li><a href="#" class="hover:text-yellow-300">Contact Us</a></li>
-          <li><a href="#" class="hover:text-yellow-300">FAQs</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="text-lg font-semibold mb-2">Contact</h4>
-        <p class="text-gray-300">Email: info@terrabalance.org</p>
-        <p class="text-gray-300">Phone: +234 800 123 4567</p>
-        <p class="text-gray-300">Address: Phase 2 road, OAUTHC, Ile-Ife, Nigeria</p>
-      </div>
-    </div>
-    <div class="mt-8 bg-[#071423] py-4 text-center text-sm text-gray-400">
-      &copy; 2025 Terra Balance Enterprises. All rights reserved.
-    </div>
-  </footer>
-
-  <!-- JavaScript -->
   <script>
-    document.getElementById('search-input').addEventListener('input', filterProducts);
-    document.getElementById('search-input-desktop').addEventListener('input', filterProducts);
-
-    function filterProducts() {
-      const mobileSearch = document.getElementById('search-input')?.value.toLowerCase() || '';
-      const desktopSearch = document.getElementById('search-input-desktop')?.value.toLowerCase() || '';
-      const search = mobileSearch || desktopSearch;
-      const cards = document.querySelectorAll('#product-grid > div');
-      cards.forEach(card => {
-        const title = card.querySelector('h2').textContent.toLowerCase();
-        card.style.display = title.includes(search) ? '' : 'none';
-      });
-    }
-
+    const searchMobile = document.getElementById('search-input');
+    const searchDesktop = document.getElementById('search-input-desktop');
     let products = [];
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let selectedProductIndex = null;
 
+    // Fetch and load products
     fetch('products.json')
       .then(res => res.json())
       .then(data => {
@@ -141,11 +117,13 @@
         updateCartCount();
       });
 
+    // Render products
     function renderProducts(filtered = products) {
       const grid = document.getElementById('product-grid');
       const count = document.getElementById('product-count');
       grid.innerHTML = '';
       count.textContent = filtered.length;
+
       filtered.forEach((product, i) => {
         const card = document.createElement('div');
         card.className = 'border rounded-lg p-4 shadow-md bg-white hover:shadow-xl cursor-pointer';
@@ -164,6 +142,50 @@
       });
     }
 
+    function filterProducts() {
+      const query = (searchMobile?.value || searchDesktop?.value || '').toLowerCase();
+      const filtered = products.filter(product => product.name.toLowerCase().includes(query));
+      renderProducts(filtered);
+    }
+
+    searchMobile?.addEventListener('input', filterProducts);
+    searchDesktop?.addEventListener('input', filterProducts);
+
+    function showProductDetail(product, index) {
+      selectedProductIndex = index;
+      document.getElementById('modal-image').src = product.image;
+      document.getElementById('modal-name').textContent = product.name;
+      document.getElementById('modal-weight').textContent = `Weight: ${product.weight}`;
+      document.getElementById('modal-price').textContent = `₦${product.price.toLocaleString()}`;
+      document.getElementById('modal-description').textContent = product.description;
+      document.getElementById('modal-qty').value = 1;
+      document.getElementById('product-modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('product-modal').classList.add('hidden');
+    }
+
+    function addToCart(index) {
+      const qty = parseInt(document.getElementById(`qty-${index}`).value);
+      if (qty < 1) return;
+      const product = products[index];
+      const found = cart.find(item => item.name === product.name);
+      if (found) found.quantity += qty;
+      else cart.push({ ...product, quantity: qty });
+      saveCart();
+      renderCartItems();
+      updateCartCount();
+    }
+
+    function addToCartFromModal() {
+      const qty = parseInt(document.getElementById('modal-qty').value);
+      if (qty > 0 && selectedProductIndex !== null) {
+        addToCart(selectedProductIndex);
+        closeModal();
+      }
+    }
+
     function renderCartItems() {
       const container = document.getElementById('cart-items');
       container.innerHTML = '';
@@ -173,6 +195,7 @@
         document.getElementById('cart-total').textContent = '0';
         return;
       }
+
       cart.forEach((item, i) => {
         total += item.price * item.quantity;
         const div = document.createElement('div');
@@ -195,18 +218,6 @@
       document.getElementById('cart-total').textContent = total.toLocaleString();
     }
 
-    function addToCart(index) {
-      const qty = parseInt(document.getElementById(`qty-${index}`).value);
-      if (qty < 1) return alert('Quantity must be at least 1.');
-      const product = products[index];
-      const found = cart.find(item => item.name === product.name);
-      if (found) found.quantity += qty;
-      else cart.push({ ...product, quantity: qty });
-      saveCart();
-      renderCartItems();
-      updateCartCount();
-    }
-
     function updateQuantity(index, delta) {
       cart[index].quantity += delta;
       if (cart[index].quantity < 1) cart[index].quantity = 1;
@@ -222,8 +233,8 @@
       updateCartCount();
     }
 
-    function saveCart() {
-      localStorage.setItem('cart', JSON.stringify(cart));
+    function toggleCart() {
+      document.getElementById('cart-sidebar').classList.toggle('translate-x-full');
     }
 
     function updateCartCount() {
@@ -231,8 +242,8 @@
       document.querySelectorAll('#cart-count').forEach(el => el.textContent = count);
     }
 
-    function toggleCart() {
-      document.getElementById('cart-sidebar').classList.toggle('translate-x-full');
+    function saveCart() {
+      localStorage.setItem('cart', JSON.stringify(cart));
     }
 
     function checkout() {
@@ -245,11 +256,6 @@
         saveCart();
         window.location.href = 'checkout.html';
       }
-    }
-
-    function showProductDetail(product, index) {
-      selectedProductIndex = index;
-      // Add modal display logic if needed
     }
   </script>
 </body>
