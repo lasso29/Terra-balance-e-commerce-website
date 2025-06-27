@@ -138,7 +138,7 @@
   
   <script>
     document.getElementById('search-input').addEventListener('input', e => filterProducts());
-    document.getElementById('mobile-search').addEventListener('input', e => filterProducts());
+    
 
     function filterProducts() {
       const search = document.getElementById('search-input').value.toLowerCase() || document.getElementById('mobile-search').value.toLowerCase();
@@ -148,11 +148,6 @@
         card.style.display = title.includes(search) ? '' : 'none';
       });
     }
-
-    let products = [];
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let selectedProductIndex = null;
-
     fetch('products.json')
       .then(res => res.json())
       .then(data => {
@@ -291,7 +286,7 @@
     }
 
     document.getElementById('search-input').addEventListener('input', filterProducts);
-    document.getElementById('mobile-search').addEventListener('input', filterProducts);
+    
 
     function filterProducts() {
       const desktopInput = document.getElementById('search-input').value.toLowerCase();
@@ -307,11 +302,6 @@
     function toggleMobileMenu() {
       document.getElementById('mobile-menu').classList.toggle('hidden');
     }
-
-    let products = [];
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  let selectedProductIndex = null;
-
   // Fetch product data
   fetch('products.json')
     .then(res => res.json())
@@ -322,30 +312,6 @@
       updateCartCount();
       populateCategories();
     });
-
-  function renderProducts(data) {
-    const grid = document.getElementById('product-grid');
-    grid.innerHTML = '';
-    document.getElementById('product-count').textContent = data.length;
-
-    data.forEach((product, i) => {
-      const card = document.createElement('div');
-      card.className = 'border rounded-lg p-4 shadow-md bg-white hover:shadow-xl cursor-pointer';
-      card.innerHTML = `
-        <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover rounded mb-2" />
-        <h2 class="font-bold text-lg">${product.name}</h2>
-        <p class="text-sm text-gray-600">${product.weight}</p>
-        <p class="text-green-700 font-bold mb-2">₦${product.price.toLocaleString()}</p>
-        <div class="flex items-center space-x-2">
-          <input type="number" id="qty-${i}" value="1" min="1" class="border px-2 py-1 w-16 rounded" onclick="event.stopPropagation();" />
-          <button onclick="event.stopPropagation(); addToCart(${i})" class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">Add to Cart</button>
-        </div>
-      `;
-      card.addEventListener('click', () => showProductDetail(product, i));
-      grid.appendChild(card);
-    });
-  }
-
   function filterProducts() {
     const input = (document.getElementById('search-input').value || document.getElementById('mobile-search').value).toLowerCase();
     const category = (document.getElementById('category-filter').value || document.getElementById('mobile-category').value);
@@ -358,7 +324,7 @@
   }
 
   document.getElementById('search-input').addEventListener('input', filterProducts);
-  document.getElementById('mobile-search').addEvent
+  
   </script>
 </body>
 </html>
