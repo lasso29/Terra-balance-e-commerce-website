@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ✅ Clear cart on homepage
   localStorage.removeItem('cart');
 
-  // ====== FEATURED PRODUCTS (12 items) ======
+  // ✅ Featured products list
   const featuredProducts = [
     {
       name: 'Organic Plantain Bunch',
@@ -91,9 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   const grid = document.getElementById('product-grid');
-  const searchInputs = document.querySelectorAll('#search-input');
+  const searchInputs = document.querySelectorAll('#search-input, #search-input-desktop');
 
-  // ====== RENDER PRODUCTS ======
+  // ✅ Render product cards
   function renderProducts(products) {
     if (!grid) return;
 
@@ -122,23 +122,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Initial render (show only 12)
+  // ✅ Initial render (first 12 items)
   renderProducts(featuredProducts.slice(0, 12));
 
-  // ====== SEARCH FUNCTION ======
+  // ✅ Real-time search (mobile + desktop)
   searchInputs.forEach(input => {
     input.addEventListener('input', () => {
-      const term = input.value.toLowerCase();
+      const term = input.value.toLowerCase().trim();
       const filtered = featuredProducts.filter(product =>
         product.name.toLowerCase().includes(term) ||
         product.description.toLowerCase().includes(term) ||
         product.category.toLowerCase().includes(term)
       );
-      renderProducts(filtered.slice(0, 12)); // Still limit to 12
+      renderProducts(filtered.slice(0, 12));
     });
   });
 
-  // ====== HERO CAROUSEL ======
+  // ✅ Hero carousel logic
   const slides = document.querySelectorAll('.carousel-slide');
   let currentSlide = 0;
 
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showSlide(0);
   }
 
-  // ====== SCROLL-IN ANIMATION ======
+  // ✅ Scroll-in animation
   const sections = document.querySelectorAll('.slide-up');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -171,10 +171,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   sections.forEach(section => observer.observe(section));
 
-  // ====== MOBILE MENU TOGGLE ======
+  // ✅ Mobile menu toggle (if used)
   const menuToggle = document.getElementById('menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
-
   if (menuToggle && mobileMenu) {
     menuToggle.addEventListener('click', () => {
       const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
@@ -183,16 +182,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ====== ACCOUNT MENU TOGGLE ======
+  // ✅ Account menu toggle (if used)
   const accountBtn = document.getElementById('account-btn');
   const accountMenu = document.getElementById('account-menu');
-
   if (accountBtn && accountMenu) {
     accountBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       accountMenu.classList.toggle('hidden');
     });
-
     document.addEventListener('click', (e) => {
       if (!accountBtn.contains(e.target)) {
         accountMenu.classList.add('hidden');
