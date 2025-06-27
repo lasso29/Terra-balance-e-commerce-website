@@ -30,7 +30,7 @@
         <h1 class="text-2xl font-bold text-green-600">Terra<span class="text-gray-800">Balance</span></h1>
       </div>
       <div class="hidden md:flex items-center space-x-4">
-        <input id="search-input" type="text" placeholder="Search products..." class="px-4 py-2 border rounded-full w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
+        <input id="search-input" type="text" placeholder="Search products." class="px-4 py-2 border rounded-full w-72 focus:outline-none focus:ring-2 focus:ring-green-500">
         <select id="category-filter" class="border px-2 py-2 rounded-full">
           <option value="">All Categories</option>
         </select>
@@ -53,7 +53,7 @@
       </button>
     </div>
     <div id="mobile-menu" class="md:hidden hidden px-4 pb-4">
-      <input id="mobile-search" type="text" placeholder="Search products..." class="w-full mb-2 px-4 py-2 border rounded focus:outline-none">
+      <input id="mobile-search" type="text" placeholder="Search products." class="w-full mb-2 px-4 py-2 border rounded focus:outline-none">
       <select id="mobile-category" class="w-full mb-2 px-4 py-2 border rounded">
         <option value="">All Categories</option>
       </select>
@@ -135,10 +135,10 @@
     </div>
   </footer>
 
-  
+
   <script>
     document.getElementById('search-input').addEventListener('input', e => filterProducts());
-    
+    document.getElementById('mobile-search').addEventListener('input', e => filterProducts());
 
     function filterProducts() {
       const search = document.getElementById('search-input').value.toLowerCase() || document.getElementById('mobile-search').value.toLowerCase();
@@ -148,6 +148,11 @@
         card.style.display = title.includes(search) ? '' : 'none';
       });
     }
+
+    let products = [];
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let selectedProductIndex = null;
+
     fetch('products.json')
       .then(res => res.json())
       .then(data => {
@@ -286,7 +291,7 @@
     }
 
     document.getElementById('search-input').addEventListener('input', filterProducts);
-    
+    document.getElementById('mobile-search').addEventListener('input', filterProducts);
 
     function filterProducts() {
       const desktopInput = document.getElementById('search-input').value.toLowerCase();
@@ -302,32 +307,13 @@
     function toggleMobileMenu() {
       document.getElementById('mobile-menu').classList.toggle('hidden');
     }
-  // Fetch product data
-  fetch('products.json')
-    .then(res => res.json())
-    .then(data => {
-      products = data;
-      renderProducts(products);
-      renderCartItems();
-      updateCartCount();
-      populateCategories();
-    });
-  function filterProducts() {
-    const input = (document.getElementById('search-input').value || document.getElementById('mobile-search').value).toLowerCase();
-    const category = (document.getElementById('category-filter').value || document.getElementById('mobile-category').value);
-    const filtered = products.filter(p => {
-      const matchesSearch = p.name.toLowerCase().includes(input);
-      const matchesCategory = category ? p.category === category : true;
-      return matchesSearch && matchesCategory;
-    });
-    renderProducts(filtered);
-  }
-
-  document.getElementById('search-input').addEventListener('input', filterProducts);
-  
   </script>
 </body>
 </html>
+
+
+  
+  
 
     
 
